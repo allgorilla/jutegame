@@ -9,6 +9,10 @@ var touch_start_pos = Vector2.ZERO
 # 子ノードのAnimationPlayerを取得
 @onready var anim = $PlayerWalk
 
+func _ready():
+	# 起動時に自動でアニメーションを開始
+	if anim.has_animation("walk"):
+		anim.play("walk")
 func _input(event):
 	# マウス（またはスマホのタッチ）操作を検知
 	if event is InputEventMouseButton:
