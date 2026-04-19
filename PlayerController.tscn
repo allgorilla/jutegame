@@ -50,3 +50,5 @@ script = ExtResource("2_1hgir")
 
 [node name="PlayerWalk" type="AnimationPlayer" parent="Player" unique_id=153522001]
 libraries/ = SubResource("AnimationLibrary_3pjhv")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1071293120]
