@@ -11,6 +11,18 @@ var player_start_grid_pos = Vector2.ZERO
 
 func _ready():
 	generate_world()
+	# プレイヤーの信号を、自分の「_on_player_move_requested」関数に繋ぐ
+	if player:
+		player.move_requested.connect(_on_player_move_requested)
+
+# 信号を受け取った時の処理
+func _on_player_move_requested(direction: Vector2):
+	# プレイヤーが「右(1, 0)」に行きたいなら、
+	# マップ全体は「左(-1, 0)」にタイル1枚分ずれる
+	var move_vector = -direction * TILE_SIZE
+	
+	# マップ全体を移動させる（Tweenを使うと滑らかになりますが、まずはパッと移動）
+	position += move_vector
 
 func generate_world():
 	# 1. まずイベントマップを走査して「プレイヤーの開始位置」を特定する
