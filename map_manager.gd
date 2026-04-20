@@ -15,6 +15,9 @@ var current_grid_pos = Vector2.ZERO
 # プレイヤーの初期位置を保持する変数
 var player_start_grid_pos = Vector2.ZERO
 
+# 移動中かどうかを管理するフラグ
+var is_moving = false
+
 func _ready():
 	generate_world()
 	# プレイヤーの信号を、自分の「_on_player_move_requested」関数に繋ぐ
@@ -44,11 +47,38 @@ func generate_world():
 
 # 移動リクエストが来た時の処理
 func _on_player_move_requested(direction: Vector2):
-	var target_grid_pos = current_grid_pos + direction
+	# ② すでに移動中なら、次の入力は無視する
+	if is_moving:
+		return
 	
+	# ① 移動が可能か判定
+	var target_grid_pos = current_grid_pos + direction
 	if walkability_map.get(target_grid_pos) == true:
+		# 移動確定なのでロックをかける
+		is_moving = true
 		current_grid_pos = target_grid_pos
-		update_map_position()
+		
+		# ② スクロールアニメーションの開始
+		start_scroll_animation()
+	else:
+		# 移動不可の場合は、ここで終了（必要なら「壁にぶつかった」演出をここに入れる）
+		print("移動不可")
+
+func start_scroll_animation():
+	# 目標となる position を計算
+	var target_pos = (-current_grid_pos * TILE_SIZE) - Vector2(TILE_SIZE / 2.0, TILE_SIZE / 2.0)
+	
+	# Tweenを作成して、0.2秒かけて滑らかに移動させる
+	var tween = create_tween()
+	# transition型とease型を指定すると「動き出し」や「止まり際」がより自然になります
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	
+	# positionプロパティを target_pos まで変化させる
+	tween.tween_property(self, "position", target_pos, 0.2)
+	
+	# ③ アニメーションが終了したら、入力を受け付けるようにする
+	tween.finished.connect(func(): is_moving = false)
 
 func find_player_start_position():
 	var img = map_event.get_image()
@@ -67,7 +97,7 @@ func update_map_position():
 	
 	# タイルの中心を(0,0)に合わせるための、常に一定のオフセット
 	# (背景が右上にずれていた問題も、これで中心に収束します)
-	var center_offset = Vector2(TILE_SIZE / 2, TILE_SIZE / 2)
+	var center_offset = Vector2(TILE_SIZE / 2.0, TILE_SIZE / 2.0)
 	
 	position = base_pos - center_offset
 
