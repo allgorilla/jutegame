@@ -14,19 +14,29 @@ func _ready():
 	if anim.has_animation("walk"):
 		anim.play("walk")
 func _input(event):
-	# マウス（またはスマホのタッチ）操作を検知
 	if event is InputEventMouseButton:
 		if event.pressed:
-			# 画面に触れた瞬間の座標を記録
 			touch_start_pos = event.position
 		else:
-			# 指を離した瞬間に、スワイプ距離を計算
+			# 指を離した瞬間の位置との差分を計算
 			var diff = event.position - touch_start_pos
 			
-			# 一定以上の距離が動いていたら「移動操作」とみなす
+			# スワイプ距離が十分なら向きを判定
 			if diff.length() >= MIN_SWIPE_DISTANCE:
-				play_walk_animation()
-
+				handle_direction(diff)
+func handle_direction(diff: Vector2):
+	# X（横）の移動量が Y（縦）より大きい場合、左右スワイプとみなす
+	if abs(diff.x) > abs(diff.y):
+		if diff.x > 0:
+			# 右スワイプ
+			flip_h = true  # 画像を左右反転
+		else:
+			# 左スワイプ
+			flip_h = false # 画像を元に戻す
+	
+	# スワイプのたびにアニメーションを再生（または継続）
+	if anim.has_animation("walk"):
+		anim.play("walk")
 func play_walk_animation():
 	if anim.has_animation("walk"):
 		anim.play("walk")
