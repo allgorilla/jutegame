@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://esmvu86ucno7" path="res://image/human_02.png" id="1_3mwrl"]
 [ext_resource type="Script" uid="uid://bh4td4368duy5" path="res://player.gd" id="2_1hgir"]
 [ext_resource type="Texture2D" uid="uid://n6lijamd1ev5" path="res://image/human_01.png" id="2_y00gc"]
+[ext_resource type="Script" uid="uid://clarkgwyy610m" path="res://map_manager.gd" id="4_1hgir"]
+[ext_resource type="Texture2D" uid="uid://35io3aueog5" path="res://image/map_bg.png" id="5_3pjhv"]
+[ext_resource type="Texture2D" uid="uid://civjshi6plgem" path="res://image/map_event.png" id="6_876be"]
 
 [sub_resource type="Animation" id="Animation_1hgir"]
 length = 0.001
@@ -42,9 +45,10 @@ _data = {
 &"walk": SubResource("Animation_g0g1r")
 }
 
-[node name="PlayerController" type="Node2D" unique_id=1149138988]
+[node name="Main" type="Node2D" unique_id=1149138988]
 
 [node name="Player" type="Sprite2D" parent="." unique_id=400859828]
+z_index = 1
 texture = ExtResource("1_3mwrl")
 script = ExtResource("2_1hgir")
 
@@ -52,3 +56,9 @@ script = ExtResource("2_1hgir")
 libraries/ = SubResource("AnimationLibrary_3pjhv")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1071293120]
+
+[node name="MapManager" type="Node2D" parent="." unique_id=670077991 node_paths=PackedStringArray("player")]
+script = ExtResource("4_1hgir")
+map_bg = ExtResource("5_3pjhv")
+map_event = ExtResource("6_876be")
+player = NodePath("../Player")

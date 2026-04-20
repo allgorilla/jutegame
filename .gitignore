@@ -2,3 +2,9 @@
 .godot/
 /android/
 *.tmp
+
+# エクスポート結果（GitHub Pages用がdocs/なら、基本は無視でもOK）
+docs/
+
+# エクスポート設定
+export_presets.cfg
