@@ -21,14 +21,16 @@ func handle_swipe(diff: Vector2):
 	var dir = Vector2.ZERO
 	
 	if abs(diff.x) > abs(diff.y):
-		dir.x = 1 if diff.x > 0 else -1
-		flip_h = (dir.x > 0) # 右スワイプで反転
+		# 【修正】左スワイプ(diff.x < 0)を「右への移動(1)」として扱う
+		dir.x = -1 if diff.x > 0 else 1
+		# 進行方向（dir.x）に合わせてキャラを反転
+		flip_h = (dir.x > 0) 
 	else:
-		dir.y = 1 if diff.y > 0 else -1
+		# 【修正】上スワイプ(diff.y < 0)を「下への移動(1)」として扱う
+		dir.y = -1 if diff.y > 0 else 1
 
-	# アニメーションを再生
 	if anim.has_animation("walk"):
 		anim.play("walk")
 
-	# MapManagerに向かって「dir方向に動かして」と信号を送る
+	# この「反転したdir」を渡すことで、MapManagerの計算と合致する
 	move_requested.emit(dir)

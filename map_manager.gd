@@ -62,21 +62,14 @@ func find_player_start_position():
 
 # 座標更新処理を共通化
 func update_map_position():
-	# 「タイルの中心」を「画面の原点(0,0)」に一致させる、という明確な意図
-	var tile_half = TILE_SIZE / 2
-	position = (-current_grid_pos * TILE_SIZE) - Vector2(tile_half, tile_half)
-
-func spawn_background_tiles():
-	var img = map_bg.get_image()
-	for y in range(img.get_height()):
-		for x in range(img.get_width()):
-			var color = img.get_pixel(x, y)
-			if color.a > 0:
-				var tile = ColorRect.new()
-				tile.size = Vector2(TILE_SIZE, TILE_SIZE)
-				tile.color = color
-				tile.position = Vector2(x * TILE_SIZE, y * TILE_SIZE)
-				add_child(tile)
+	# 「今いるタイルの位置」を画面中央(0,0)に持ってくる
+	var base_pos = -current_grid_pos * TILE_SIZE
+	
+	# タイルの中心を(0,0)に合わせるための、常に一定のオフセット
+	# (背景が右上にずれていた問題も、これで中心に収束します)
+	var center_offset = Vector2(TILE_SIZE / 2, TILE_SIZE / 2)
+	
+	position = base_pos - center_offset
 
 # タイル生成のロジックをここに集約
 func spawn_tile(x, y, color):
