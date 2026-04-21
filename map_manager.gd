@@ -1,21 +1,28 @@
 extends Node2D
 
-const TILE_SIZE = 80.0  # 警告回避のためfloatに変更
+const TILE_SIZE = 64.0  # 警告回避のためfloatに変更
 @export var map_bg: Texture2D
 @export var map_move: Texture2D   # 追加：移動可能範囲
 @export var map_event: Texture2D
+@export var map_object: Texture2D  # ③：追加
 @export var player: Sprite2D
+
+# タイル素材の読み込み
+var grass_tex = preload("res://image/grass.png")
+var road_tex = preload("res://image/road.png")
+var wall_tex = preload("res://image/wall.png")
 
 var walkability_map = {}
 var current_grid_pos = Vector2.ZERO
 var is_moving = false # 移動中の入力ロック用
 
 func _ready():
-	# 1. まず通行判定マップを作成（最優先）
 	generate_walkability_map()
-	# 2. 世界の見た目を生成
 	generate_world()
-	# 3. プレイヤーの初期位置を決定
+	# ③ map_objectの読み込みを追加
+	if map_object:
+		generate_objects()
+		
 	if map_event:
 		find_player_start_position()
 	
@@ -39,6 +46,27 @@ func generate_walkability_map():
 			else:
 				walkability_map[grid_pos] = false
 
+# ③：map_objectからタイル画像を配置する
+func generate_objects():
+	var img = map_object.get_image()
+	for y in range(img.get_height()):
+		for x in range(img.get_width()):
+			var color = img.get_pixel(x, y)
+			if color.a == 0: continue # 透明ならスキップ
+			
+			var hex = color.to_html(false)
+			var tex: Texture2D = null
+			
+			# 色に応じてテクスチャを選択
+			match hex:
+				"ff8000": tex = grass_tex # オレンジ：草むら
+				"ffffff": tex = road_tex  # 白：道路
+				"808080": tex = wall_tex  # グレー：城壁
+				"000000": continue        # 黒：予約スペースなのでスキップ
+			
+			if tex:
+				spawn_tile_sprite(x, y, tex)
+
 func generate_world():
 	if map_bg:
 		var img = map_bg.get_image()
@@ -48,6 +76,16 @@ func generate_world():
 				if color.a > 0:
 					spawn_tile(x, y, color)
 
+# 画像を配置するための新しい関数
+func spawn_tile_sprite(x, y, tex):
+	var sprite = Sprite2D.new()
+	sprite.texture = tex
+	sprite.centered = false # 左上基準で配置
+	sprite.position = Vector2(x * TILE_SIZE, y * TILE_SIZE)
+	# 背景(0)より手前、キャラ(2以降を想定)より奥に設定
+	sprite.z_index = 1 
+	add_child(sprite)
+	
 func _on_player_move_requested(direction: Vector2):
 	if is_moving:
 		return
