@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://clarkgwyy610m" path="res://map_manager.gd" id="4_1hgir"]
 [ext_resource type="Texture2D" uid="uid://35io3aueog5" path="res://image/map_bg.png" id="5_3pjhv"]
 [ext_resource type="Texture2D" uid="uid://civjshi6plgem" path="res://image/map_event.png" id="6_876be"]
+[ext_resource type="Texture2D" uid="uid://dpt0oxq77d4se" path="res://image/map_move.png" id="6_xmas2"]
 
 [sub_resource type="Animation" id="Animation_1hgir"]
 length = 0.001
@@ -60,5 +61,6 @@ libraries/ = SubResource("AnimationLibrary_3pjhv")
 [node name="MapManager" type="Node2D" parent="." unique_id=670077991 node_paths=PackedStringArray("player")]
 script = ExtResource("4_1hgir")
 map_bg = ExtResource("5_3pjhv")
+map_move = ExtResource("6_xmas2")
 map_event = ExtResource("6_876be")
 player = NodePath("../Player")
