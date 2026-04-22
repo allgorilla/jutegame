@@ -52,6 +52,8 @@ _data = {
 
 [node name="Player" type="Sprite2D" parent="." unique_id=400859828]
 z_index = 1
+position = Vector2(0, -8)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_3mwrl")
 script = ExtResource("2_1hgir")
 
