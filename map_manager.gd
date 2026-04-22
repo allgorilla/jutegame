@@ -6,7 +6,7 @@ const TILE_SIZE = 64.0  # 警告回避のためfloatに変更
 @export var map_event: Texture2D
 @export var map_object: Texture2D
 @export var map_layout: Texture2D
-@export var player: Sprite2D
+@export var player: AnimatedSprite2D
 
 # --- ④用の画像リスト（発見順） ---
 var layout_textures = [
@@ -39,8 +39,10 @@ func _ready():
 	
 	if map_event:
 		process_map_event() # 名前を汎用的なものに変更
-	
+
 	if player:
+		# 起動と同時にアニメーションを開始（エディタでAutoplayをオンにしていれば不要ですが、念のため）
+		player.play("idle")
 		player.move_requested.connect(_on_player_move_requested)
 
 # 新設：map_moveから通行可能データを読み込む
