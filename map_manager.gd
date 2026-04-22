@@ -21,6 +21,7 @@ var layout_textures = [
 var grass_tex = preload("res://image/grass.png")
 var road_tex = preload("res://image/road.png")
 var wall_tex = preload("res://image/wall.png")
+var tree_tex = preload("res://image/tree.png")
 
 var walkability_map = {}
 var current_grid_pos = Vector2.ZERO
@@ -37,7 +38,7 @@ func _ready():
 		generate_layout_objects()
 	
 	if map_event:
-		find_player_start_position()
+		process_map_event() # 名前を汎用的なものに変更
 	
 	if player:
 		player.move_requested.connect(_on_player_move_requested)
@@ -192,16 +193,35 @@ func start_scroll_animation():
 	tween.tween_property(self, "position", target_pos, 0.2)
 	tween.finished.connect(func(): is_moving = false)
 
-func find_player_start_position():
+# map_eventのスキャンと処理
+func process_map_event():
 	var img = map_event.get_image()
 	for y in range(img.get_height()):
 		for x in range(img.get_width()):
 			var color = img.get_pixel(x, y)
-			# 青ドット判定
-			if color.r == 0 and color.g == 0 and color.b > 0.9 and color.a > 0.9:
+			if color.a < 0.1: continue # 透明はスキップ
+
+			# --- 青ドット：プレイヤーの初期位置 ---
+			if color.r < 0.1 and color.g < 0.1 and color.b > 0.9:
 				current_grid_pos = Vector2(x, y)
 				update_map_position()
-				return
+				
+			# --- 緑ドット：tree.png を配置 ---
+			elif color.r < 0.1 and color.g > 0.9 and color.b < 0.1:
+				spawn_tree(x, y)
+
+# 木を配置する専用関数
+func spawn_tree(x, y):
+	var sprite = Sprite2D.new()
+	sprite.texture = tree_tex
+	sprite.centered = false
+	sprite.position = Vector2(x * TILE_SIZE, y * TILE_SIZE)
+	
+	# 背景(0)より手前、キャラ(2)より奥
+	# もし木に隠れるようにしたければキャラより高く設定しますが、
+	# まずは他のオブジェクトと同じ 1 で設定します
+	sprite.z_index = 1 
+	add_child(sprite)
 
 func update_map_position():
 	var base_pos = -current_grid_pos * TILE_SIZE
