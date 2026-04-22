@@ -1,4 +1,4 @@
-extends Sprite2D
+extends AnimatedSprite2D
 
 # 「この方向に1マス動かして！」という信号を定義
 signal move_requested(direction: Vector2)
