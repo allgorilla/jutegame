@@ -4,8 +4,18 @@ const TILE_SIZE = 64.0  # 警告回避のためfloatに変更
 @export var map_bg: Texture2D
 @export var map_move: Texture2D   # 追加：移動可能範囲
 @export var map_event: Texture2D
-@export var map_object: Texture2D  # ③：追加
+@export var map_object: Texture2D
+@export var map_layout: Texture2D
 @export var player: Sprite2D
+
+# --- ④用の画像リスト（発見順） ---
+var layout_textures = [
+	preload("res://image/layout_king.png"),
+	preload("res://image/layout_bar.png"),
+	preload("res://image/layout_shop.png"),
+	preload("res://image/layout_rest.png"),
+	preload("res://image/layout_guild.png")
+]
 
 # タイル素材の読み込み
 var grass_tex = preload("res://image/grass.png")
@@ -23,6 +33,9 @@ func _ready():
 	if map_object:
 		generate_objects()
 		
+	if map_layout:
+		generate_layout_objects()
+	
 	if map_event:
 		find_player_start_position()
 	
@@ -66,6 +79,79 @@ func generate_objects():
 			
 			if tex:
 				spawn_tile_sprite(x, y, tex)
+
+# ④：巨大オブジェクトのスキャンと配置
+func generate_layout_objects():
+	var img = map_layout.get_image()
+	var width = img.get_width()
+	var height = img.get_height()
+	var layout_index = 0
+	var scanned_pixels = [] # 重複処理防止用
+
+	# 左上から右下へスキャン
+	for y in range(height):
+		for x in range(width):
+			var grid_pos = Vector2(x, y)
+			if grid_pos in scanned_pixels: continue
+			
+			var color = img.get_pixel(x, y)
+			
+			# 赤ドット(R=1, G=0, B=0)を発見した場合
+			if color.r > 0.9 and color.g < 0.1 and color.b < 0.1:
+				if layout_index < layout_textures.size():
+					# 1. サイズを計測（隣接する青ドットを数える）
+					var obj_size = measure_blue_area(img, x, y, scanned_pixels)
+					
+					# 2. 画像を配置
+					spawn_layout_sprite(x, y, layout_textures[layout_index], obj_size)
+					
+					# 3. 次の画像へ
+					layout_index += 1
+
+# 青ドットを計測してサイズ(タイル数)を返す
+func measure_blue_area(img: Image, start_x: int, start_y: int, scanned_list: Array) -> Vector2:
+	var w = 1
+	var h = 1
+	
+	# 横幅を計測 (右方向に青ドットが続く限り)
+	while start_x + w < img.get_width():
+		var c = img.get_pixel(start_x + w, start_y)
+		if c.r < 0.1 and c.g < 0.1 and c.b > 0.9: # 青
+			w += 1
+		else:
+			break
+			
+	# 高さを計測 (下方向に青ドットが続く限り)
+	while start_y + h < img.get_height():
+		var c = img.get_pixel(start_x, start_y + h)
+		if c.r < 0.1 and c.g < 0.1 and c.b > 0.9: # 青
+			h += 1
+		else:
+			break
+	
+	# 占有範囲をスキャン済みリストに登録
+	for ny in range(start_y, start_y + h):
+		for nx in range(start_x, start_x + w):
+			scanned_list.append(Vector2(nx, ny))
+			
+	return Vector2(w, h)
+
+# 巨大オブジェクト用のスプライト生成
+func spawn_layout_sprite(x, y, tex, grid_size):
+	var sprite = Sprite2D.new()
+	sprite.texture = tex
+	sprite.centered = false
+	sprite.position = Vector2(x * TILE_SIZE, y * TILE_SIZE)
+	
+	# 画像のサイズを指定されたタイル数分に引き延ばす（または合わせる）
+	# 元画像が 128x128 等で、タイル3x2分なら、サイズを調整
+	var target_size = grid_size * TILE_SIZE
+	var tex_size = tex.get_size()
+	sprite.scale = target_size / tex_size
+	
+	# オブジェクトレイヤー(1)よりさらに手前、キャラ(2)より奥
+	sprite.z_index = 1 
+	add_child(sprite)
 
 func generate_world():
 	if map_bg:

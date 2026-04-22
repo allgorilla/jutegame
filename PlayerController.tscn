@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://civjshi6plgem" path="res://image/map_event.png" id="6_876be"]
 [ext_resource type="Texture2D" uid="uid://dpt0oxq77d4se" path="res://image/map_move.png" id="6_xmas2"]
 [ext_resource type="Texture2D" uid="uid://ceqju8dc5suct" path="res://image/map_object.png" id="8_xmas2"]
+[ext_resource type="Texture2D" uid="uid://bh58x48dg7yph" path="res://image/map_layout.png" id="9_ehpa4"]
 
 [sub_resource type="Animation" id="Animation_1hgir"]
 length = 0.001
@@ -66,4 +67,5 @@ map_bg = ExtResource("5_3pjhv")
 map_move = ExtResource("6_xmas2")
 map_event = ExtResource("6_876be")
 map_object = ExtResource("8_xmas2")
+map_layout = ExtResource("9_ehpa4")
 player = NodePath("../Player")
