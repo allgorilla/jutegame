@@ -1,7 +1,6 @@
 extends Node2D
 
 const TILE_SIZE = 64.0  # 警告回避のためfloatに変更
-@export var map_bg: Texture2D
 @export var map_move: Texture2D   # 追加：移動可能範囲
 @export var map_event: Texture2D
 @export var map_object: Texture2D
@@ -39,8 +38,7 @@ func _ready():
 	_setup_world()
 
 func _setup_world():
-	generate_world() # 背景描画（以前のまま）
-	
+
 	# プレイヤー位置の設定
 	current_grid_pos = data.player_start_pos
 	update_map_position()
@@ -89,15 +87,6 @@ func spawn_layout_sprite(x, y, tex, grid_size):
 	# オブジェクトレイヤー(1)よりさらに手前、キャラ(2)より奥
 	sprite.z_index = 1 
 	add_child(sprite)
-
-func generate_world():
-	if map_bg:
-		var img = map_bg.get_image()
-		for y in range(img.get_height()):
-			for x in range(img.get_width()):
-				var color = img.get_pixel(x, y)
-				if color.a > 0:
-					spawn_tile(x, y, color)
 
 # 画像を配置するための新しい関数
 func spawn_tile_sprite(x, y, tex):
@@ -163,10 +152,3 @@ func update_map_position():
 	var base_pos = -current_grid_pos * TILE_SIZE
 	var center_offset = Vector2(TILE_SIZE / 2.0, TILE_SIZE / 2.0)
 	position = base_pos - center_offset
-
-func spawn_tile(x, y, color):
-	var tile = ColorRect.new()
-	tile.size = Vector2(TILE_SIZE, TILE_SIZE)
-	tile.color = color
-	tile.position = Vector2(x * TILE_SIZE, y * TILE_SIZE)
-	add_child(tile)
