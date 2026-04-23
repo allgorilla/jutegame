@@ -8,14 +8,16 @@ const TILE_SIZE = 64.0  # 警告回避のためfloatに変更
 @export var map_layout: Texture2D
 @export var player: AnimatedSprite2D
 
-# --- ④用の画像リスト（発見順） ---
-var layout_textures = [
-	preload("res://image/layout_king.png"),
-	preload("res://image/layout_bar.png"),
-	preload("res://image/layout_shop.png"),
-	preload("res://image/layout_rest.png"),
-	preload("res://image/layout_guild.png")
-]
+# --- ④用のデータテーブル（座標をキーにする） ---
+# ここにデバッグプリントで出た内容をコピーして貼り付けていきます
+var layout_data_table = {
+	Vector2(26.0, 25.0): preload("res://image/layout_king.png"),
+	Vector2(31.0, 27.0): preload("res://image/layout_bar.png"),
+	Vector2(35.0, 27.0): preload("res://image/layout_shop.png"),
+	Vector2(31.0, 30.0): preload("res://image/layout_rest.png"),
+	Vector2(35.0, 30.0): preload("res://image/layout_guild.png"),
+	
+}
 
 # タイル素材の読み込み
 var grass_tex = preload("res://image/grass.png")
@@ -88,8 +90,9 @@ func generate_layout_objects():
 	var img = map_layout.get_image()
 	var width = img.get_width()
 	var height = img.get_height()
-	var layout_index = 0
 	var scanned_pixels = [] # 重複処理防止用
+
+	print("--- 巨大オブジェクトのスキャンを開始 ---")
 
 	# 左上から右下へスキャン
 	for y in range(height):
@@ -99,17 +102,21 @@ func generate_layout_objects():
 			
 			var color = img.get_pixel(x, y)
 			
-			# 赤ドット(R=1, G=0, B=0)を発見した場合
+			# 赤ドット(R=1, G=0, B=0)を起点として発見
 			if color.r > 0.9 and color.g < 0.1 and color.b < 0.1:
-				if layout_index < layout_textures.size():
-					# 1. サイズを計測（隣接する青ドットを数える）
-					var obj_size = measure_blue_area(img, x, y, scanned_pixels)
-					
-					# 2. 画像を配置
-					spawn_layout_sprite(x, y, layout_textures[layout_index], obj_size)
-					
-					# 3. 次の画像へ
-					layout_index += 1
+				# 1. サイズを計測（隣接する青ドットを数える）
+				var obj_size = measure_blue_area(img, x, y, scanned_pixels)
+				
+				# 2. 座標をキーにデータテーブルをサーチ
+				if layout_data_table.has(grid_pos):
+					var tex = layout_data_table[grid_pos]
+					spawn_layout_sprite(x, y, tex, obj_size)
+				else:
+					# 3. 未登録の場合、登録用コードの形式でデバッグプリントを出す
+					# これをそのまま辞書にコピペできるようにしています
+					print("警告: Vector2", grid_pos, ": preload(), # 登録がありません")
+
+	print("--- スキャン終了 ---")
 
 # 青ドットを計測してサイズ(タイル数)を返す
 func measure_blue_area(img: Image, start_x: int, start_y: int, scanned_list: Array) -> Vector2:
