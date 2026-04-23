@@ -1,23 +1,37 @@
 extends RefCounted
 class_name MapData
 
-# 解析結果を格納する変数
+# --- 素材データの定義（こちらに移動） ---
+var layout_data_table = {
+	Vector2(26, 25): preload("res://image/layout_king.png"),
+	Vector2(31, 27): preload("res://image/layout_bar.png"),
+	Vector2(35, 27): preload("res://image/layout_shop.png"),
+	Vector2(31, 30): preload("res://image/layout_rest.png"),
+	Vector2(35, 30): preload("res://image/layout_guild.png"),
+}
+
+var grass_tex = preload("res://image/grass.png")
+var road_tex = preload("res://image/road.png")
+var wall_tex = preload("res://image/wall.png")
+var tree_tex = preload("res://image/tree.png")
+
+# --- 解析結果を格納する変数 ---
 var walkability_map = {}
-var layout_objects = [] # [{pos: Vector2, tex: Texture2D, size: Vector2}, ...]
-var object_tiles = [] # [{pos: Vector2, hex: String}, ...]
+var layout_objects = []
 var player_start_pos = Vector2.ZERO
 var tree_positions = []
+var object_tiles = []
 
-# 解析のメイン関数
-func parse_maps(map_move: Texture2D, map_event: Texture2D, map_layout: Texture2D, map_object: Texture2D, layout_table: Dictionary):
+# 解析メイン関数（引数から layout_table を削除できます）
+func parse_maps(map_move: Texture2D, map_event: Texture2D, map_layout: Texture2D, map_object: Texture2D):
 	if map_move:
 		_parse_move(map_move)
 	if map_event:
 		_parse_event(map_event)
+	if map_layout:
+		_parse_layout(map_layout) # クラス内のテーブルを使うので引数不要
 	if map_object:
 		_parse_objects(map_object)
-	if map_layout:
-		_parse_layout(map_layout, layout_table)
 
 # 通行判定の解析
 func _parse_move(tex: Texture2D):
@@ -57,9 +71,10 @@ func _parse_objects(tex: Texture2D):
 				object_tiles.append({"pos": Vector2(x, y), "hex": hex})
 
 # 巨大オブジェクトの解析
-func _parse_layout(tex: Texture2D, layout_table: Dictionary):
+func _parse_layout(tex: Texture2D):
 	var img = tex.get_image()
 	var scanned_pixels = []
+	var layout_table = self.layout_data_table
 	
 	for y in range(img.get_height()):
 		for x in range(img.get_width()):
