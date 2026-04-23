@@ -29,122 +29,49 @@ var walkability_map = {}
 var current_grid_pos = Vector2.ZERO
 var is_moving = false # 移動中の入力ロック用
 
-func _ready():
-	generate_walkability_map()
-	generate_world()
-	# ③ map_objectの読み込みを追加
-	if map_object:
-		generate_objects()
-		
-	if map_layout:
-		generate_layout_objects()
-	
-	if map_event:
-		process_map_event() # 名前を汎用的なものに変更
+var data = MapData.new() # 解析クラスのインスタンス
 
+func _ready():
+	# 1. 解析の実行（重い処理をMapDataに任せる）
+	data.parse_maps(map_move, map_event, map_layout, map_object, layout_data_table)
+	
+	# 2. 解析結果を使って描画（MapManagerは「配置」に専念）
+	_setup_world()
+
+func _setup_world():
+	generate_world() # 背景描画（以前のまま）
+	
+	# プレイヤー位置の設定
+	current_grid_pos = data.player_start_pos
+	update_map_position()
+	
+	# 通行判定のコピー
+	walkability_map = data.walkability_map
+	
+	# 1タイルオブジェクト（草地・壁など）の配置
+	for obj in data.object_tiles:
+		var tex: Texture2D = null
+		
+		# 色に応じてテクスチャを選択（ロジックは以前のmatch文と同じ）
+		match obj.hex:
+			"ff8000": tex = grass_tex # オレンジ
+			"ffffff": tex = road_tex  # 白
+			"808080": tex = wall_tex  # グレー
+		
+		if tex:
+			spawn_tile_sprite(obj.pos.x, obj.pos.y, tex)
+	# 木の配置
+	for pos in data.tree_positions:
+		spawn_tree(pos.x, pos.y)
+		
+	# 巨大オブジェクトの配置
+	for obj in data.layout_objects:
+		spawn_layout_sprite(obj.pos.x, obj.pos.y, obj.tex, obj.size)
+
+	# プレイヤーの準備
 	if player:
-		# 起動と同時にアニメーションを開始（エディタでAutoplayをオンにしていれば不要ですが、念のため）
 		player.play("idle")
 		player.move_requested.connect(_on_player_move_requested)
-
-# 新設：map_moveから通行可能データを読み込む
-func generate_walkability_map():
-	if not map_move:
-		print("警告: map_moveが設定されていません")
-		return
-		
-	var img = map_move.get_image()
-	for y in range(img.get_height()):
-		for x in range(img.get_width()):
-			var color = img.get_pixel(x, y)
-			var grid_pos = Vector2(x, y)
-			# 白(1,1,1)なら通行可能、それ以外（黒など）は不可
-			if color.r > 0.9 and color.g > 0.9 and color.b > 0.9:
-				walkability_map[grid_pos] = true
-			else:
-				walkability_map[grid_pos] = false
-
-# ③：map_objectからタイル画像を配置する
-func generate_objects():
-	var img = map_object.get_image()
-	for y in range(img.get_height()):
-		for x in range(img.get_width()):
-			var color = img.get_pixel(x, y)
-			if color.a == 0: continue # 透明ならスキップ
-			
-			var hex = color.to_html(false)
-			var tex: Texture2D = null
-			
-			# 色に応じてテクスチャを選択
-			match hex:
-				"ff8000": tex = grass_tex # オレンジ：草むら
-				"ffffff": tex = road_tex  # 白：道路
-				"808080": tex = wall_tex  # グレー：城壁
-				"000000": continue        # 黒：予約スペースなのでスキップ
-			
-			if tex:
-				spawn_tile_sprite(x, y, tex)
-
-# ④：巨大オブジェクトのスキャンと配置
-func generate_layout_objects():
-	var img = map_layout.get_image()
-	var width = img.get_width()
-	var height = img.get_height()
-	var scanned_pixels = [] # 重複処理防止用
-
-	print("--- 巨大オブジェクトのスキャンを開始 ---")
-
-	# 左上から右下へスキャン
-	for y in range(height):
-		for x in range(width):
-			var grid_pos = Vector2(x, y)
-			if grid_pos in scanned_pixels: continue
-			
-			var color = img.get_pixel(x, y)
-			
-			# 赤ドット(R=1, G=0, B=0)を起点として発見
-			if color.r > 0.9 and color.g < 0.1 and color.b < 0.1:
-				# 1. サイズを計測（隣接する青ドットを数える）
-				var obj_size = measure_blue_area(img, x, y, scanned_pixels)
-				
-				# 2. 座標をキーにデータテーブルをサーチ
-				if layout_data_table.has(grid_pos):
-					var tex = layout_data_table[grid_pos]
-					spawn_layout_sprite(x, y, tex, obj_size)
-				else:
-					# 3. 未登録の場合、登録用コードの形式でデバッグプリントを出す
-					# これをそのまま辞書にコピペできるようにしています
-					print("警告: Vector2", grid_pos, ": preload(), # 登録がありません")
-
-	print("--- スキャン終了 ---")
-
-# 青ドットを計測してサイズ(タイル数)を返す
-func measure_blue_area(img: Image, start_x: int, start_y: int, scanned_list: Array) -> Vector2:
-	var w = 1
-	var h = 1
-	
-	# 横幅を計測 (右方向に青ドットが続く限り)
-	while start_x + w < img.get_width():
-		var c = img.get_pixel(start_x + w, start_y)
-		if c.r < 0.1 and c.g < 0.1 and c.b > 0.9: # 青
-			w += 1
-		else:
-			break
-			
-	# 高さを計測 (下方向に青ドットが続く限り)
-	while start_y + h < img.get_height():
-		var c = img.get_pixel(start_x, start_y + h)
-		if c.r < 0.1 and c.g < 0.1 and c.b > 0.9: # 青
-			h += 1
-		else:
-			break
-	
-	# 占有範囲をスキャン済みリストに登録
-	for ny in range(start_y, start_y + h):
-		for nx in range(start_x, start_x + w):
-			scanned_list.append(Vector2(nx, ny))
-			
-	return Vector2(w, h)
 
 # 巨大オブジェクト用のスプライト生成
 func spawn_layout_sprite(x, y, tex, grid_size):
