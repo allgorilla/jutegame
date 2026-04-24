@@ -18,13 +18,27 @@ var is_moving = false
 var SceneChangerScene = preload("res://SceneChanger.tscn")
 
 func _ready():
-	add_child(spawner)
-	# 解析（素材データはMapData側が持っているので、渡す必要がなくなりました）
+	# 1. まずは「見えない裏側」で世界の解析と構築をすべて終わらせる
+	# (この間、画面はまだ SceneChanger の黒い幕で覆われています)
 	data.parse_maps(map_move, map_event, map_layout, map_object)
-	_setup_world()
+	
+	if Global.last_player_pos != Vector2.ZERO:
+		current_grid_pos = Global.last_player_pos
+	else:
+		current_grid_pos = data.player_start_pos
+	
+	add_child(spawner)
+	_setup_world() # ここでタイルやオブジェクトがすべて配置される
+	
+	# 2. すべての配置が終わった「後」で、フェードを解除して幕を開ける
+	var changer = get_tree().root.get_node_or_null("SceneChanger")
+	if changer:
+		var anim = changer.get_node("AnimationPlayer")
+		anim.play_backwards("fade") # 明るくする
+		await anim.animation_finished # 明るくなるのを待つ
+		changer.queue_free() # 最後に幕を捨てる
 
 func _setup_world():
-	current_grid_pos = data.player_start_pos
 	update_map_position()
 	walkability_map = data.walkability_map
 	
@@ -88,6 +102,8 @@ func _on_player_move_requested(direction: Vector2):
 
 func _check_event_trigger(pos: Vector2):
 	if pos in data.event_positions:
+		# 保存：シーンを去る前に、今の座標をGlobalに預ける
+		Global.last_player_pos = pos
 		is_moving = true # 遷移中に動けないように固定
 		
 		# 1. フェード用の画面を生成して表示
