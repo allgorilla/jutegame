@@ -55,16 +55,40 @@ func _get_texture_from_data(hex: String) -> Texture2D:
 	return null
 
 func _on_player_move_requested(direction: Vector2):
-	if is_moving:
-		return
-		
-	var target_grid_pos = current_grid_pos + direction
+	if is_moving: return
 	
-	# walkability_map（map_move由来）を参照して判定
-	if walkability_map.get(target_grid_pos) == true:
-		is_moving = true
-		current_grid_pos = target_grid_pos
-		start_scroll_animation()
+	# 1. 次の座標を計算
+	var next_grid_pos = current_grid_pos + direction
+	
+	# 2. 通行判定（白タイルかどうか等）
+	if not walkability_map.get(next_grid_pos, false):
+		return
+	
+	# 3. 移動開始
+	is_moving = true
+	var target_position = position - (direction * TILE_SIZE) # 16はタイルサイズ
+	
+	# 4. Tweenでスクロールアニメーション実行
+	var tween = create_tween()
+	tween.tween_property(self, "position", target_position, 0.2)
+	
+	# ★ここが重要：アニメーションが終わるまでここで待つ！
+	await tween.finished
+	
+	# 5. 内部的な座標データを更新
+	current_grid_pos = next_grid_pos
+	
+	# 6. 移動が終わって、キャラがマスに乗った「後」で判定！
+	_check_event_trigger(current_grid_pos)
+	
+	# イベントが発生しなかった場合のためにフラグを下ろす
+	# (イベント発生時はシーンが切り替わるので気にしなくてOK)
+	is_moving = false
+
+func _check_event_trigger(pos: Vector2):
+	if pos in data.event_positions:
+		print("キャラがマスに到着。イベントシーンへ遷移します。")
+		get_tree().change_scene_to_file("res://DefaultEventScene.tscn")
 
 func start_scroll_animation():
 	var target_pos = (-current_grid_pos * TILE_SIZE) - Vector2(TILE_SIZE / 2, TILE_SIZE / 2)

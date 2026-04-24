@@ -21,6 +21,7 @@ var layout_objects = []
 var player_start_pos = Vector2.ZERO
 var tree_positions = []
 var object_tiles = []
+var event_positions = [] # マゼンダドットの座標を格納する配列
 
 # 解析メイン関数（引数から layout_table を削除できます）
 func parse_maps(map_move: Texture2D, map_event: Texture2D, map_layout: Texture2D, map_object: Texture2D):
@@ -32,6 +33,16 @@ func parse_maps(map_move: Texture2D, map_event: Texture2D, map_layout: Texture2D
 		_parse_layout(map_layout) # クラス内のテーブルを使うので引数不要
 	if map_object:
 		_parse_objects(map_object)
+	
+	event_positions.clear()
+	var event_img = map_event.get_image()
+	for y in range(event_img.get_height()):
+		for x in range(event_img.get_width()):
+			var color = event_img.get_pixel(x, y)
+			
+			# マゼンダ（R255, G0, B255）をチェック
+			if color.is_equal_approx(Color(1, 0, 1, 1)): 
+				event_positions.append(Vector2(x, y))	
 
 # 通行判定の解析
 func _parse_move(tex: Texture2D):
