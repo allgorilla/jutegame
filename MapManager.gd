@@ -15,6 +15,7 @@ var data: MapData = MapData.new()
 var walkability_map = {}
 var current_grid_pos = Vector2.ZERO
 var is_moving = false
+var SceneChangerScene = preload("res://SceneChanger.tscn")
 
 func _ready():
 	add_child(spawner)
@@ -66,7 +67,7 @@ func _on_player_move_requested(direction: Vector2):
 	
 	# 3. 移動開始
 	is_moving = true
-	var target_position = position - (direction * TILE_SIZE) # 16はタイルサイズ
+	var target_position = position - (direction * TILE_SIZE)
 	
 	# 4. Tweenでスクロールアニメーション実行
 	var tween = create_tween()
@@ -87,7 +88,18 @@ func _on_player_move_requested(direction: Vector2):
 
 func _check_event_trigger(pos: Vector2):
 	if pos in data.event_positions:
-		print("キャラがマスに到着。イベントシーンへ遷移します。")
+		is_moving = true # 遷移中に動けないように固定
+		
+		# 1. フェード用の画面を生成して表示
+		var changer = SceneChangerScene.instantiate()
+		get_tree().root.add_child(changer) # ルートに追加することでシーンを跨いでも消えない
+		
+		# 2. 暗くなるアニメーションを再生
+		var anim = changer.get_node("AnimationPlayer")
+		anim.play("fade")
+		await anim.animation_finished # 暗くなるまで待つ
+		
+		# 3. 暗くなった裏でシーンを切り替える
 		get_tree().change_scene_to_file("res://DefaultEventScene.tscn")
 
 func start_scroll_animation():
