@@ -8,6 +8,9 @@ var current_state = State.READING
 @onready var screen_button = $UI/ScreenButton # 画面全体の透明ボタン
 
 func _ready():
+	# テスト：名前「Hero1」、パスワード「pass」でデータを送ってみる
+	NetworkManager.save_player_data("Hero1", 30, 50, 10, "pass")
+	
 	command_window.hide()
 	# 最初のメッセージ
 	display_text("ゆうしゃよ、よくぞまいった！")
