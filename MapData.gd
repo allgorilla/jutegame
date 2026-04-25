@@ -12,7 +12,7 @@ var layout_data_table = {
 
 # 5点の座標をすべて登録（パスは今はすべて共通）
 var event_table = {
-	Vector2(27.0, 27.0): "res://DefaultEventScene.tscn",
+	Vector2(27.0, 27.0): "res://CastleScene.tscn",
 	Vector2(32.0, 28.0): "res://DefaultEventScene.tscn",
 	Vector2(36.0, 28.0): "res://DefaultEventScene.tscn",
 	Vector2(32.0, 31.0): "res://DefaultEventScene.tscn",
