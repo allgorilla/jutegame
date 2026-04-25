@@ -10,6 +10,14 @@ var layout_data_table = {
 	Vector2(35, 30): preload("res://image/layout_guild.png"),
 }
 
+# 5点の座標をすべて登録（パスは今はすべて共通）
+var event_table = {
+	Vector2(27.0, 27.0): "res://DefaultEventScene.tscn",
+	Vector2(32.0, 28.0): "res://DefaultEventScene.tscn",
+	Vector2(36.0, 28.0): "res://DefaultEventScene.tscn",
+	Vector2(32.0, 31.0): "res://DefaultEventScene.tscn",
+	Vector2(36.0, 31.0): "res://DefaultEventScene.tscn"
+}
 var grass_tex = preload("res://image/grass.png")
 var road_tex = preload("res://image/road.png")
 var wall_tex = preload("res://image/wall.png")
@@ -33,7 +41,7 @@ func parse_maps(map_move: Texture2D, map_event: Texture2D, map_layout: Texture2D
 		_parse_layout(map_layout) # クラス内のテーブルを使うので引数不要
 	if map_object:
 		_parse_objects(map_object)
-	
+
 	event_positions.clear()
 	var event_img = map_event.get_image()
 	for y in range(event_img.get_height()):
@@ -43,6 +51,21 @@ func parse_maps(map_move: Texture2D, map_event: Texture2D, map_layout: Texture2D
 			# マゼンダ（R255, G0, B255）をチェック
 			if color.is_equal_approx(Color(1, 0, 1, 1)): 
 				event_positions.append(Vector2(x, y))	
+	# --- 解析の最後に「整合性チェック」を追加 ---
+	_validate_event_table()
+
+func _validate_event_table():
+	var missing_count = 0
+	for pos in event_positions:
+		if not event_table.has(pos):
+			# 未登録の座標を見つけたら即座に警告を出す
+			push_error("【未登録イベント】マップ上にマゼンダがありますが、event_tableに登録がありません: ", pos)
+			missing_count += 1
+			
+	if missing_count > 0:
+		print("致命的なエラー: 合計 ", missing_count, " 箇所のイベント設定が不足しています。")
+	else:
+		print("イベントテーブルの整合性チェック完了。全 ", event_positions.size(), " 箇所が正常に登録されています。")
 
 # 通行判定の解析
 func _parse_move(tex: Texture2D):

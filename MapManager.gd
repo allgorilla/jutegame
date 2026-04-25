@@ -102,21 +102,27 @@ func _on_player_move_requested(direction: Vector2):
 
 func _check_event_trigger(pos: Vector2):
 	if pos in data.event_positions:
-		# 保存：シーンを去る前に、今の座標をGlobalに預ける
-		Global.last_player_pos = pos
-		is_moving = true # 遷移中に動けないように固定
+		# 1. 辞書に登録されているかチェック
+		if not data.event_table.has(pos):
+			# 未登録なら警告を出して処理を中断（またはデフォルトへ）
+			push_warning("【警告】未登録のイベント座標を踏みました: ", pos, "。MapDataのevent_tableに追加してください。")
+			is_moving = false # 動けるように戻す
+			return 
+
+		# 2. 登録がある場合のみ遷移処理へ
+		is_moving = true
+		var target_scene_path = data.event_table[pos]
 		
-		# 1. フェード用の画面を生成して表示
+		# フェード処理の開始
 		var changer = SceneChangerScene.instantiate()
-		get_tree().root.add_child(changer) # ルートに追加することでシーンを跨いでも消えない
+		get_tree().root.add_child(changer)
 		
-		# 2. 暗くなるアニメーションを再生
 		var anim = changer.get_node("AnimationPlayer")
 		anim.play("fade")
-		await anim.animation_finished # 暗くなるまで待つ
+		await anim.animation_finished
 		
-		# 3. 暗くなった裏でシーンを切り替える
-		get_tree().change_scene_to_file("res://DefaultEventScene.tscn")
+		Global.last_player_pos = pos
+		get_tree().change_scene_to_file(target_scene_path)
 
 func start_scroll_animation():
 	var target_pos = (-current_grid_pos * TILE_SIZE) - Vector2(TILE_SIZE / 2, TILE_SIZE / 2)
