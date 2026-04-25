@@ -22,11 +22,12 @@ grow_vertical = 2
 
 [node name="Button" type="Button" parent="." unique_id=628856887]
 layout_mode = 0
-offset_left = 176.0
-offset_top = 274.0
-offset_right = 221.0
-offset_bottom = 305.0
+offset_left = 152.0
+offset_top = 270.0
+offset_right = 255.0
+offset_bottom = 326.0
 theme_override_fonts/font = ExtResource("2_yc8je")
+theme_override_font_sizes/font_size = 32
 text = "もどる"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
