@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://civjshi6plgem"
-path="res://.godot/imported/map_event.png-caeb3885bafaf4e7e2e1954b0b4127d8.ctex"
+uid="uid://cu4ukkrkafplb"
+path="res://.godot/imported/wall.png-0386b1c28a801026ba109332c6fa6817.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/map_event.png"
-dest_files=["res://.godot/imported/map_event.png-caeb3885bafaf4e7e2e1954b0b4127d8.ctex"]
+source_file="res://assets/image/wall.png"
+dest_files=["res://.godot/imported/wall.png-0386b1c28a801026ba109332c6fa6817.ctex"]
 
 [params]
 

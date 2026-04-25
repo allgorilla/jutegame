@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cpwm5jht3aqg3"]
 
-[ext_resource type="Script" uid="uid://qeg47mc8k13v" path="res://CastleScene.gd" id="1_drab1"]
+[ext_resource type="Script" uid="uid://qeg47mc8k13v" path="res://scripts/CastleScene.gd" id="1_drab1"]
 
 [node name="CastleScene" type="Control" unique_id=84887198]
 layout_mode = 3

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwqyu2kocntdd"
-path="res://.godot/imported/layout_guild.png-bdb09609d561c6b929840ff2eb47c619.ctex"
+uid="uid://civjshi6plgem"
+path="res://.godot/imported/map_event.png-8c92823d573d93d3ea40bde7ac406156.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/layout_guild.png"
-dest_files=["res://.godot/imported/layout_guild.png-bdb09609d561c6b929840ff2eb47c619.ctex"]
+source_file="res://assets/image/map_event.png"
+dest_files=["res://.godot/imported/map_event.png-8c92823d573d93d3ea40bde7ac406156.ctex"]
 
 [params]
 

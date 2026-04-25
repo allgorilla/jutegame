@@ -3,25 +3,25 @@ class_name MapData
 
 # --- 素材データの定義（こちらに移動） ---
 var layout_data_table = {
-	Vector2(26, 25): preload("res://image/layout_king.png"),
-	Vector2(31, 27): preload("res://image/layout_bar.png"),
-	Vector2(35, 27): preload("res://image/layout_shop.png"),
-	Vector2(31, 30): preload("res://image/layout_rest.png"),
-	Vector2(35, 30): preload("res://image/layout_guild.png"),
+	Vector2(26, 25): preload("res://assets/image/layout_king.png"),
+	Vector2(31, 27): preload("res://assets/image/layout_bar.png"),
+	Vector2(35, 27): preload("res://assets/image/layout_shop.png"),
+	Vector2(31, 30): preload("res://assets/image/layout_rest.png"),
+	Vector2(35, 30): preload("res://assets/image/layout_guild.png"),
 }
 
 # 5点の座標をすべて登録（パスは今はすべて共通）
 var event_table = {
-	Vector2(27.0, 27.0): "res://CastleScene.tscn",
-	Vector2(32.0, 28.0): "res://DefaultEventScene.tscn",
-	Vector2(36.0, 28.0): "res://DefaultEventScene.tscn",
-	Vector2(32.0, 31.0): "res://DefaultEventScene.tscn",
-	Vector2(36.0, 31.0): "res://DefaultEventScene.tscn"
+	Vector2(27.0, 27.0): "res://scenes/CastleScene.tscn",
+	Vector2(32.0, 28.0): "res://scenes/DefaultEventScene.tscn",
+	Vector2(36.0, 28.0): "res://scenes/DefaultEventScene.tscn",
+	Vector2(32.0, 31.0): "res://scenes/DefaultEventScene.tscn",
+	Vector2(36.0, 31.0): "res://scenes/DefaultEventScene.tscn"
 }
-var grass_tex = preload("res://image/grass.png")
-var road_tex = preload("res://image/road.png")
-var wall_tex = preload("res://image/wall.png")
-var tree_tex = preload("res://image/tree.png")
+var grass_tex = preload("res://assets/image/grass.png")
+var road_tex = preload("res://assets/image/road.png")
+var wall_tex = preload("res://assets/image/wall.png")
+var tree_tex = preload("res://assets/image/tree.png")
 
 # --- 解析結果を格納する変数 ---
 var walkability_map = {}

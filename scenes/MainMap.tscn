@@ -1,22 +1,22 @@
 [gd_scene format=3 uid="uid://chtjy6nt6ep1"]
 
-[ext_resource type="Texture2D" uid="uid://esmvu86ucno7" path="res://image/human_02.png" id="1_3mwrl"]
-[ext_resource type="Script" uid="uid://bh4td4368duy5" path="res://player.gd" id="2_1hgir"]
-[ext_resource type="Texture2D" uid="uid://n6lijamd1ev5" path="res://image/human_01.png" id="2_y00gc"]
-[ext_resource type="Script" uid="uid://clarkgwyy610m" path="res://MapManager.gd" id="4_1hgir"]
-[ext_resource type="Texture2D" uid="uid://civjshi6plgem" path="res://image/map_event.png" id="6_876be"]
-[ext_resource type="Texture2D" uid="uid://dpt0oxq77d4se" path="res://image/map_move.png" id="6_xmas2"]
-[ext_resource type="Texture2D" uid="uid://ceqju8dc5suct" path="res://image/map_object.png" id="8_xmas2"]
-[ext_resource type="Texture2D" uid="uid://bh58x48dg7yph" path="res://image/map_layout.png" id="9_ehpa4"]
+[ext_resource type="Texture2D" uid="uid://n6lijamd1ev5" path="res://assets/image/human_01.png" id="1_acn1i"]
+[ext_resource type="Texture2D" uid="uid://esmvu86ucno7" path="res://assets/image/human_02.png" id="2_i2ruk"]
+[ext_resource type="Script" uid="uid://bh4td4368duy5" path="res://scripts/player.gd" id="3_bx5ub"]
+[ext_resource type="Script" uid="uid://clarkgwyy610m" path="res://scripts/MapManager.gd" id="4_gokjw"]
+[ext_resource type="Texture2D" uid="uid://dpt0oxq77d4se" path="res://assets/image/map_move.png" id="5_mvbka"]
+[ext_resource type="Texture2D" uid="uid://civjshi6plgem" path="res://assets/image/map_event.png" id="6_x708w"]
+[ext_resource type="Texture2D" uid="uid://bh58x48dg7yph" path="res://assets/image/map_layout.png" id="7_yrulf"]
+[ext_resource type="Texture2D" uid="uid://ceqju8dc5suct" path="res://assets/image/map_object.png" id="8_mmkx4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ehpa4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_y00gc")
+"texture": ExtResource("1_acn1i")
 }, {
 "duration": 1.0,
-"texture": ExtResource("1_3mwrl")
+"texture": ExtResource("2_i2ruk")
 }],
 "loop": true,
 "name": &"idle",
@@ -35,7 +35,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_3mwrl")]
+"values": [ExtResource("2_i2ruk")]
 }
 
 [sub_resource type="Animation" id="Animation_g0g1r"]
@@ -52,7 +52,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("1_3mwrl"), ExtResource("2_y00gc")]
+"values": [ExtResource("2_i2ruk"), ExtResource("1_acn1i")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3pjhv"]
@@ -70,7 +70,7 @@ scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ehpa4")
 animation = &"idle"
 frame_progress = 0.24740246
-script = ExtResource("2_1hgir")
+script = ExtResource("3_bx5ub")
 
 [node name="PlayerWalk" type="AnimationPlayer" parent="Player" unique_id=153522001]
 libraries/ = SubResource("AnimationLibrary_3pjhv")
@@ -79,9 +79,9 @@ libraries/ = SubResource("AnimationLibrary_3pjhv")
 
 [node name="MapManager" type="Node2D" parent="." unique_id=670077991 node_paths=PackedStringArray("player")]
 z_index = -1
-script = ExtResource("4_1hgir")
-map_move = ExtResource("6_xmas2")
-map_event = ExtResource("6_876be")
-map_layout = ExtResource("9_ehpa4")
-map_object = ExtResource("8_xmas2")
+script = ExtResource("4_gokjw")
+map_move = ExtResource("5_mvbka")
+map_event = ExtResource("6_x708w")
+map_layout = ExtResource("7_yrulf")
+map_object = ExtResource("8_mmkx4")
 player = NodePath("../Player")

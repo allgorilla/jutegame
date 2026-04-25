@@ -15,7 +15,7 @@ var data: MapData = MapData.new()
 var walkability_map = {}
 var current_grid_pos = Vector2.ZERO
 var is_moving = false
-var SceneChangerScene = preload("res://SceneChanger.tscn")
+var SceneChangerScene = preload("res://scenes/SceneChanger.tscn")
 
 func _ready():
 	# 1. まずは「見えない裏側」で世界の解析と構築をすべて終わらせる
