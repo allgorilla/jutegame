@@ -25,6 +25,10 @@ window/size/viewport_width=400
 window/size/viewport_height=600
 window/stretch/mode="viewport"
 
+[gui]
+
+theme/custom_font="uid://dt0n5imp1bwyc"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

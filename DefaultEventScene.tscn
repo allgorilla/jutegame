@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ctu3b8f20n1pd"]
 
 [ext_resource type="Script" uid="uid://bykt7u80q0yhi" path="res://DefaultEventScene.gd" id="1_nny8c"]
+[ext_resource type="FontFile" uid="uid://dt0n5imp1bwyc" path="res://font/NotoSansJP-VariableFont_wght.ttf" id="2_yc8je"]
 
 [node name="DefaultEventScene" type="Control" unique_id=1171806594]
 layout_mode = 3
@@ -25,6 +26,7 @@ offset_left = 176.0
 offset_top = 274.0
 offset_right = 221.0
 offset_bottom = 305.0
+theme_override_fonts/font = ExtResource("2_yc8je")
 text = "もどる"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
