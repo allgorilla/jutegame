@@ -4,15 +4,21 @@
 
 [node name="CastleScene" type="Control" unique_id=84887198]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_drab1")
 
 [node name="Background" type="TextureRect" parent="." unique_id=51926352]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="KingSprite" type="Sprite2D" parent="." unique_id=1314291357]
 
@@ -30,3 +36,41 @@ offset_left = 18.0
 offset_top = 42.0
 offset_right = 360.0
 offset_bottom = 151.0
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+
+[node name="CommandWindow" type="NinePatchRect" parent="UI" unique_id=1452120986]
+offset_left = 112.0
+offset_top = 139.0
+offset_right = 297.0
+offset_bottom = 245.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/CommandWindow" unique_id=440093212]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 22.0
+offset_right = 173.0
+offset_bottom = 96.0
+
+[node name="SaveButton" type="Button" parent="UI/CommandWindow/VBoxContainer" unique_id=606045568]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "セーブする"
+
+[node name="BackButton" type="Button" parent="UI/CommandWindow/VBoxContainer" unique_id=1231394986]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "もどる"
+
+[node name="ScreenButton" type="Button" parent="UI" unique_id=1420836783]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="UI/ScreenButton" to="." method="_on_screen_button_pressed"]

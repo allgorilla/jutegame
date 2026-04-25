@@ -1,24 +1,37 @@
 extends Control
 
+enum State { READING, WAIT_TAP, COMMAND }
+var current_state = State.READING
+
 @onready var message_label = $UI/MessageWindow/MessageLabel
+@onready var command_window = $UI/CommandWindow # 最初は hide() しておく
 
 func _ready():
-	# 1. 最初は文字をセットし、表示割合を 0（何も見えない状態）にする
-	message_label.text = "ゆうしゃよ、よくぞまいった！"
-	message_label.visible_ratio = 0
-	
-	# 2. 少し待ってからメッセージ表示開始
-	await get_tree().create_timer(1.0).timeout
-	show_message()
+	command_window.hide()
+	display_text("ゆうしゃよ、よくぞまいった！")
 
-func show_message():
-	# 3. Tween（トゥイーン）を作成
+func display_text(txt):
+	current_state = State.READING
+	message_label.text = txt
+	message_label.visible_ratio = 0
 	var tween = create_tween()
-	
-	# 1文字 0.1秒 で計算する例
-	var duration = message_label.text.length() * 0.1
-	tween.tween_property(message_label, "visible_ratio", 1.0, duration)
-	
-	# 5. アニメーションが終わるのを待つ（必要に応じて）
+	tween.tween_property(message_label, "visible_ratio", 1.0, 1.0)
 	await tween.finished
-	print("メッセージ表示完了！")
+	current_state = State.WAIT_TAP
+
+# 画面全体の透明ボタンが押されたとき
+func _on_screen_button_pressed():
+	match current_state:
+		State.WAIT_TAP:
+			# 次のセリフへ
+			display_text("ここまでのぼうけんを、きろくしておくかね？")
+			await get_tree().create_timer(1.2).timeout # 文字が出終わるのを待つ
+			show_commands()
+		State.READING:
+			# （オプション）文字表示中に押したら一瞬で全文出す処理
+			pass
+
+func show_commands():
+	current_state = State.COMMAND
+	command_window.show()
+	# ここでボタンにフォーカスを当てたり、アニメーションさせたりする
