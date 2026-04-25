@@ -73,4 +73,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[connection signal="pressed" from="UI/CommandWindow/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="UI/CommandWindow/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="UI/ScreenButton" to="." method="_on_screen_button_pressed"]
