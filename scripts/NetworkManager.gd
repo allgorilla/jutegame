@@ -5,7 +5,13 @@ const DB_URL = "https://jutegame-4ea50-default-rtdb.firebaseio.com/"
 var http_request: HTTPRequest
 
 # 通信状態を管理
-enum State { IDLE, FETCHING_NEXT_ID, REGISTERING_PLAYER, UPDATING_NEXT_ID }
+enum State { 
+	IDLE, 
+	FETCHING_NEXT_ID, 
+	REGISTERING_PLAYER, 
+	UPDATING_NEXT_ID,
+	FETCHING_PLAYER_DATA  # ← これを追記
+}
 var current_state = State.IDLE
 var pending_char_name = ""
 
@@ -27,7 +33,7 @@ func _on_request_completed(_result, response_code, _headers, body):
 	if response_code != 200 and response_code != 201:
 		print("通信エラー:", response_code)
 		return
-
+	var response_text = body.get_string_from_utf8()
 	match current_state:
 		State.FETCHING_NEXT_ID:
 			var next_id = body.get_string_from_utf8().to_int()
@@ -42,6 +48,16 @@ func _on_request_completed(_result, response_code, _headers, body):
 		State.UPDATING_NEXT_ID:
 			print("★2. 全ての登録＆ID更新が完了しました！")
 			current_state = State.IDLE
+
+		State.FETCHING_PLAYER_DATA:
+			var player_data = JSON.parse_string(response_text)
+			if player_data:
+				print("★おかえりなさい、", player_data["name"], "さん！")
+				print("ステータス: ATK", player_data["atk"], " / INT", player_data["int"])
+				# ここで MainMap へシーン遷移させる処理を入れる
+			else:
+				print("エラー：サーバーにデータが存在しません")
+
 
 func _update_next_id():
 	current_state = State.UPDATING_NEXT_ID
@@ -88,3 +104,37 @@ func _save_id_locally(my_id: int):
 	var data = {"my_id": my_id}
 	file.store_string(JSON.stringify(data))
 	file.close()
+
+# CONTINUEから呼ばれる関数
+func load_existing_game():
+	if not FileAccess.file_exists("user://save_data.json"):
+		print("エラー：ローカルセーブが見つかりません")
+		return
+	
+	# ローカルから自分のIDを読み取る
+	var file = FileAccess.open("user://save_data.json", FileAccess.READ)
+	var content = file.get_as_text()
+	file.close()
+	
+	var json = JSON.parse_string(content)
+	if json == null or not json.has("my_id"):
+		print("エラー：セーブデータの中身が不正です:", content)
+		return
+
+	var my_id = int(json["my_id"])
+	
+	# ★重要：ここでのURL組み立てをチェック
+	# URLの末尾に .json が漏れていたり、スラッシュが重複していないか確認
+	var url = DB_URL + "players/" + str(my_id) + ".json"
+	
+	print("--- CONTINUEリクエスト送信 ---")
+	print("読み込んだID:", my_id)
+	print("生成されたURL:", url)
+	print("----------------------------")
+	
+	current_state = State.FETCHING_PLAYER_DATA
+	
+	# リクエスト送信
+	var err = http_request.request(url, [], HTTPClient.METHOD_GET)
+	if err != OK:
+		print("HTTPRequestを開始できませんでした。エラーコード:", err)

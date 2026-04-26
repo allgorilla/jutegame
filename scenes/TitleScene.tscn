@@ -49,3 +49,4 @@ theme_override_font_sizes/font_size = 32
 text = "Jutegame（仮）"
 
 [connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
