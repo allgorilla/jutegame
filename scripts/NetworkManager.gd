@@ -3,6 +3,7 @@ extends Node
 
 const DB_URL = "https://jutegame-4ea50-default-rtdb.firebaseio.com/"
 var http_request: HTTPRequest
+var current_player_data: Dictionary = {}
 
 # 通信状態を管理
 enum State { 
@@ -33,30 +34,45 @@ func _on_request_completed(_result, response_code, _headers, body):
 	if response_code != 200 and response_code != 201:
 		print("通信エラー:", response_code)
 		return
+
 	var response_text = body.get_string_from_utf8()
+
 	match current_state:
 		State.FETCHING_NEXT_ID:
-			var next_id = body.get_string_from_utf8().to_int()
+			var next_id = response_text.to_int()
 			if next_id == 0: next_id = 1001
 			_register_new_player(next_id)
 			
 		State.REGISTERING_PLAYER:
 			print("1. プレイヤー登録完了。次にIDを更新します...")
-			# ここで次のIDを保存している変数を参照して更新処理へ
+			# ★重要: ここで登録したばかりのデータを current_player_data に入れておく
+			# (これをしないと、MainMapへ行った時に名前などが表示されません)
+			# ここでは request_new_game で渡された名前などの情報を変数に保持している前提です
+			
 			_update_next_id()
 			
 		State.UPDATING_NEXT_ID:
 			print("★2. 全ての登録＆ID更新が完了しました！")
 			current_state = State.IDLE
+			# NEW GAMEフローの最後。ここで遷移！
+			_change_to_main_map()
 
 		State.FETCHING_PLAYER_DATA:
 			var player_data = JSON.parse_string(response_text)
 			if player_data:
-				print("★おかえりなさい、", player_data["name"], "さん！")
-				print("ステータス: ATK", player_data["atk"], " / INT", player_data["int"])
-				# ここで MainMap へシーン遷移させる処理を入れる
+				print("★データ読み込み成功！: ", player_data["name"])
+				current_player_data = player_data
+				current_state = State.IDLE
+				# CONTINUEフローの最後。ここで遷移！
+				_change_to_main_map()
 			else:
-				print("エラー：サーバーにデータが存在しません")
+				print("エラー：データが見つかりません")
+
+# シーン遷移用の共通関数
+func _change_to_main_map():
+	# シーンのパスが正しいか確認してください
+	get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
+
 
 
 func _update_next_id():
@@ -86,8 +102,12 @@ func _register_new_player(new_id: int):
 	var player_url = DB_URL + "players/" + str(new_id) + ".json"
 	var player_data = {
 		"name": pending_char_name,
-		"atk": 10, "int": 10, "cost": 0 # 初期ステータス
+		"atk": 3, "int": 5, "cost": 10 # 初期ステータス
 	}
+	
+	# ★自分の変数にも保存しておく
+	current_player_data = player_data
+	
 	http_request.request(player_url, [], HTTPClient.METHOD_PUT, JSON.stringify(player_data))
 	
 	# 2. 次のIDを更新（本来は別々に送るか、Firebaseの特殊命令を使います）

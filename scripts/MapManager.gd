@@ -18,6 +18,14 @@ var is_moving = false
 var SceneChangerScene = preload("res://scenes/SceneChanger.tscn")
 
 func _ready():
+	# NetworkManagerに保存されたデータを参照する
+	if NetworkManager.current_player_data.has("name"):
+		var p_name = NetworkManager.current_player_data["name"]
+		print("MainMapに到着しました。現在のプレイヤー: ", p_name)
+		
+		# もしMainMapにラベル(NameLabelなど)があるなら表示を更新
+		# $NameLabel.text = p_name + " の冒険"
+
 	# 1. まずは「見えない裏側」で世界の解析と構築をすべて終わらせる
 	# (この間、画面はまだ SceneChanger の黒い幕で覆われています)
 	data.parse_maps(map_move, map_event, map_layout, map_object)
