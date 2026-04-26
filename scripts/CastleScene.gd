@@ -61,4 +61,4 @@ func _on_back_button_pressed():
 
 # マップへ戻る
 func return_to_map():
-	get_tree().change_scene_to_file("res://PlayerController.tscn")
+	get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
