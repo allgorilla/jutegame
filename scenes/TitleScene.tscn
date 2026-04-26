@@ -49,6 +49,7 @@ theme_override_font_sizes/font_size = 32
 text = "Jutegame（仮）"
 
 [node name="NameRegistrationPanel" type="PanelContainer" parent="." unique_id=209029479]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -69,6 +70,7 @@ text = "なまえをきめてください。"
 
 [node name="NameLineEdit" type="LineEdit" parent="NameRegistrationPanel/VBoxContainer" unique_id=1511239735]
 layout_mode = 2
+max_length = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NameRegistrationPanel/VBoxContainer" unique_id=634247]
 layout_mode = 2
