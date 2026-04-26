@@ -20,7 +20,7 @@ func _on_button_pressed():
 		await anim.animation_finished
 		
 		# 2. 元のマップシーンへ戻る（シーンのファイルパスを指定）
-		get_tree().change_scene_to_file("res://PlayerController.tscn")
+		get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
 	else:
 		# フェードなしで戻る場合
-		get_tree().change_scene_to_file("res://PlayerController.tscn")
+		get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
