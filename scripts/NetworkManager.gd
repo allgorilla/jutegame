@@ -15,9 +15,6 @@ enum State {
 var current_state = State.IDLE
 var pending_char_name = ""
 
-@onready var name_panel = $NameRegistrationPanel
-@onready var name_input = $NameRegistrationPanel/VBoxContainer/NameLineEdit
-
 func _ready():
 	http_request = HTTPRequest.new()
 	add_child(http_request)
@@ -141,27 +138,3 @@ func load_existing_game():
 	var err = http_request.request(url, [], HTTPClient.METHOD_GET)
 	if err != OK:
 		print("HTTPRequestを開始できませんでした。エラーコード:", err)
-
-# TitleScene.gd の一部
-
-
-# 1. NEW GAMEボタンが押されたらパネルを出す
-func _on_new_game_button_pressed():
-	name_panel.show()
-	name_input.grab_focus() # すぐに入力できる状態にする
-
-# 2. キャンセルが押されたら閉じる
-func _on_cancel_button_pressed():
-	name_panel.hide()
-
-# 3. 決定ボタンが押されたら通信開始！
-func _on_confirm_button_pressed():
-	var player_name = name_input.text.strip_edges() # 前後の空白を削除
-	
-	if player_name == "":
-		print("名前を入力してください")
-		return
-		
-	name_panel.hide()
-	# ここで以前のテスト用固定名ではなく、入力された名前を渡す
-	NetworkManager.request_new_game(player_name)

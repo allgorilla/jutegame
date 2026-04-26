@@ -24,8 +24,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 253.0
-offset_bottom = -231.0
+offset_top = 215.0
+offset_bottom = -269.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -42,9 +42,9 @@ text = "CONTINUE"
 [node name="MessageLabel" type="Label" parent="." unique_id=1068383628]
 layout_mode = 0
 offset_left = 84.0
-offset_top = 107.0
+offset_top = 88.0
 offset_right = 320.0
-offset_bottom = 155.0
+offset_bottom = 136.0
 theme_override_font_sizes/font_size = 32
 text = "Jutegame（仮）"
 
@@ -63,6 +63,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="NameRegistrationPanel/VBoxContainer" unique_id=585687187]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 24
 text = "なまえをきめてください。"
 
@@ -71,10 +72,13 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="NameRegistrationPanel/VBoxContainer" unique_id=634247]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="ConfirmButton" type="Button" parent="NameRegistrationPanel/VBoxContainer/HBoxContainer" unique_id=13397920]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_font_sizes/font_size = 24
 text = "きめる"
 
@@ -85,3 +89,5 @@ text = "もどる"
 
 [connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="NameRegistrationPanel/VBoxContainer/HBoxContainer/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="NameRegistrationPanel/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
