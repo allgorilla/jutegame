@@ -44,18 +44,16 @@ func _on_request_completed(_result, response_code, _headers, body):
 			_register_new_player(next_id)
 			
 		State.REGISTERING_PLAYER:
-			print("1. プレイヤー登録完了。次にIDを更新します...")
-			# ★重要: ここで登録したばかりのデータを current_player_data に入れておく
-			# (これをしないと、MainMapへ行った時に名前などが表示されません)
-			# ここでは request_new_game で渡された名前などの情報を変数に保持している前提です
-			
-			_update_next_id()
-			
+			# プレイヤー保存が成功したら、次に「IDのカウントアップ」を送る
+			print("プレイヤー保存成功。次にIDを更新します...")
+			_update_next_id_on_server() 
+
 		State.UPDATING_NEXT_ID:
-			print("★2. 全ての登録＆ID更新が完了しました！")
+			# ID更新も成功したら、最後にローカル保存して終了
+			var final_id = int(current_player_data["my_id"])
+			_save_id_locally(final_id)
+			print("全ての登録プロセスが完了しました")
 			current_state = State.IDLE
-			# NEW GAMEフローの最後。ここで遷移！
-			_change_to_main_map()
 
 		State.FETCHING_PLAYER_DATA:
 			var player_data = JSON.parse_string(response_text)
@@ -67,6 +65,15 @@ func _on_request_completed(_result, response_code, _headers, body):
 				_change_to_main_map()
 			else:
 				print("エラー：データが見つかりません")
+
+# ID更新だけを担当する関数
+func _update_next_id_on_server():
+	current_state = State.UPDATING_NEXT_ID
+	var next_id_url = DB_URL + "metadata/next_id.json"
+	var next_val = int(current_player_data["my_id"]) + 1
+	
+	# 同じ http_request ノードを再利用
+	http_request.request(next_id_url, [], HTTPClient.METHOD_PUT, str(next_val))
 
 # シーン遷移用の共通関数
 func _change_to_main_map():
@@ -96,27 +103,20 @@ func _update_next_id():
 func _register_new_player(new_id: int):
 	current_state = State.REGISTERING_PLAYER
 	
-	# 1. プレイヤーデータの保存
-	var player_url = DB_URL + "players/" + str(new_id) + ".json"
-	var player_data = {
-		"name": pending_char_name,
-		"atk": 3, "int": 5, "cost": 10 # 初期ステータス
-	}
-	
-	# ★自分の変数にも保存しておく
-	current_player_data = player_data
+	# 自分の変数にIDを反映し、最新の状態をセット
 	current_player_data["my_id"] = new_id
+	# ※pending_char_name などは setup_local_player 時点で 
+	# current_player_data["name"] に入っている前提です。
+
+	# 1. まずはプレイヤーデータを保存
+	var player_url = DB_URL + "players/" + str(new_id) + ".json"
+	var json_data = JSON.stringify(current_player_data)
 	
-	http_request.request(player_url, [], HTTPClient.METHOD_PUT, JSON.stringify(player_data))
+	# 既存の http_request を使い回す（完了後に次の通信へ飛ばす）
+	http_request.request(player_url, [], HTTPClient.METHOD_PUT, json_data)
 	
-	# 2. 次のIDを更新（本来は別々に送るか、Firebaseの特殊命令を使います）
-	var next_id_url = DB_URL + "metadata/next_id.json"
-	var next_id_req = HTTPRequest.new() # 重複を避けるため別のノードで送信
-	add_child(next_id_req)
-	next_id_req.request(next_id_url, [], HTTPClient.METHOD_PUT, str(new_id + 1))
-	
-	# 3. ローカルにIDを保存
-	_save_id_locally(new_id)
+	# ★ ここで ID更新リクエストを同時に送らず、
+	# _on_request_completed の REGISTERING_PLAYER 終了時に次を送るようにします。
 
 func _save_id_locally(id_val: int):
 	var data = {"my_id": id_val}
