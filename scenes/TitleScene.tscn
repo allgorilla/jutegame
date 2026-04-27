@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://dmh7w3ctr0he7"]
+
+[ext_resource type="Script" uid="uid://b1n6eb5ku0v2s" path="res://scripts/TitleScene.gd" id="1_lx1li"]
+
+[node name="TitleScene" type="Control" unique_id=1891642211]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lx1li")
+
+[node name="Background" type="TextureRect" parent="." unique_id=768896069]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=983279286]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 215.0
+offset_bottom = -269.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewGameButton" type="Button" parent="VBoxContainer" unique_id=511181008]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "NEW GAME"
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer" unique_id=686319031]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "CONTINUE"
+
+[node name="MessageLabel" type="Label" parent="." unique_id=1068383628]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 88.0
+offset_right = 320.0
+offset_bottom = 136.0
+theme_override_font_sizes/font_size = 32
+text = "Jutegame（仮）"
+
+[node name="NameRegistrationPanel" type="PanelContainer" parent="." unique_id=209029479]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -199.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NameRegistrationPanel" unique_id=1074536330]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="NameRegistrationPanel/VBoxContainer" unique_id=585687187]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "なまえをきめてください。"
+
+[node name="NameLineEdit" type="LineEdit" parent="NameRegistrationPanel/VBoxContainer" unique_id=1511239735]
+layout_mode = 2
+max_length = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NameRegistrationPanel/VBoxContainer" unique_id=634247]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="ConfirmButton" type="Button" parent="NameRegistrationPanel/VBoxContainer/HBoxContainer" unique_id=13397920]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 24
+text = "きめる"
+
+[node name="CancelButton" type="Button" parent="NameRegistrationPanel/VBoxContainer/HBoxContainer" unique_id=148250443]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "もどる"
+
+[connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="NameRegistrationPanel/VBoxContainer/HBoxContainer/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="NameRegistrationPanel/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
