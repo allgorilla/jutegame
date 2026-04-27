@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://civjshi6plgem" path="res://assets/image/map_event.png" id="6_x708w"]
 [ext_resource type="Texture2D" uid="uid://bh58x48dg7yph" path="res://assets/image/map_layout.png" id="7_yrulf"]
 [ext_resource type="Texture2D" uid="uid://ceqju8dc5suct" path="res://assets/image/map_object.png" id="8_mmkx4"]
+[ext_resource type="Texture2D" uid="uid://tpus256a758r" path="res://assets/image/status_icon.png" id="9_nmjbi"]
+[ext_resource type="Script" uid="uid://d2qgiy1txg1el" path="res://scripts/IconButton.gd" id="10_yd4n3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ehpa4"]
 animations = [{
@@ -85,3 +87,12 @@ map_event = ExtResource("6_x708w")
 map_layout = ExtResource("7_yrulf")
 map_object = ExtResource("8_mmkx4")
 player = NodePath("../Player")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1606306595]
+
+[node name="StatusButton" type="TextureButton" parent="CanvasLayer" unique_id=1140667457]
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("9_nmjbi")
+texture_pressed = ExtResource("9_nmjbi")
+script = ExtResource("10_yd4n3")
