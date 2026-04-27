@@ -20,6 +20,7 @@ func _ready():
 	http_request = HTTPRequest.new()
 	add_child(http_request)
 	http_request.request_completed.connect(_on_request_completed)
+	randomize()
 
 # NEW GAMEから呼ばれる入り口
 func request_new_game(user_name: String):
@@ -162,19 +163,10 @@ func load_existing_game():
 
 # タイトル画面から呼ばれる：とりあえず手元でキャラを作るだけ
 func setup_local_player(player_name: String):
-	current_player_data = {
-		"name": player_name,
-		"atk": 10,
-		"int": 10,
-		"cost": 0
-	}
-	# IDはまだないので 0 か null にしておく
-	current_player_data["my_id"] = 0
+	# PlayerFactory を使って初期データを生成
+	current_player_data = PlayerFactory.create_initial_data(player_name)
 	
-	# 一旦ローカルに保存（中途半端な状態で落としても名前を忘れないため）
 	_save_id_locally(0) 
-	
-	# 通信を介さず即座にメインマップへ
 	_change_to_main_map()
 
 # 王様の「セーブ」から呼ばれるメイン関数
