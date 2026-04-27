@@ -45,7 +45,11 @@ func show_commands():
 func _on_save_button_pressed():
 	command_window.hide()
 	screen_button.mouse_filter = Control.MOUSE_FILTER_STOP
-	# セーブ後のメッセージを表示
+	
+	# --- 実際のセーブ処理を組み込み ---
+	NetworkManager.save_player_data()
+	# --------------------------------
+	
 	display_text("たしかにセーブしたぞい。ではゆくがよい、ゆうしゃよ！")
 	current_state = State.FINISHED
 

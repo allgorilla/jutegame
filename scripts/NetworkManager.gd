@@ -11,7 +11,7 @@ enum State {
 	FETCHING_NEXT_ID, 
 	REGISTERING_PLAYER, 
 	UPDATING_NEXT_ID,
-	FETCHING_PLAYER_DATA  # ← これを追記
+	FETCHING_PLAYER_DATA
 }
 var current_state = State.IDLE
 var pending_char_name = ""
@@ -73,8 +73,6 @@ func _change_to_main_map():
 	# シーンのパスが正しいか確認してください
 	get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
 
-
-
 func _update_next_id():
 	current_state = State.UPDATING_NEXT_ID
 	
@@ -107,6 +105,7 @@ func _register_new_player(new_id: int):
 	
 	# ★自分の変数にも保存しておく
 	current_player_data = player_data
+	current_player_data["my_id"] = new_id
 	
 	http_request.request(player_url, [], HTTPClient.METHOD_PUT, JSON.stringify(player_data))
 	
@@ -119,9 +118,9 @@ func _register_new_player(new_id: int):
 	# 3. ローカルにIDを保存
 	_save_id_locally(new_id)
 
-func _save_id_locally(my_id: int):
+func _save_id_locally(id_val: int):
+	var data = {"my_id": id_val}
 	var file = FileAccess.open("user://save_data.json", FileAccess.WRITE)
-	var data = {"my_id": my_id}
 	file.store_string(JSON.stringify(data))
 	file.close()
 
@@ -158,3 +157,45 @@ func load_existing_game():
 	var err = http_request.request(url, [], HTTPClient.METHOD_GET)
 	if err != OK:
 		print("HTTPRequestを開始できませんでした。エラーコード:", err)
+
+# NetworkManager.gd
+
+# タイトル画面から呼ばれる：とりあえず手元でキャラを作るだけ
+func setup_local_player(player_name: String):
+	current_player_data = {
+		"name": player_name,
+		"atk": 10,
+		"int": 10,
+		"cost": 0
+	}
+	# IDはまだないので 0 か null にしておく
+	current_player_data["my_id"] = 0
+	
+	# 一旦ローカルに保存（中途半端な状態で落としても名前を忘れないため）
+	_save_id_locally(0) 
+	
+	# 通信を介さず即座にメインマップへ
+	_change_to_main_map()
+
+# 王様の「セーブ」から呼ばれるメイン関数
+func save_player_data():
+	if current_player_data.get("my_id", 0) == 0:
+		# IDが0（未登録）なら、これまでの新規登録フローを開始
+		print("新規登録を開始します...")
+		request_new_game(current_player_data["name"])
+	else:
+		# すでにIDがあるなら、そのIDの場所を最新データで上書きする
+		_overwrite_existing_player()
+
+# 上書き保存用の関数
+func _overwrite_existing_player():
+	current_state = State.REGISTERING_PLAYER # 状態は「登録中」を流用
+	
+	var my_id = int(current_player_data["my_id"])
+	var url = DB_URL + "players/" + str(my_id) + ".json"
+	
+	print("既存のデータを上書き中... ID:", my_id)
+	
+	# PUTメソッドで現在の current_player_data をそのまま送信
+	var json_data = JSON.stringify(current_player_data)
+	http_request.request(url, [], HTTPClient.METHOD_PUT, json_data)

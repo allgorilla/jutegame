@@ -36,7 +36,7 @@ func _on_confirm_button_pressed():
 		
 	name_panel.hide()
 	# ここで以前のテスト用固定名ではなく、入力された名前を渡す
-	NetworkManager.request_new_game(player_name)
+	NetworkManager.setup_local_player(player_name)
 
 func _on_continue_button_pressed() -> void:
 	NetworkManager.load_existing_game()
