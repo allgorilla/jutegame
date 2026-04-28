@@ -9,7 +9,12 @@ var current_state = State.READING
 
 func _ready():
 	command_window.hide()
-	# 最初のメッセージ
+	# 昨日のフェードイン処理（明るくする）
+	var changer = get_tree().root.get_node_or_null("SceneChanger")
+	if changer:
+		var anim = changer.get_node("AnimationPlayer")
+		anim.play_backwards("fade")
+		await anim.animation_finished	# 最初のメッセージ
 	display_text("ゆうしゃよ、よくぞまいった！")
 	current_state = State.WAIT_TAP
 

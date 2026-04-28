@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cpwm5jht3aqg3"]
 
 [ext_resource type="Script" uid="uid://qeg47mc8k13v" path="res://scripts/CastleScene.gd" id="1_drab1"]
+[ext_resource type="Texture2D" uid="uid://b2ko1itctb1q1" path="res://assets/image/bg_castle.png" id="2_rib2u"]
 
 [node name="CastleScene" type="Control" unique_id=84887198]
 layout_mode = 3
@@ -18,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_rib2u")
 metadata/_edit_use_anchors_ = true
 
 [node name="KingSprite" type="Sprite2D" parent="." unique_id=1314291357]
