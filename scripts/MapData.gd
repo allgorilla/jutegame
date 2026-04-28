@@ -13,10 +13,10 @@ var layout_data_table = {
 # 5点の座標をすべて登録（パスは今はすべて共通）
 var event_table = {
 	Vector2(27.0, 27.0): "res://scenes/CastleScene.tscn",
-	Vector2(32.0, 28.0): "res://scenes/DefaultEventScene.tscn",
-	Vector2(36.0, 28.0): "res://scenes/DefaultEventScene.tscn",
-	Vector2(32.0, 31.0): "res://scenes/DefaultEventScene.tscn",
-	Vector2(36.0, 31.0): "res://scenes/DefaultEventScene.tscn"
+	Vector2(32.0, 28.0): "res://scenes/TavernScene.tscn",
+	Vector2(36.0, 28.0): "res://scenes/ShopScene.tscn",
+	Vector2(32.0, 31.0): "res://scenes/InnScene.tscn",
+	Vector2(36.0, 31.0): "res://scenes/GuildScene.tscn"
 }
 var grass_tex = preload("res://assets/image/grass.png")
 var road_tex = preload("res://assets/image/road.png")
