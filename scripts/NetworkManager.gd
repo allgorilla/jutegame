@@ -3,6 +3,7 @@ extends Node
 
 const DB_URL = "https://jutegame-4ea50-default-rtdb.firebaseio.com/"
 var http_request: HTTPRequest
+signal load_finished(success: bool)
 
 # 通信状態を管理
 enum State { 
@@ -31,10 +32,11 @@ func request_new_game(user_name: String):
 	http_request.request(url, [], HTTPClient.METHOD_GET)
 
 func _on_request_completed(_result, response_code, _headers, body):
+
 	if response_code != 200 and response_code != 201:
 		print("通信エラー:", response_code)
+		load_finished.emit(false) # ★追加
 		return
-
 	var response_text = body.get_string_from_utf8()
 
 	match current_state:
@@ -58,13 +60,11 @@ func _on_request_completed(_result, response_code, _headers, body):
 		State.FETCHING_PLAYER_DATA:
 			var player_data = JSON.parse_string(response_text)
 			if player_data:
-				print("★データ読み込み成功！: ", player_data["name"])
 				Global.player_data = player_data
 				current_state = State.IDLE
-				# CONTINUEフローの最後。ここで遷移！
-				_change_to_main_map()
+				load_finished.emit(true) # ★成功のシグナルを送る（遷移はさせない！）
 			else:
-				print("エラー：データが見つかりません")
+				load_finished.emit(false) # ★失敗のシグナルを送る
 
 # ID更新だけを担当する関数
 func _update_next_id_on_server():
@@ -157,16 +157,6 @@ func load_existing_game():
 	var err = http_request.request(url, [], HTTPClient.METHOD_GET)
 	if err != OK:
 		print("HTTPRequestを開始できませんでした。エラーコード:", err)
-
-# NetworkManager.gd
-
-# タイトル画面から呼ばれる：とりあえず手元でキャラを作るだけ
-func setup_local_player(player_name: String):
-	# PlayerFactory を使って初期データを生成
-	Global.player_data = PlayerFactory.create_initial_data(player_name)
-	
-	_save_id_locally(0) 
-	_change_to_main_map()
 
 # 王様の「セーブ」から呼ばれるメイン関数
 func save_player_data():

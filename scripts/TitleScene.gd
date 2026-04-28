@@ -43,5 +43,17 @@ func _on_confirm_button_pressed():
 	name_panel.hide()
 	get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
 
-func _on_continue_button_pressed() -> void:
+func _on_continue_button_pressed():
+	# NetworkManagerの「完了の合図」を予約してから、ロードを開始する
+	if not NetworkManager.load_finished.is_connected(_on_load_finished):
+		NetworkManager.load_finished.connect(_on_load_finished)
+	
 	NetworkManager.load_existing_game()
+
+# 合図が届いたらここで遷移する
+func _on_load_finished(success: bool):
+	if success:
+		get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
+	else:
+		# エラーメッセージを出すなどの処理
+		print("データのロードに失敗しました")
