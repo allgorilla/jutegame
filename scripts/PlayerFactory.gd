@@ -23,12 +23,15 @@ static func create_initial_data(player_name: String) -> Dictionary:
 		"atk": atk,
 		"int": int_val,
 		"cost": 10,
-		"my_id": 0
+		"my_id": 0,
+		"gold": 500,
+		"soldiers": []
 	}
 	
 	print("--- キャラクター生成結果 ---")
 	print("名前: ", player_name)
 	print("ATK : ", atk, " / INT : ", int_val)
+	print("所持金: ", data["gold"], " G") # デバッグ表示も追加
 	print("---------------------------")
 	
 	return data

@@ -28,15 +28,20 @@ func _on_cancel_button_pressed():
 
 # 3. 決定ボタンが押されたら通信開始！
 func _on_confirm_button_pressed():
-	var player_name = name_input.text.strip_edges() # 前後の空白を削除
+	var player_name = name_input.text.strip_edges()
 	
 	if player_name == "":
 		print("名前を入力してください")
 		return
 		
+	# ① Factoryで純粋なデータを作成
+	var new_data = PlayerFactory.create_initial_data(player_name)
+	
+	# ② Global（ワークメモリ）に同期
+	Global.sync_player_data(new_data)
+	
 	name_panel.hide()
-	# ここで以前のテスト用固定名ではなく、入力された名前を渡す
-	NetworkManager.setup_local_player(player_name)
+	get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
 
 func _on_continue_button_pressed() -> void:
 	NetworkManager.load_existing_game()
