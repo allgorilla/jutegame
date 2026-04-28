@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dt1fc4giebew1"]
 
-[ext_resource type="Script" uid="uid://c5g51q5pb6aab" path="res://scripts/TavernScene.gd" id="1_0f4rn"]
+[ext_resource type="Script" uid="uid://c5g51q5pb6aab" path="res://scripts/BarScene.gd" id="1_0f4rn"]
 [ext_resource type="Texture2D" uid="uid://dgwdbhcs1ob01" path="res://assets/image/bg_guild.png" id="2_0f4rn"]
 
 [node name="GuildScene" type="Control" unique_id=1347790924]

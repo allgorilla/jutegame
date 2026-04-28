@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bgg7bkkkgtooj"]
 
-[ext_resource type="Script" uid="uid://c5g51q5pb6aab" path="res://scripts/TavernScene.gd" id="1_mi1d8"]
+[ext_resource type="Script" uid="uid://c5g51q5pb6aab" path="res://scripts/BarScene.gd" id="1_mi1d8"]
 [ext_resource type="Texture2D" uid="uid://cmlfajcv623e7" path="res://assets/image/bg_shop.png" id="2_mi1d8"]
 
 [node name="ShopScene" type="Control" unique_id=1347790924]

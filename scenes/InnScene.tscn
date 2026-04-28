@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cseabodlwhx17"]
 
-[ext_resource type="Script" uid="uid://c5g51q5pb6aab" path="res://scripts/TavernScene.gd" id="1_yro66"]
+[ext_resource type="Script" uid="uid://c5g51q5pb6aab" path="res://scripts/BarScene.gd" id="1_yro66"]
 [ext_resource type="Texture2D" uid="uid://dfmefw1a6by8m" path="res://assets/image/bg_inn.png" id="2_yro66"]
 
 [node name="InnScene" type="Control" unique_id=1347790924]

@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://bpkl4hlanhdgw"]
 
-[ext_resource type="Script" uid="uid://c5g51q5pb6aab" path="res://scripts/TavernScene.gd" id="1_vgbr2"]
-[ext_resource type="Texture2D" uid="uid://cjxfuuklsf251" path="res://assets/image/bg_bar.png" id="2_kbbmk"]
+[ext_resource type="Script" uid="uid://c5g51q5pb6aab" path="res://scripts/BarScene.gd" id="1_wbuq2"]
+[ext_resource type="Texture2D" uid="uid://cjxfuuklsf251" path="res://assets/image/bg_bar.png" id="2_auw8d"]
 
-[node name="TavernScene" type="Control" unique_id=1347790924]
+[node name="BarScene" type="Control" unique_id=1347790924]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_vgbr2")
+script = ExtResource("1_wbuq2")
 
 [node name="Background" type="TextureRect" parent="." unique_id=2139749929]
 layout_mode = 1
@@ -19,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_kbbmk")
+texture = ExtResource("2_auw8d")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=739282048]
 
