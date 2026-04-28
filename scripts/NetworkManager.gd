@@ -3,7 +3,6 @@ extends Node
 
 const DB_URL = "https://jutegame-4ea50-default-rtdb.firebaseio.com/"
 var http_request: HTTPRequest
-var current_player_data: Dictionary = {}
 
 # 通信状態を管理
 enum State { 
@@ -51,7 +50,7 @@ func _on_request_completed(_result, response_code, _headers, body):
 
 		State.UPDATING_NEXT_ID:
 			# ID更新も成功したら、最後にローカル保存して終了
-			var final_id = int(current_player_data["my_id"])
+			var final_id = int(Global.player_data["my_id"])
 			_save_id_locally(final_id)
 			print("全ての登録プロセスが完了しました")
 			current_state = State.IDLE
@@ -60,7 +59,7 @@ func _on_request_completed(_result, response_code, _headers, body):
 			var player_data = JSON.parse_string(response_text)
 			if player_data:
 				print("★データ読み込み成功！: ", player_data["name"])
-				current_player_data = player_data
+				Global.player_data = player_data
 				current_state = State.IDLE
 				# CONTINUEフローの最後。ここで遷移！
 				_change_to_main_map()
@@ -71,7 +70,7 @@ func _on_request_completed(_result, response_code, _headers, body):
 func _update_next_id_on_server():
 	current_state = State.UPDATING_NEXT_ID
 	var next_id_url = DB_URL + "metadata/next_id.json"
-	var next_val = int(current_player_data["my_id"]) + 1
+	var next_val = int(Global.player_data["my_id"]) + 1
 	
 	# 同じ http_request ノードを再利用
 	http_request.request(next_id_url, [], HTTPClient.METHOD_PUT, str(next_val))
@@ -105,13 +104,13 @@ func _register_new_player(new_id: int):
 	current_state = State.REGISTERING_PLAYER
 	
 	# 自分の変数にIDを反映し、最新の状態をセット
-	current_player_data["my_id"] = new_id
+	Global.player_data["my_id"] = new_id
 	# ※pending_char_name などは setup_local_player 時点で 
-	# current_player_data["name"] に入っている前提です。
+	# Global.player_data["name"] に入っている前提です。
 
 	# 1. まずはプレイヤーデータを保存
 	var player_url = DB_URL + "players/" + str(new_id) + ".json"
-	var json_data = JSON.stringify(current_player_data)
+	var json_data = JSON.stringify(Global.player_data)
 	
 	# 既存の http_request を使い回す（完了後に次の通信へ飛ばす）
 	http_request.request(player_url, [], HTTPClient.METHOD_PUT, json_data)
@@ -164,17 +163,17 @@ func load_existing_game():
 # タイトル画面から呼ばれる：とりあえず手元でキャラを作るだけ
 func setup_local_player(player_name: String):
 	# PlayerFactory を使って初期データを生成
-	current_player_data = PlayerFactory.create_initial_data(player_name)
+	Global.player_data = PlayerFactory.create_initial_data(player_name)
 	
 	_save_id_locally(0) 
 	_change_to_main_map()
 
 # 王様の「セーブ」から呼ばれるメイン関数
 func save_player_data():
-	if current_player_data.get("my_id", 0) == 0:
+	if Global.player_data.get("my_id", 0) == 0:
 		# IDが0（未登録）なら、これまでの新規登録フローを開始
 		print("新規登録を開始します...")
-		request_new_game(current_player_data["name"])
+		request_new_game(Global.player_data["name"])
 	else:
 		# すでにIDがあるなら、そのIDの場所を最新データで上書きする
 		_overwrite_existing_player()
@@ -183,11 +182,11 @@ func save_player_data():
 func _overwrite_existing_player():
 	current_state = State.REGISTERING_PLAYER # 状態は「登録中」を流用
 	
-	var my_id = int(current_player_data["my_id"])
+	var my_id = int(Global.player_data["my_id"])
 	var url = DB_URL + "players/" + str(my_id) + ".json"
 	
 	print("既存のデータを上書き中... ID:", my_id)
 	
-	# PUTメソッドで現在の current_player_data をそのまま送信
-	var json_data = JSON.stringify(current_player_data)
+	# PUTメソッドで現在の Global.player_data をそのまま送信
+	var json_data = JSON.stringify(Global.player_data)
 	http_request.request(url, [], HTTPClient.METHOD_PUT, json_data)

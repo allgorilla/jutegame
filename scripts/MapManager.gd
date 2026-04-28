@@ -19,8 +19,8 @@ var SceneChangerScene = preload("res://scenes/SceneChanger.tscn")
 
 func _ready():
 	# NetworkManagerに保存されたデータを参照する
-	if NetworkManager.current_player_data.has("name"):
-		var p_name = NetworkManager.current_player_data["name"]
+	if Global.player_data.has("name"):
+		var p_name = Global.player_data["name"]
 		print("MainMapに到着しました。現在のプレイヤー: ", p_name)
 		
 		# もしMainMapにラベル(NameLabelなど)があるなら表示を更新
