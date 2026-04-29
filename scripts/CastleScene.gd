@@ -18,17 +18,9 @@ func _ready():
 	await SceneManager.fade_in_scene() # 
 	
 	message_panel.gui_input.connect(_on_panel_gui_input)
-	_show_castle_message("ゆうしゃよ、よくぞまいった！") #
 
-# 内部共通：メッセージ表示とNEXT演出
-func _show_castle_message(txt: String, show_guide: bool = true):
-	next_guide.hide()
-	await MessageManager.display_text(message_label, txt)
-	
-	# ガイドを表示しても良い設定の時だけ表示・アニメ開始
-	if show_guide:
-		next_guide.show()
-		MessageManager.start_next_animation(next_guide)
+	MessageManager.setup_ui(message_label, next_guide)
+	await MessageManager.display_text("ゆうしゃよ、よくぞまいった！")
 
 # パネルクリック時の挙動を整理
 func _on_panel_gui_input(event):
@@ -40,10 +32,7 @@ func _on_panel_gui_input(event):
 			Phase.INTRO:
 				current_phase = Phase.QUESTION
 				# 次はコマンド選択なので、ガイドは不要（false を渡す）
-				await _show_castle_message("ここまでのぼうけんを、きろくしておくかね？", false)
-				
-				# セリフ完了後、少し待ってからコマンドを表示
-				await get_tree().create_timer(0.5).timeout
+				await MessageManager.display_text("ここまでのぼうけんを、きろくしておくかね？", false)
 				_show_commands()
 				
 			Phase.FINISHED:
@@ -60,14 +49,14 @@ func _show_commands():
 func _on_save_button_pressed():
 	command_window.hide()
 	NetworkManager.save_player_data() # [cite: 1, 4]
-	
+
 	current_phase = Phase.FINISHED
-	_show_castle_message("たしかにセーブしたぞい。ではゆくがよい、ゆうしゃよ！")
+	await MessageManager.display_text("たしかにセーブしたぞい。ではゆくがよい、ゆうしゃよ！")
 
 func _on_back_button_pressed():
 	command_window.hide()
 	current_phase = Phase.FINISHED
-	_show_castle_message("セーブしないともうすか。ではゆくがよい、ゆうしゃよ！")
+	await MessageManager.display_text("セーブしないともうすか。ではゆくがよい、ゆうしゃよ！")
 
 func _return_to_map():
 	# 突然切り替わるのではなく、暗転してからマップへ
