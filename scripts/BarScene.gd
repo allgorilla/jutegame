@@ -20,21 +20,13 @@ func _ready():
 	# 共通マネージャーを使って明るくする演出を開始
 	await SceneManager.fade_in_scene()
 	
+	MessageManager.setup_ui(message_label, next_guide)
 	_show_message() 
 	message_panel.gui_input.connect(_on_panel_gui_input)
 
 func _show_message():
-	# NEXTガイドを隠して文字表示開始
-	next_guide.hide()
-	
 	var txt = messages[current_msg_index]
-	
-	# 1. 文字を表示
-	await MessageManager.display_text(message_label, txt)
-	
-	# 2. 表示が終わったら点滅開始
-	next_guide.show()
-	MessageManager.start_next_animation(next_guide)
+	await MessageManager.display_text(txt)
 
 func _on_panel_gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
