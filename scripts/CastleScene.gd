@@ -74,4 +74,5 @@ func _on_back_button_pressed():
 	_show_castle_message("セーブしないともうすか。ではゆくがよい、ゆうしゃよ！")
 
 func _return_to_map():
-	get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
+	# 突然切り替わるのではなく、暗転してからマップへ
+	SceneManager.change_scene_with_fade("res://scenes/MainMap.tscn")

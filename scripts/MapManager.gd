@@ -121,16 +121,9 @@ func _check_event_trigger(pos: Vector2):
 		is_moving = true
 		var target_scene_path = data.event_table[pos]
 		
-		# フェード処理の開始
-		var changer = SceneChangerScene.instantiate()
-		get_tree().root.add_child(changer)
-		
-		var anim = changer.get_node("AnimationPlayer")
-		anim.play("fade")
-		await anim.animation_finished
-		
+		# 座標を保存して、共通マネージャーでフェード遷移
 		Global.last_player_pos = pos
-		get_tree().change_scene_to_file(target_scene_path)
+		SceneManager.change_scene_with_fade(target_scene_path)
 
 func start_scroll_animation():
 	var target_pos = (-current_grid_pos * TILE_SIZE) - Vector2(TILE_SIZE / 2, TILE_SIZE / 2)
