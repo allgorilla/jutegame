@@ -32,26 +32,44 @@ offset_top = 400.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Name" type="Label" parent="CanvasLayer/Panel" unique_id=1414492911]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 24.0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "マリィ："
+
 [node name="MessageLabel" type="RichTextLabel" parent="CanvasLayer/Panel" unique_id=1714813276]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -100.0
+offset_top = -60.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 24
 
 [node name="NextGuide" type="Label" parent="CanvasLayer/Panel" unique_id=144227034]
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -24.0
 offset_top = -24.0
+offset_right = 24.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 32
+text = "<NEXT>"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Panel/NextGuide" unique_id=1825092648]
 
 [node name="StatusPanel" type="PanelContainer" parent="." unique_id=1240158805]
 layout_mode = 1

@@ -3,12 +3,13 @@ extends Control
 
 @onready var current_gold_label = $StatusPanel/VBox/GoldLine/ValueLabel
 @onready var cost_label = $StatusPanel/VBox/CostLine/ValueLabel
+@onready var message_panel = $CanvasLayer/Panel # メッセージ枠本体
 @onready var message_label = $CanvasLayer/Panel/MessageLabel
 @onready var next_guide = $CanvasLayer/Panel/NextGuide
 
 var messages = [
-	"マリィ：\nここは さかば よ！\nたびのなかまを しょうかい するわ！",
-	"マリィ：\nしょうかいりょうは ５０ゴールド よ！"
+	"ここは さかば よ！\nたびのなかまを しょうかい するわ！",
+	"しょうかいりょうは ５０ゴールド よ！"
 ]
 var current_msg_index = 0
 
@@ -21,16 +22,27 @@ func _ready():
 		anim.play_backwards("fade")
 		await anim.animation_finished
 	_show_message()
+	message_panel.gui_input.connect(_on_panel_gui_input)
 
-func _input(event):
-	if event.is_action_pressed("ui_accept"): # SpaceやEnter
+# パネル上での入力イベント
+func _on_panel_gui_input(event):
+	# 左クリックまたはスマホのタップを検知
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		_advance_message()
 
 func _show_message():
 	message_label.text = messages[current_msg_index]
-	# 最後のメッセージならガイドを変えるなどの演出
-	next_guide.visible = true
+	_start_next_animation()
 
+func _start_next_animation():
+	# 以前の動きをキャンセル
+	var tween = create_tween().set_loops() # 無限ループ設定
+	
+	# 透明度を1秒かけて点滅させる例
+	next_guide.modulate.a = 1.0
+	tween.tween_property(next_guide, "modulate:a", 0.3, 0.6).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(next_guide, "modulate:a", 1.0, 0.6).set_trans(Tween.TRANS_SINE)
+	
 func _advance_message():
 	current_msg_index += 1
 	
@@ -55,8 +67,3 @@ func update_ui():
 	# 変数 recruitment_cost の値を反映
 	# %d は整数、%4d と書くと「4桁分のスペースを確保して右詰め」になります
 	cost_label.text = "%4d G" % recruitment_cost
-
-# マップに戻るボタンの処理
-func _on_return_button_pressed():
-	# メインマップシーンへ遷移
-	get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
