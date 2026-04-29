@@ -15,6 +15,7 @@ var current_msg_index = 0
 
 func _ready():
 	update_ui()
+	next_guide.hide()
 	# 昨日のフェードイン処理（明るくする）
 	var changer = get_tree().root.get_node_or_null("SceneChanger")
 	if changer:
@@ -24,25 +25,27 @@ func _ready():
 	_show_message()
 	message_panel.gui_input.connect(_on_panel_gui_input)
 
-# パネル上での入力イベント
+func _show_message():
+	# NEXTガイドを隠して文字表示開始
+	next_guide.hide()
+	
+	var txt = messages[current_msg_index]
+	
+	# 1. 文字を表示
+	await MessageManager.display_text(message_label, txt)
+	
+	# 2. 表示が終わったら点滅開始
+	next_guide.show()
+	MessageManager.start_next_animation(next_guide)
+
 func _on_panel_gui_input(event):
-	# 左クリックまたはスマホのタップを検知
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		# 文字を読んでいる最中のタップをガード（お好みでスキップ処理を入れてもOK）
+		if MessageManager.current_state == MessageManager.MsgState.READING:
+			return
+			
 		_advance_message()
 
-func _show_message():
-	message_label.text = messages[current_msg_index]
-	_start_next_animation()
-
-func _start_next_animation():
-	# 以前の動きをキャンセル
-	var tween = create_tween().set_loops() # 無限ループ設定
-	
-	# 透明度を1秒かけて点滅させる例
-	next_guide.modulate.a = 1.0
-	tween.tween_property(next_guide, "modulate:a", 0.3, 0.6).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(next_guide, "modulate:a", 1.0, 0.6).set_trans(Tween.TRANS_SINE)
-	
 func _advance_message():
 	current_msg_index += 1
 	

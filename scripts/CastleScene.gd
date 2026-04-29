@@ -3,66 +3,70 @@ extends Control
 enum State { READING, WAIT_TAP, COMMAND, FINISHED }
 var current_state = State.READING
 
-@onready var message_label = $UI/MessageWindow/MessageLabel
-@onready var command_window = $UI/CommandWindow # 枠
-@onready var screen_button = $UI/ScreenButton # 画面全体の透明ボタン
+@onready var command_window = $CanvasLayer/CommandWindow # 枠
+@onready var message_panel = $CanvasLayer/Panel # メッセージ枠本体
+@onready var message_label = $CanvasLayer/Panel/MessageLabel
+@onready var next_guide = $CanvasLayer/Panel/NextGuide
 
 func _ready():
 	command_window.hide()
-	# 昨日のフェードイン処理（明るくする）
+	next_guide.hide()
+	# 以前実装したフェードイン処理 
 	var changer = get_tree().root.get_node_or_null("SceneChanger")
 	if changer:
 		var anim = changer.get_node("AnimationPlayer")
 		anim.play_backwards("fade")
-		await anim.animation_finished	# 最初のメッセージ
-	display_text("ゆうしゃよ、よくぞまいった！")
+		await anim.animation_finished
+	
+	# 共通マネージャーで王様のセリフを表示
+	_show_message("ゆうしゃよ、よくぞまいった！")
+	message_panel.gui_input.connect(_on_panel_gui_input)
+
+# メッセージ表示とNEXTガイドの制御をまとめた内部関数
+func _show_message(txt):
+	next_guide.hide() # 表示中はガイドを隠す
+	current_state = State.READING
+	
+	# 共通処理で文字を表示
+	await MessageManager.display_text(message_label, txt)
+	
+	# 表示完了後にガイドを出して点滅開始
+	next_guide.show()
+	MessageManager.start_next_animation(next_guide)
 	current_state = State.WAIT_TAP
 
-func display_text(txt):
-	current_state = State.READING
-	message_label.text = txt
-	message_label.visible_ratio = 0
-	var duration = txt.length() * 0.1 # 文字数に合わせて速度調整
-	var tween = create_tween()
-	tween.tween_property(message_label, "visible_ratio", 1.0, duration)
-	await tween.finished
-
-# 画面全体タップ（透明ボタン）
-func _on_screen_button_pressed():
-	if current_state == State.WAIT_TAP:
-		# 最初のセリフが終わってタップされたら、次の問いかけへ
-		display_text("ここまでのぼうけんを、きろくしておくかね？")
-		current_state = State.WAIT_TAP
-		await get_tree().create_timer(1.2).timeout
-		show_commands()
-	elif current_state == State.FINISHED:
-		# 全ての会話が終わってタップされたらマップに戻る
-		return_to_map()
+func _on_panel_gui_input(event):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		# 文字を読んでいる最中のタップをガード（お好みでスキップ処理を入れてもOK）
+		if MessageManager.current_state == MessageManager.MsgState.WAIT_TAP:
+			_show_message("ここまでのぼうけんを、きろくしておくかね？")
+			await get_tree().create_timer(1.2).timeout
+			show_commands()
+		elif MessageManager.current_state == MessageManager.MsgState.READING:
+			return
+		elif current_state == State.FINISHED:
+			return_to_map()
 
 func show_commands():
 	current_state = State.COMMAND
 	command_window.show()
-	# コマンド選択中は画面全体の透明ボタンを無効化（誤爆防止）
-	screen_button.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 # --- ボタンの処理 ---
 
 func _on_save_button_pressed():
 	command_window.hide()
-	screen_button.mouse_filter = Control.MOUSE_FILTER_STOP
 	
 	# --- 実際のセーブ処理を組み込み ---
 	NetworkManager.save_player_data()
 	# --------------------------------
 	
-	display_text("たしかにセーブしたぞい。ではゆくがよい、ゆうしゃよ！")
+	_show_message("たしかにセーブしたぞい。ではゆくがよい、ゆうしゃよ！")
 	current_state = State.FINISHED
 
 func _on_back_button_pressed():
 	command_window.hide()
-	screen_button.mouse_filter = Control.MOUSE_FILTER_STOP
 	# もどる選択時のメッセージを表示
-	display_text("セーブしないともうすか。ではゆくがよい、ゆうしゃよ！")
+	_show_message("セーブしないともうすか。ではゆくがよい、ゆうしゃよ！")
 	current_state = State.FINISHED
 
 # マップへ戻る
