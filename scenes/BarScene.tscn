@@ -12,7 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wbuq2")
-recruitment_cost = null
 
 [node name="Background" type="TextureRect" parent="." unique_id=2139749929]
 layout_mode = 1
@@ -72,6 +71,27 @@ text = "<NEXT>"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Panel/NextGuide" unique_id=1825092648]
 
+[node name="CommandWindow" type="NinePatchRect" parent="CanvasLayer" unique_id=1041065010]
+offset_top = 215.0
+offset_right = 400.0
+offset_bottom = 215.0
+
+[node name="PayButton" type="Button" parent="CanvasLayer/CommandWindow" unique_id=1604007891]
+layout_mode = 0
+offset_top = -120.0
+offset_right = 400.0
+offset_bottom = -64.0
+theme_override_font_sizes/font_size = 32
+text = "はらう"
+
+[node name="LeaveButton" type="Button" parent="CanvasLayer/CommandWindow" unique_id=1374688522]
+layout_mode = 0
+offset_top = -60.0
+offset_right = 400.0
+offset_bottom = -4.0
+theme_override_font_sizes/font_size = 32
+text = "たちさる"
+
 [node name="StatusPanel" type="PanelContainer" parent="." unique_id=1240158805]
 layout_mode = 1
 anchors_preset = 1
@@ -114,3 +134,6 @@ size_flags_horizontal = 8
 theme_override_fonts/font = ExtResource("3_auw8d")
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 2
+
+[connection signal="pressed" from="CanvasLayer/CommandWindow/PayButton" to="." method="_on_pay_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CommandWindow/LeaveButton" to="." method="_on_leave_button_pressed"]
