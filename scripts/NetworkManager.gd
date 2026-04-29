@@ -33,11 +33,12 @@ func request_new_game(user_name: String):
 
 func _on_request_completed(_result, response_code, _headers, body):
 
-	if response_code != 200 and response_code != 201:
-		print("通信エラー:", response_code)
-		load_finished.emit(false) # ★追加
-		return
 	var response_text = body.get_string_from_utf8()
+	if response_code == 400:
+		print("--- Firebaseエラー詳細 ---")
+		print(response_text)
+		print("-------------------------")
+		return
 
 	match current_state:
 		State.FETCHING_NEXT_ID:
@@ -46,9 +47,18 @@ func _on_request_completed(_result, response_code, _headers, body):
 			_register_new_player(next_id)
 			
 		State.REGISTERING_PLAYER:
-			# プレイヤー保存が成功したら、次に「IDのカウントアップ」を送る
-			print("プレイヤー保存成功。次にIDを更新します...")
-			_update_next_id_on_server() 
+			# 登録中（REGISTERING_PLAYER）が終わった際の挙動
+			if pending_char_name != "":
+				# 名前がセットされている = 新規登録フローの途中
+				print("新規プレイヤー登録成功。IDを加算します。")
+				pending_char_name = "" # フラグをクリア
+				_update_next_id_on_server()
+			else:
+				# 名前がない = 既存データの上書き保存完了
+				print("プレイヤーデータの上書き保存に成功しました。")
+				current_state = State.IDLE
+			# 必要に応じて load_finished シグナルを流用、
+			# または新しく save_finished(true) を定義して emit
 
 		State.UPDATING_NEXT_ID:
 			# ID更新も成功したら、最後にローカル保存して終了
@@ -62,42 +72,30 @@ func _on_request_completed(_result, response_code, _headers, body):
 			if player_data:
 				Global.player_data = player_data
 				current_state = State.IDLE
-				load_finished.emit(true) # ★成功のシグナルを送る（遷移はさせない！）
+				load_finished.emit(true)
 			else:
-				load_finished.emit(false) # ★失敗のシグナルを送る
+				load_finished.emit(false)
 
 # ID更新だけを担当する関数
 func _update_next_id_on_server():
 	current_state = State.UPDATING_NEXT_ID
-	var next_id_url = DB_URL + "metadata/next_id.json"
-	var next_val = int(Global.player_data["my_id"]) + 1
 	
-	# 同じ http_request ノードを再利用
-	http_request.request(next_id_url, [], HTTPClient.METHOD_PUT, str(next_val))
-
-# シーン遷移用の共通関数
-func _change_to_main_map():
-	# シーンのパスが正しいか確認してください
-	get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
-
-func _update_next_id():
-	current_state = State.UPDATING_NEXT_ID
+	# 1. URLは必ず親ノードである metadata.json を指定
+	var url = DB_URL + "metadata.json"
 	
-	# ローカルファイルから現在のIDを読み取る
-	var file = FileAccess.open("user://save_data.json", FileAccess.READ)
-	var json = JSON.parse_string(file.get_as_text())
-	var next_val = int(json["my_id"]) + 1
+	# 2. JSON文字列をエスケープして直接作成
+	# 辞書を経由しないことで、型推論によるパースエラーを物理的に防ぎます
+	var raw_json = "{\"next_id\": {\".sv\": \"increment\", \"value\": 1}}"
 	
-	var url = DB_URL + "metadata/next_id.json"
-	
-	# 【重要】JSON.stringify() を使って、確実に「数値」としてシリアライズする
-	var json_data = JSON.stringify(next_val) 
-	
-	# ヘッダーにContent-Typeを指定（念のため）
+	# 3. ヘッダーを明示
 	var headers = ["Content-Type: application/json"]
 	
-	print("サーバーのnext_idを更新中... 値:", next_val)
-	http_request.request(url, headers, HTTPClient.METHOD_PUT, json_data)
+	print("サーバーサイド加算開始...")
+	
+	# 4. PATCHメソッドで送信（Firebaseの増分更新はPATCHが基本です）
+	var err = http_request.request(url, headers, HTTPClient.METHOD_PATCH, raw_json)
+	if err != OK:
+		print("リクエスト開始失敗:", err)
 
 # 実際にIDを割り当てて登録する内部関数
 func _register_new_player(new_id: int):
