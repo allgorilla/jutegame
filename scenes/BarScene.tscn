@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c5g51q5pb6aab" path="res://scripts/BarScene.gd" id="1_wbuq2"]
 [ext_resource type="Texture2D" uid="uid://cjxfuuklsf251" path="res://assets/image/bg_bar.png" id="2_auw8d"]
+[ext_resource type="FontFile" uid="uid://drh1l1iix6ihw" path="res://assets/font/NotoSansMonoCJKjp-Bold.otf" id="3_auw8d"]
 
 [node name="BarScene" type="Control" unique_id=1347790924]
 layout_mode = 3
@@ -61,8 +62,8 @@ text = "所持金："
 [node name="ValueLabel" type="Label" parent="StatusPanel/VBox/GoldLine" unique_id=1241164402]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_auw8d")
 theme_override_font_sizes/font_size = 24
-text = "500"
 horizontal_alignment = 2
 
 [node name="CostLine" type="HBoxContainer" parent="StatusPanel/VBox" unique_id=1435641039]
@@ -77,8 +78,8 @@ text = "紹介料："
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_auw8d")
 theme_override_font_sizes/font_size = 24
-text = "50"
 horizontal_alignment = 2
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_return_button_pressed"]
