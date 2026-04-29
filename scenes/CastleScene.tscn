@@ -26,29 +26,26 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=797868029]
 
-[node name="CommandWindow" type="NinePatchRect" parent="CanvasLayer" unique_id=1452120986]
-offset_left = 111.0
-offset_top = 153.0
-offset_right = 308.0
-offset_bottom = 283.0
-mouse_filter = 1
+[node name="CommandWindow" type="NinePatchRect" parent="CanvasLayer" unique_id=982167679]
+offset_top = 215.0
+offset_right = 400.0
+offset_bottom = 215.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CommandWindow" unique_id=440093212]
+[node name="SaveButton" type="Button" parent="CanvasLayer/CommandWindow" unique_id=567428988]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 14.0
-offset_right = 182.0
-offset_bottom = 138.0
-
-[node name="SaveButton" type="Button" parent="CanvasLayer/CommandWindow/VBoxContainer" unique_id=606045568]
-layout_mode = 2
+offset_top = -120.0
+offset_right = 400.0
+offset_bottom = -64.0
 theme_override_font_sizes/font_size = 32
 text = "セーブする"
 
-[node name="BackButton" type="Button" parent="CanvasLayer/CommandWindow/VBoxContainer" unique_id=1231394986]
-layout_mode = 2
+[node name="BackButton" type="Button" parent="CanvasLayer/CommandWindow" unique_id=1322949527]
+layout_mode = 0
+offset_top = -60.0
+offset_right = 400.0
+offset_bottom = -4.0
 theme_override_font_sizes/font_size = 32
-text = "もどる"
+text = "たちさる"
 
 [node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1084310170]
 anchors_preset = 15
@@ -97,5 +94,5 @@ text = "<NEXT>"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Panel/NextGuide" unique_id=1715075077]
 
-[connection signal="pressed" from="CanvasLayer/CommandWindow/VBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/CommandWindow/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CommandWindow/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CommandWindow/BackButton" to="." method="_on_back_button_pressed"]
