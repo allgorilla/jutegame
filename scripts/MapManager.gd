@@ -21,30 +21,22 @@ func _ready():
 	# NetworkManagerに保存されたデータを参照する
 	if Global.player_data.has("name"):
 		var p_name = Global.player_data["name"]
-		print("MainMapに到着しました。現在のプレイヤー: ", p_name)
-		
-		# もしMainMapにラベル(NameLabelなど)があるなら表示を更新
-		# $NameLabel.text = p_name + " の冒険"
+		print("MainMapに到着しました。現在のプレイヤー: ", p_name) 
 
 	# 1. まずは「見えない裏側」で世界の解析と構築をすべて終わらせる
 	# (この間、画面はまだ SceneChanger の黒い幕で覆われています)
-	data.parse_maps(map_move, map_event, map_layout, map_object)
+	data.parse_maps(map_move, map_event, map_layout, map_object) 
 	
 	if Global.last_player_pos != Vector2.ZERO:
-		current_grid_pos = Global.last_player_pos
+		current_grid_pos = Global.last_player_pos 
 	else:
-		current_grid_pos = data.player_start_pos
+		current_grid_pos = data.player_start_pos 
 	
-	add_child(spawner)
-	_setup_world() # ここでタイルやオブジェクトがすべて配置される
+	add_child(spawner) 
+	_setup_world() # ここでタイルやオブジェクトがすべて配置される 
 	
-	# 2. すべての配置が終わった「後」で、フェードを解除して幕を開ける
-	var changer = get_tree().root.get_node_or_null("SceneChanger")
-	if changer:
-		var anim = changer.get_node("AnimationPlayer")
-		anim.play_backwards("fade") # 明るくする
-		await anim.animation_finished # 明るくなるのを待つ
-		changer.queue_free() # 最後に幕を捨てる
+	# 2. すべての配置が終わった「後」で、共通マネージャーを使って明るくする
+	await SceneManager.fade_in_scene()
 
 func _setup_world():
 	update_map_position()

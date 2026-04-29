@@ -9,20 +9,16 @@ var current_phase = Phase.INTRO
 @onready var message_label = $CanvasLayer/Panel/MessageLabel
 @onready var next_guide = $CanvasLayer/Panel/NextGuide
 
+
 func _ready():
 	command_window.hide()
 	next_guide.hide()
 	
-	# フェードイン処理
-	var changer = get_tree().root.get_node_or_null("SceneChanger")
-	if changer:
-		var anim = changer.get_node("AnimationPlayer")
-		anim.play_backwards("fade")
-		await anim.animation_finished
+	# 共通マネージャーで明るくする
+	await SceneManager.fade_in_scene() # 
 	
-	# 最初のメッセージ表示
 	message_panel.gui_input.connect(_on_panel_gui_input)
-	_show_castle_message("ゆうしゃよ、よくぞまいった！")
+	_show_castle_message("ゆうしゃよ、よくぞまいった！") #
 
 # 内部共通：メッセージ表示とNEXT演出
 func _show_castle_message(txt: String, show_guide: bool = true):

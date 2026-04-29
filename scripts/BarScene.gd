@@ -14,15 +14,13 @@ var messages = [
 var current_msg_index = 0
 
 func _ready():
-	update_ui()
-	next_guide.hide()
-	# 昨日のフェードイン処理（明るくする）
-	var changer = get_tree().root.get_node_or_null("SceneChanger")
-	if changer:
-		var anim = changer.get_node("AnimationPlayer")
-		anim.play_backwards("fade")
-		await anim.animation_finished
-	_show_message()
+	update_ui() 
+	next_guide.hide() 
+	
+	# 共通マネージャーを使って明るくする演出を開始
+	await SceneManager.fade_in_scene()
+	
+	_show_message() 
 	message_panel.gui_input.connect(_on_panel_gui_input)
 
 func _show_message():
