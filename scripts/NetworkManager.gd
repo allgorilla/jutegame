@@ -11,7 +11,8 @@ enum State {
 	FETCHING_NEXT_ID, 
 	REGISTERING_PLAYER, 
 	UPDATING_NEXT_ID,
-	FETCHING_PLAYER_DATA
+	FETCHING_PLAYER_DATA,
+	FETCHING_NEXT_ID_FOR_INCREMENT
 }
 var current_state = State.IDLE
 var pending_char_name = ""
@@ -76,26 +77,21 @@ func _on_request_completed(_result, response_code, _headers, body):
 			else:
 				load_finished.emit(false)
 
+		State.FETCHING_NEXT_ID_FOR_INCREMENT:
+			var current_id = response_text.to_int()
+			var next_val = current_id + 1
+			
+			current_state = State.UPDATING_NEXT_ID
+			var url = DB_URL + "metadata/next_id.json"
+			var headers = ["Content-Type: application/json"]
+			http_request.request(url, headers, HTTPClient.METHOD_PUT, JSON.stringify(next_val))
+
 # ID更新だけを担当する関数
 func _update_next_id_on_server():
-	current_state = State.UPDATING_NEXT_ID
-	
-	# 1. URLは必ず親ノードである metadata.json を指定
-	var url = DB_URL + "metadata.json"
-	
-	# 2. JSON文字列をエスケープして直接作成
-	# 辞書を経由しないことで、型推論によるパースエラーを物理的に防ぎます
-	var raw_json = "{\"next_id\": {\".sv\": \"increment\", \"value\": 1}}"
-	
-	# 3. ヘッダーを明示
-	var headers = ["Content-Type: application/json"]
-	
-	print("サーバーサイド加算開始...")
-	
-	# 4. PATCHメソッドで送信（Firebaseの増分更新はPATCHが基本です）
-	var err = http_request.request(url, headers, HTTPClient.METHOD_PATCH, raw_json)
-	if err != OK:
-		print("リクエスト開始失敗:", err)
+	# 状態を ID取得 に一時的に戻して、最新の next_id を取りに行く
+	current_state = State.FETCHING_NEXT_ID_FOR_INCREMENT
+	var url = DB_URL + "metadata/next_id.json"
+	http_request.request(url, [], HTTPClient.METHOD_GET)
 
 # 実際にIDを割り当てて登録する内部関数
 func _register_new_player(new_id: int):

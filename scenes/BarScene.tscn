@@ -82,5 +82,5 @@ theme_override_fonts/font = ExtResource("3_auw8d")
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 2
 
-[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_return_button_pressed"]
