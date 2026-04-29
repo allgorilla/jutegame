@@ -3,7 +3,7 @@ extends Control
 
 @onready var current_gold_label = $StatusPanel/VBox/GoldLine/ValueLabel
 @onready var cost_label = $StatusPanel/VBox/CostLine/ValueLabel
-@onready var message_panel = $CanvasLayer/Panel # メッセージ枠本体
+@onready var message_panel = $CanvasLayer/Panel
 @onready var message_label = $CanvasLayer/Panel/MessageLabel
 @onready var next_guide = $CanvasLayer/Panel/NextGuide
 
