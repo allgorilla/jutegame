@@ -8,7 +8,17 @@
 layer = 10
 script = ExtResource("1_omt8b")
 
-[node name="Background" type="ColorRect" parent="." unique_id=17927834]
+[node name="MainContent" type="Control" parent="." unique_id=50960166]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 300)
+
+[node name="Background" type="ColorRect" parent="MainContent" unique_id=17927834]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,15 +26,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5019608)
 
-[node name="BackgroundButton" type="Button" parent="." unique_id=2130032820]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-flat = true
-
-[node name="NameLabel" type="Label" parent="." unique_id=2123604683]
+[node name="NameLabel" type="Label" parent="MainContent" unique_id=2123604683]
+layout_mode = 0
 offset_left = 55.0
 offset_top = 50.0
 offset_right = 256.0
@@ -33,88 +36,100 @@ theme_override_colors/font_color = Color(1, 1, 0.5019608, 1)
 theme_override_font_sizes/font_size = 32
 text = "ジュテイム"
 
-[node name="Image" type="TextureRect" parent="." unique_id=252478091]
+[node name="Image" type="TextureRect" parent="MainContent" unique_id=252478091]
+layout_mode = 0
 offset_left = 45.0
 offset_top = 163.0
 offset_right = 205.0
 offset_bottom = 323.0
 texture = ExtResource("1_6mmf1")
 
-[node name="Rarity" type="TextureRect" parent="." unique_id=1672309396]
+[node name="Rarity" type="TextureRect" parent="MainContent" unique_id=1672309396]
+layout_mode = 0
 offset_left = 274.0
 offset_top = 28.0
 offset_right = 374.0
 offset_bottom = 128.0
 texture = ExtResource("1_iihyn")
 
-[node name="StatusContainer" type="VBoxContainer" parent="." unique_id=2049288213]
+[node name="StatusContainer" type="VBoxContainer" parent="MainContent" unique_id=2049288213]
+layout_mode = 0
 offset_left = 232.0
 offset_top = 166.0
 offset_right = 379.0
 offset_bottom = 326.0
 
-[node name="CostContainer" type="HBoxContainer" parent="StatusContainer" unique_id=1765992082]
+[node name="CostContainer" type="HBoxContainer" parent="MainContent/StatusContainer" unique_id=1765992082]
 layout_mode = 2
 
-[node name="CostLabel" type="Label" parent="StatusContainer/CostContainer" unique_id=1945931686]
+[node name="CostLabel" type="Label" parent="MainContent/StatusContainer/CostContainer" unique_id=1945931686]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "コスト"
 
-[node name="CostValue" type="Label" parent="StatusContainer/CostContainer" unique_id=1821142326]
+[node name="CostValue" type="Label" parent="MainContent/StatusContainer/CostContainer" unique_id=1821142326]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = " 20"
 
-[node name="PowerContainer" type="HBoxContainer" parent="StatusContainer" unique_id=541328468]
+[node name="PowerContainer" type="HBoxContainer" parent="MainContent/StatusContainer" unique_id=541328468]
 layout_mode = 2
 
-[node name="PowerLabel" type="Label" parent="StatusContainer/PowerContainer" unique_id=1248677341]
+[node name="PowerLabel" type="Label" parent="MainContent/StatusContainer/PowerContainer" unique_id=1248677341]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "戦闘"
 
-[node name="PowerValue" type="Label" parent="StatusContainer/PowerContainer" unique_id=78841828]
+[node name="PowerValue" type="Label" parent="MainContent/StatusContainer/PowerContainer" unique_id=78841828]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
 text = "   8"
 horizontal_alignment = 2
 
-[node name="MagicContainer" type="HBoxContainer" parent="StatusContainer" unique_id=1677990563]
+[node name="MagicContainer" type="HBoxContainer" parent="MainContent/StatusContainer" unique_id=1677990563]
 layout_mode = 2
 
-[node name="MagicLabel" type="Label" parent="StatusContainer/MagicContainer" unique_id=1514077132]
+[node name="MagicLabel" type="Label" parent="MainContent/StatusContainer/MagicContainer" unique_id=1514077132]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "魔力"
 
-[node name="MagicValue" type="Label" parent="StatusContainer/MagicContainer" unique_id=1066442068]
+[node name="MagicValue" type="Label" parent="MainContent/StatusContainer/MagicContainer" unique_id=1066442068]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "   3"
 
-[node name="SkillContainer" type="VBoxContainer" parent="." unique_id=972074057]
+[node name="SkillContainer" type="VBoxContainer" parent="MainContent" unique_id=972074057]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 35.0
-offset_top = 381.0
-offset_right = -29.0
-offset_bottom = -31.0
+offset_left = 23.0
+offset_top = 351.0
+offset_right = -19.0
+offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SkillName" type="Label" parent="SkillContainer" unique_id=478968488]
+[node name="SkillName" type="Label" parent="MainContent/SkillContainer" unique_id=478968488]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.76862746, 0.76862746, 1, 1)
 theme_override_font_sizes/font_size = 28
-text = "スキル：バーサーク"
+text = "[４] バーサーク"
 
-[node name="SkillText" type="Label" parent="SkillContainer" unique_id=673481458]
+[node name="SkillText" type="Label" parent="MainContent/SkillContainer" unique_id=673481458]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_font_sizes/font_size = 24
 text = "５ターンのあいだ戦闘力が10増加する。使用時にＨＰを50％失う。
 "
 autowrap_mode = 3
+
+[node name="BackgroundButton" type="Button" parent="." unique_id=2130032820]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true

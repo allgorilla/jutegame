@@ -76,7 +76,7 @@ func _proceed_flow():
 			
 		Phase.POST_RESULT:
 			# ④ 合流案内
-			await MessageManager.display_text("きにいってもらえたかしら。\nあたらしいなかまとは やどや でごうりゅうしてね！")
+			await MessageManager.display_text("きにいってもらえたかしら。\nあたらしい なかまとは\nやどや でごうりゅうしてね！")
 			current_phase = Phase.AGAIN_ASK
 			
 		Phase.AGAIN_ASK:
