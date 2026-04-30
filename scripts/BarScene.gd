@@ -18,6 +18,7 @@ var current_phase = Phase.INTRO
 
 func _ready():
 	command_window.hide()
+	next_guide.hide()
 	progress_bar.hide()
 	update_ui()
 	
