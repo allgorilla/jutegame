@@ -3,6 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://n6lijamd1ev5" path="res://assets/image/human_01.png" id="1_6mmf1"]
 [ext_resource type="Texture2D" uid="uid://tpus256a758r" path="res://assets/image/status_icon.png" id="1_iihyn"]
 [ext_resource type="Script" uid="uid://brucpu6cy7qvk" path="res://scripts/StatusWindow.gd" id="1_omt8b"]
+[ext_resource type="Texture2D" uid="uid://b7fj41yrgulqu" path="res://assets/image/Bonus_Weapon.png" id="4_2acd4"]
+[ext_resource type="Texture2D" uid="uid://bk605wk2jpud7" path="res://assets/image/Bonus_Armor.png" id="5_2jnv4"]
+[ext_resource type="Texture2D" uid="uid://dviua5vfwtahw" path="res://assets/image/Bonus_life.png" id="6_rypsu"]
 
 [node name="StatusWindow" type="CanvasLayer" unique_id=303682386]
 layer = 10
@@ -28,36 +31,36 @@ color = Color(0, 0, 0, 0.5019608)
 
 [node name="NameLabel" type="Label" parent="MainContent" unique_id=2123604683]
 layout_mode = 0
-offset_left = 55.0
-offset_top = 50.0
-offset_right = 256.0
-offset_bottom = 98.0
+offset_left = 51.0
+offset_top = 43.0
+offset_right = 252.0
+offset_bottom = 91.0
 theme_override_colors/font_color = Color(1, 1, 0.5019608, 1)
 theme_override_font_sizes/font_size = 32
 text = "ジュテイム"
 
 [node name="Image" type="TextureRect" parent="MainContent" unique_id=252478091]
 layout_mode = 0
-offset_left = 45.0
-offset_top = 163.0
-offset_right = 205.0
-offset_bottom = 323.0
+offset_left = 43.0
+offset_top = 145.0
+offset_right = 203.0
+offset_bottom = 305.0
 texture = ExtResource("1_6mmf1")
 
 [node name="Rarity" type="TextureRect" parent="MainContent" unique_id=1672309396]
 layout_mode = 0
-offset_left = 274.0
+offset_left = 286.0
 offset_top = 28.0
-offset_right = 374.0
-offset_bottom = 128.0
+offset_right = 366.0
+offset_bottom = 108.0
 texture = ExtResource("1_iihyn")
 
 [node name="StatusContainer" type="VBoxContainer" parent="MainContent" unique_id=2049288213]
 layout_mode = 0
-offset_left = 232.0
-offset_top = 166.0
-offset_right = 379.0
-offset_bottom = 326.0
+offset_left = 227.0
+offset_top = 147.0
+offset_right = 374.0
+offset_bottom = 307.0
 
 [node name="CostContainer" type="HBoxContainer" parent="MainContent/StatusContainer" unique_id=1765992082]
 layout_mode = 2
@@ -105,10 +108,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 23.0
-offset_top = 351.0
-offset_right = -19.0
-offset_bottom = -21.0
+offset_left = 29.0
+offset_top = 328.0
+offset_right = -26.0
+offset_bottom = -77.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -122,7 +125,7 @@ text = "[４] バーサーク"
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
 theme_override_font_sizes/font_size = 24
-text = "５ターンのあいだ戦闘力が10増加する。使用時にＨＰを50％失う。
+text = "5ターンのあいだ戦闘力が10増加する。使用時にＨＰを50％失う。
 "
 autowrap_mode = 3
 
@@ -133,3 +136,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 flat = true
+
+[node name="BonusContainer" type="HBoxContainer" parent="." unique_id=1273401581]
+offset_left = 102.0
+offset_top = 511.0
+offset_right = 302.0
+offset_bottom = 575.0
+
+[node name="Bonus1" type="TextureRect" parent="BonusContainer" unique_id=1760122519]
+layout_mode = 2
+texture = ExtResource("4_2acd4")
+
+[node name="Bonus2" type="TextureRect" parent="BonusContainer" unique_id=831851964]
+layout_mode = 2
+texture = ExtResource("5_2jnv4")
+
+[node name="Bonus3" type="TextureRect" parent="BonusContainer" unique_id=1414648728]
+layout_mode = 2
+texture = ExtResource("6_rypsu")
