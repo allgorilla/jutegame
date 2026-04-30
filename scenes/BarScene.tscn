@@ -24,6 +24,18 @@ texture = ExtResource("2_auw8d")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=739282048]
 
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" unique_id=477338633]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -14.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+
 [node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1781734953]
 anchors_preset = 15
 anchor_right = 1.0

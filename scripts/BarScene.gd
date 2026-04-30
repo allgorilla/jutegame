@@ -11,14 +11,14 @@ var current_phase = Phase.INTRO
 @onready var message_panel = $CanvasLayer/Panel
 @onready var message_label = $CanvasLayer/Panel/MessageLabel
 @onready var next_guide = $CanvasLayer/Panel/NextGuide
-
-# 追加：コマンドウィンドウとその中のボタン
 @onready var command_window = $CanvasLayer/CommandWindow
 @onready var pay_button = $CanvasLayer/CommandWindow/PayButton
 @onready var leave_button = $CanvasLayer/CommandWindow/LeaveButton
+@onready var progress_bar = $CanvasLayer/ProgressBar
 
 func _ready():
 	command_window.hide()
+	progress_bar.hide()
 	update_ui()
 	
 	# 【重要】MessageManagerにUIを覚えさせる 
@@ -46,6 +46,19 @@ func _proceed_flow():
 			_show_commands()
 			
 		Phase.RESULT:
+			# コマンドを隠し、プログレスバーを表示（仮定）
+			progress_bar.show()
+			progress_bar.value = 0
+			
+			# 3秒間で 0 から 100 へアニメーションさせる
+			var tween = create_tween()
+			# set_trans(Tween.TRANS_QUART) などを足すと「徐々に加速」などの味付けも可能
+			tween.tween_property(progress_bar, "value", 100, 1.0)
+			
+			# アニメーション終了を待つ
+			await tween.finished
+			
+			progress_bar.hide()
 			# ③ 支払い後の結果
 			_consume_gold()
 			await MessageManager.display_text("あたらしいなかまが くわわった！")
