@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://drutgj62b1tse"]
+
+[ext_resource type="Texture2D" uid="uid://n6lijamd1ev5" path="res://assets/image/human_01.png" id="1_6mmf1"]
+[ext_resource type="Texture2D" uid="uid://tpus256a758r" path="res://assets/image/status_icon.png" id="1_iihyn"]
+[ext_resource type="Script" uid="uid://brucpu6cy7qvk" path="res://scripts/StatusWindow.gd" id="1_omt8b"]
+
+[node name="StatusWindow" type="CanvasLayer" unique_id=303682386]
+layer = 10
+script = ExtResource("1_omt8b")
+
+[node name="Background" type="ColorRect" parent="." unique_id=17927834]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="BackgroundButton" type="Button" parent="." unique_id=2130032820]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="NameLabel" type="Label" parent="." unique_id=2123604683]
+offset_left = 55.0
+offset_top = 50.0
+offset_right = 256.0
+offset_bottom = 98.0
+theme_override_colors/font_color = Color(1, 1, 0.5019608, 1)
+theme_override_font_sizes/font_size = 32
+text = "ジュテイム"
+
+[node name="Image" type="TextureRect" parent="." unique_id=252478091]
+offset_left = 45.0
+offset_top = 163.0
+offset_right = 205.0
+offset_bottom = 323.0
+texture = ExtResource("1_6mmf1")
+
+[node name="Rarity" type="TextureRect" parent="." unique_id=1672309396]
+offset_left = 274.0
+offset_top = 28.0
+offset_right = 374.0
+offset_bottom = 128.0
+texture = ExtResource("1_iihyn")
+
+[node name="StatusContainer" type="VBoxContainer" parent="." unique_id=2049288213]
+offset_left = 232.0
+offset_top = 166.0
+offset_right = 379.0
+offset_bottom = 326.0
+
+[node name="CostContainer" type="HBoxContainer" parent="StatusContainer" unique_id=1765992082]
+layout_mode = 2
+
+[node name="CostLabel" type="Label" parent="StatusContainer/CostContainer" unique_id=1945931686]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "コスト"
+
+[node name="CostValue" type="Label" parent="StatusContainer/CostContainer" unique_id=1821142326]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = " 20"
+
+[node name="PowerContainer" type="HBoxContainer" parent="StatusContainer" unique_id=541328468]
+layout_mode = 2
+
+[node name="PowerLabel" type="Label" parent="StatusContainer/PowerContainer" unique_id=1248677341]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "戦闘"
+
+[node name="PowerValue" type="Label" parent="StatusContainer/PowerContainer" unique_id=78841828]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "   8"
+horizontal_alignment = 2
+
+[node name="MagicContainer" type="HBoxContainer" parent="StatusContainer" unique_id=1677990563]
+layout_mode = 2
+
+[node name="MagicLabel" type="Label" parent="StatusContainer/MagicContainer" unique_id=1514077132]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "魔力"
+
+[node name="MagicValue" type="Label" parent="StatusContainer/MagicContainer" unique_id=1066442068]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "   3"
+
+[node name="SkillContainer" type="VBoxContainer" parent="." unique_id=972074057]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 381.0
+offset_right = -29.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillName" type="Label" parent="SkillContainer" unique_id=478968488]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.76862746, 0.76862746, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "スキル：バーサーク"
+
+[node name="SkillText" type="Label" parent="SkillContainer" unique_id=673481458]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+theme_override_font_sizes/font_size = 24
+text = "５ターンのあいだ戦闘力が10増加する。使用時にＨＰを50％失う。
+"
+autowrap_mode = 3

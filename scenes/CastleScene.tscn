@@ -33,17 +33,16 @@ offset_bottom = 215.0
 
 [node name="SaveButton" type="Button" parent="CanvasLayer/CommandWindow" unique_id=567428988]
 layout_mode = 0
-offset_top = -120.0
+offset_top = -60.0
 offset_right = 400.0
-offset_bottom = -64.0
+offset_bottom = -4.0
 theme_override_font_sizes/font_size = 32
 text = "セーブする"
 
 [node name="BackButton" type="Button" parent="CanvasLayer/CommandWindow" unique_id=1322949527]
 layout_mode = 0
-offset_top = -60.0
 offset_right = 400.0
-offset_bottom = -4.0
+offset_bottom = 56.0
 theme_override_font_sizes/font_size = 32
 text = "たちさる"
 

@@ -59,7 +59,16 @@ func _proceed_flow():
 			await tween.finished
 			
 			progress_bar.hide()
+			message_panel.hide()
+
+			var status_ui = preload("res://scenes/StatusWindow.tscn").instantiate()
+			add_child(status_ui)
+
+			# 閉じられるまでここで待機する
+			await status_ui.closed
+			
 			# ③ 支払い後の結果
+			message_panel.show()
 			_consume_gold()
 			await MessageManager.display_text("あたらしいなかまが くわわった！")
 			current_phase = Phase.POST_RESULT
@@ -118,3 +127,21 @@ func update_ui():
 	var current_gold = Global.player_data.get("gold", 0)
 	current_gold_label.text = "%4d G" % current_gold
 	cost_label.text = "%4d G" % recruitment_cost
+
+# BarScene.gd 内での処理イメージ
+
+func _show_status_window(data):
+	# 1. ステータス画面のシーンを読み込んでインスタンス化
+	var status_scene = preload("res://scenes/StatusWindow.tscn").instantiate()
+	
+	# 2. 酒場シーン（自分自身）の子として画面に追加
+	add_child(status_scene)
+	
+	# 3. データを渡す
+	status_scene.set_data(data)
+	
+	# 4. ステータス画面が閉じられるのを待つ（シグナルを利用）
+	await status_scene.closed 
+	
+	# 5. 閉じたらフローを再開
+	_proceed_flow()
