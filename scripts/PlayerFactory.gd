@@ -22,14 +22,20 @@ static func create_initial_data(player_name: String) -> Dictionary:
 		4:
 			int_val = randi_range(1, 4)
 	
-	# 3. 辞書データにまとめて返す
+	# 3. スキルを抽選する。
+	var skill_id = "NONE"
+	if rarity >= 1: # UC以上なら抽選
+		skill_id = SkillFactory.get_random_skill_id( rarity )
+		
+	# 4. 辞書データにまとめて返す
 	var data = {
+		"my_id": 0,
 		"name": player_name,
+		"cost": 10,
 		"rarity": rarity,
 		"atk": atk,
 		"int": int_val,
-		"cost": 10,
-		"my_id": 0,
+		"skill_id": skill_id,
 		"gold": 500,
 		"soldiers": []
 	}
