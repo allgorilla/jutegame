@@ -29,13 +29,23 @@ static func create_character_data() -> Dictionary:
 
 ## 内部用：ステータスとスキルの抽選ロジック（共通化）
 static func _generate_base_stats() -> Dictionary:
+	var costs = [10, 15, 20, 25, 30]
+	var cost = costs.pick_random()
 	var rarity = _pick_rarity()
+	var base_power
 	
 	# POWERとMAGICの決定
-	var power = randi_range(1, 4)
+	var extra_power = randi_range(1, 4)
 	var magic_val = 0
 	
-	match power:
+	match cost:
+		10: base_power = 0
+		15: base_power = 2
+		20: base_power = 4
+		25: base_power = 6
+		30: base_power = 8
+
+	match extra_power:
 		1: magic_val = randi_range(1, 10)
 		2: magic_val = randi_range(1, 8)
 		3: magic_val = randi_range(1, 6)
@@ -48,19 +58,27 @@ static func _generate_base_stats() -> Dictionary:
 		
 	return {
 		"my_id": 0,
-		"cost": 10,
+		"cost": cost,
 		"rarity": rarity,
-		"power": power,
+		"power": base_power + extra_power,
 		"magic": magic_val,
 		"skill_id": skill_id
 	}
 
 static func _pick_rarity() -> int:
 	var roll = randf()
-	if roll < 0.02: return Rarity.SR
-	elif roll < 0.20: return Rarity.R
-	elif roll < 0.60: return Rarity.UC
+	if roll < 0.10: return Rarity.SR
+	elif roll < 0.35: return Rarity.R
+	elif roll < 0.65: return Rarity.UC
 	else: return Rarity.C
+
+static func _pick_cost() -> int:
+	var roll = randf()
+	if roll < 0.05: return 30
+	elif roll < 0.20: return 25
+	elif roll < 0.40: return 20
+	elif roll < 0.70: return 15
+	else: return 10
 
 static func _print_debug_log(data: Dictionary) -> void:
 	print("--- キャラクター生成結果 ---")
