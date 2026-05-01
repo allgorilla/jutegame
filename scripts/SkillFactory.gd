@@ -8,7 +8,7 @@ const SKILLS_C = {
 	"FRONT_MARCH": { "name": "進撃の号令", "cost": 5, "text": "味方前列の戦闘力を3増加させる。" },
 	"MAGIC_BOLT": { "name": "マジックボルト", "cost": 5, "text": "敵一人に魔力ダメージを与える。" },
 	"WEAKNESS": { "name": "ウィークネス", "cost": 5, "text": "戦闘力を4弱体化させる。" },
-	"LIGHT_HEAL": { "name": "ライトヒール", "cost": 2, "text": "味方一人のHPを50%回復する。" },
+	"LIGHT_HEAL": { "name": "ライトヒール", "cost": 2, "text": "味方一人のHPを30%回復する。" },
 }
 
 # アンコモン以上用：全スキル（必要に応じてレアリティごとに細分化も可能）
