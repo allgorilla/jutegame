@@ -61,13 +61,21 @@ func _proceed_flow():
 			
 			progress_bar.hide()
 			message_panel.hide()
+			
+			# 1. まずキャラクターデータを生成
+			var character_data = PlayerFactory.create_character_data()
 
+			# 2. シーンを読み込んで実体化（インスタンス化）する
 			var status_ui = preload("res://scenes/StatusWindow.tscn").instantiate()
+			
+			# 3. 【重要】実体化した status_ui に対してデータを渡す
+			status_ui.set_data(character_data)
+
+			# 4. 画面（ツリー）に追加する
 			add_child(status_ui)
 
-			# 閉じられるまでここで待機する
-			await status_ui.closed
-			
+			# 5. 閉じられるまで待機
+			await status_ui.closed			
 			# ③ 支払い後の結果
 			message_panel.show()
 			_consume_gold()
@@ -76,7 +84,7 @@ func _proceed_flow():
 			
 		Phase.POST_RESULT:
 			# ④ 合流案内
-			await MessageManager.display_text("きにいってもらえたかしら。\nあたらしい なかまとは\nやどや でごうりゅうしてね！")
+			await MessageManager.display_text("あたらしい なかまとは\nやどや でごうりゅうしてね！")
 			current_phase = Phase.AGAIN_ASK
 			
 		Phase.AGAIN_ASK:
