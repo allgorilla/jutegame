@@ -23,7 +23,7 @@ func _ready():
 func _proceed_flow():
 	match current_phase:
 		Phase.INTRO:
-			await MessageManager.display_text("ここは さかば よ！\nたびのなかまを しょうかい するわ！")
+			await MessageManager.display_text("ここは さかば よ！\nたびのなかまを しょうかいするわ！")
 			current_phase = Phase.COST_INFO
 			# _proceed_flow() # 自動で料金説明へ
 			
