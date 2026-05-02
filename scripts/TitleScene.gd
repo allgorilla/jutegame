@@ -40,6 +40,17 @@ func _on_confirm_button_pressed():
 	# ② Global（ワークメモリ）に同期
 	Global.sync_player_data(new_data)
 	
+	# 登録完了のシグナルを接続（既存のコンティニュー用と同じ関数を流用）
+	if not NetworkManager.load_finished.is_connected(_on_load_finished):
+		NetworkManager.load_finished.connect(_on_load_finished)
+	
+	# パネルを隠し、サーバーへの新規登録リクエストを投げる
+	name_panel.hide()
+	NetworkManager.request_new_game(player_name) # ここでID取得・登録・保存が走る
+	
+	print("サーバーに登録中...")
+	# ※ここで「通信中...」といったUIを出すと親切です
+	
 	name_panel.hide()
 	get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
 

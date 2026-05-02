@@ -67,6 +67,7 @@ func _on_request_completed(_result, response_code, _headers, body):
 			_save_id_locally(final_id)
 			print("全ての登録プロセスが完了しました")
 			current_state = State.IDLE
+			load_finished.emit(true)
 
 		State.FETCHING_PLAYER_DATA:
 			var player_data = JSON.parse_string(response_text)
