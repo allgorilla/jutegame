@@ -79,6 +79,10 @@ func _proceed_flow():
 			# ③ 支払い後の結果
 			message_panel.show()
 			_consume_gold()
+
+			# サーバー上の所持金を更新する。
+			NetworkManager.save_player_data()
+			
 			await MessageManager.display_text("あたらしいなかまが くわわった！")
 			current_phase = Phase.POST_RESULT
 			
