@@ -25,7 +25,7 @@ func _proceed_flow():
 		Phase.INTRO:
 			await MessageManager.display_text("ここは さかば よ！\nたびのなかまを しょうかい するわ！")
 			current_phase = Phase.COST_INFO
-			_proceed_flow() # 自動で料金説明へ
+			# _proceed_flow() # 自動で料金説明へ
 			
 		Phase.COST_INFO:
 			await MessageManager.display_text("しょうかいりょうは ５０ゴールド よ！", false)
