@@ -79,11 +79,29 @@ func _proceed_flow():
 			await status_ui.closed			
 			# ③ 支払い後の結果
 			message_panel.show()
+			# 1. まず所持金を減らす
 			_consume_gold()
 
-			# 新キャラをサーバーに保存
+			# 2. NPC（新キャラ）をサーバーに新規登録して、発行されたIDを受け取る
+			# save_character_data は内部で request_new_game を呼び、
+			# 最終的に current_saving_data["my_id"] に新しいIDがセットされます[cite: 3, 2]
 			NetworkManager.save_character_data(npc_data)
+			await NetworkManager.load_finished 
 			
+			# 3. 発行されたばかりのNPCのIDを取得
+			var new_npc_id = NetworkManager.current_saving_data["my_id"]
+
+			# 4. 自分の「inn_list」にそのIDを追加
+			if not Global.player_data.has("inn_list"):
+				Global.player_data["inn_list"] = []
+			
+			Global.player_data["inn_list"].append(new_npc_id)
+			print("inn_listに新キャラIDを追加しました: ", new_npc_id)
+
+			# 5. 更新された inn_list と gold を含む PC データを上書き保存
+			NetworkManager.save_character_data(Global.player_data)
+			await NetworkManager.load_finished
+
 			await MessageManager.display_text("あたらしいなかまが くわわった！")
 			current_phase = Phase.POST_RESULT
 			
