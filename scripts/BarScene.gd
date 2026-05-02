@@ -1,6 +1,5 @@
 extends Control
 
-# ステートを細かく定義
 enum Phase { INTRO, COST_INFO, RESULT, POST_RESULT, AGAIN_ASK, EXIT }
 var current_phase = Phase.INTRO
 
@@ -12,8 +11,6 @@ var current_phase = Phase.INTRO
 @onready var message_label = $CanvasLayer/Panel/MessageLabel
 @onready var next_guide = $CanvasLayer/Panel/NextGuide
 @onready var command_window = $CanvasLayer/CommandWindow
-@onready var pay_button = $CanvasLayer/CommandWindow/PayButton
-@onready var leave_button = $CanvasLayer/CommandWindow/LeaveButton
 @onready var progress_bar = $CanvasLayer/ProgressBar
 
 func _ready():
@@ -21,124 +18,107 @@ func _ready():
 	next_guide.hide()
 	progress_bar.hide()
 	update_ui()
-	
-	# 【重要】MessageManagerにUIを覚えさせる 
 	MessageManager.setup_ui(message_label, next_guide)
 	
-	# 共通マネージャーで明るくする
 	await SceneManager.fade_in_scene()
-	
 	message_panel.gui_input.connect(_on_panel_gui_input)
-	
-	# 最初の挨拶を開始
 	_proceed_flow()
 
-# シーン進行のメインロジック
 func _proceed_flow():
 	match current_phase:
 		Phase.INTRO:
-			# ① 挨拶 (引数はテキストのみでOK) 
 			await MessageManager.display_text("ここは さかば よ！\nたびのなかまを しょうかい するわ！")
 			current_phase = Phase.COST_INFO
 			
 		Phase.COST_INFO:
-			# ② 料金説明＋選択肢（ガイドなし） 
 			await MessageManager.display_text("しょうかいりょうは ５０ゴールド よ！", false)
-			_show_commands()
+			command_window.show()
 			
 		Phase.RESULT:
-			# コマンドを隠し、プログレスバーを表示（仮定）
-			progress_bar.show()
-			progress_bar.value = 0
-			
-			# 3秒間で 0 から 100 へアニメーションさせる
-			var tween = create_tween()
-			# set_trans(Tween.TRANS_QUART) などを足すと「徐々に加速」などの味付けも可能
-			tween.tween_property(progress_bar, "value", 100, 1.0)
-			
-			# アニメーション終了を待つ
-			await tween.finished
-			
-			progress_bar.hide()
-			message_panel.hide()
-			
-			# 1. まずキャラクターデータを生成
 			var npc_data = PlayerFactory.create_character_data()
 			npc_data["is_pc"] = false
 
-			# 2. シーンを読み込んで実体化（インスタンス化）する
+			# 通信処理をバックグラウンドで開始
+			_start_async_save_process.call_deferred(npc_data)
+
+			# 演出開始
+			progress_bar.show()
+			progress_bar.value = 0
+			var tween = create_tween()
+			tween.tween_property(progress_bar, "value", 100, 2)
+			await tween.finished
+			
+			# 演出終了後、通信の完了を「一度だけ」待つ
+			# （通信が先に終わっていれば即座に通過します）
+			await NetworkManager.all_save_finished
+
+			progress_bar.hide()
+			message_panel.hide()
+
+			# ステータス画面の表示
 			var status_ui = preload("res://scenes/StatusWindow.tscn").instantiate()
-			
-			# 3. 【重要】実体化した status_ui に対してデータを渡す
 			status_ui.set_data(npc_data)
-
-			# 4. 画面（ツリー）に追加する
 			add_child(status_ui)
+			await status_ui.closed
 
-			# 5. 閉じられるまで待機
-			await status_ui.closed			
-			# ③ 支払い後の結果
 			message_panel.show()
-			# 1. まず所持金を減らす
-			_consume_gold()
-
-			# 2. NPC（新キャラ）をサーバーに新規登録して、発行されたIDを受け取る
-			# save_character_data は内部で request_new_game を呼び、
-			# 最終的に current_saving_data["my_id"] に新しいIDがセットされます[cite: 3, 2]
-			NetworkManager.save_character_data(npc_data)
-			await NetworkManager.load_finished 
-			
-			# 3. 発行されたばかりのNPCのIDを取得
-			var new_npc_id = NetworkManager.current_saving_data["my_id"]
-
-			# 4. 自分の「inn_list」にそのIDを追加
-			if not Global.player_data.has("inn_list"):
-				Global.player_data["inn_list"] = []
-			
-			Global.player_data["inn_list"].append(new_npc_id)
-			print("inn_listに新キャラIDを追加しました: ", new_npc_id)
-
-			# 5. 更新された inn_list と gold を含む PC データを上書き保存
-			NetworkManager.save_character_data(Global.player_data)
-			await NetworkManager.load_finished
-
 			await MessageManager.display_text("あたらしいなかまが くわわった！")
 			current_phase = Phase.POST_RESULT
-			
+
 		Phase.POST_RESULT:
-			# ④ 合流案内
 			await MessageManager.display_text("あたらしい なかまとは\nやどや でごうりゅうしてね！")
 			current_phase = Phase.AGAIN_ASK
 			
 		Phase.AGAIN_ASK:
-			# ⑤ もう一度聞く
 			await MessageManager.display_text("もうひとり しょうかい しちゃう？", false)
-			_show_commands()
+			command_window.show()
 			
 		Phase.EXIT:
-			# ⑥ 退店処理
 			await MessageManager.display_text("またいらしてね！")
 			SceneManager.change_scene_with_fade("res://scenes/MainMap.tscn")
 
-# パネルクリック時の処理
+# --- 通信ヘルパー（ここを整理） ---
+
+func _start_async_save_process(npc_data: Dictionary):
+	# 1. ローカル所持金を減らす
+	_consume_gold()
+
+	# 2. NPC保存（新規登録フロー）
+	NetworkManager.save_character_data(npc_data)
+	await NetworkManager.load_finished
+	
+	# 通信連続実行のためのインターバル
+	await get_tree().process_frame
+
+	# 3. NPCのIDをPCのリストに追加
+	var new_npc_id = int(NetworkManager.current_saving_data.get("my_id", 0))
+	if new_npc_id > 0:
+		if not Global.player_data.has("inn_list"):
+			Global.player_data["inn_list"] = []
+		if not new_npc_id in Global.player_data["inn_list"]:
+			Global.player_data["inn_list"].append(new_npc_id)
+
+	# 4. PC（自分）の上書き保存
+	# IDは int() キャストで .0 問題を確実に防止
+	var pc_id = int(Global.player_data.get("my_id", 0))
+	if pc_id > 0:
+		NetworkManager.save_character_data(Global.player_data)
+		await NetworkManager.load_finished
+	
+	# すべて完了した合図を送る
+	NetworkManager.all_save_finished.emit()
+
+# --- ユーティリティ ---
+
 func _on_panel_gui_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		# メッセージが止まっている（WAIT_TAP）ときだけ次へ進む 
 		if MessageManager.current_state == MessageManager.MsgState.WAIT_TAP:
 			_proceed_flow()
 
-func _show_commands():
-	command_window.show()
-
-# --- ボタンのシグナル処理 ---
-
 func _on_pay_button_pressed():
-	var current_gold = Global.player_data.get("gold", 0)
-	if current_gold < recruitment_cost:
-		# お金が足りない場合のメッセージ演出も共通処理で可能
+	if Global.player_data.get("gold", 0) < recruitment_cost:
 		MessageManager.display_text("あら、おかねが たりないみたいね…")
 		return
-		
 	command_window.hide()
 	current_phase = Phase.RESULT
 	_proceed_flow()
@@ -148,32 +128,11 @@ func _on_leave_button_pressed():
 	current_phase = Phase.EXIT
 	_proceed_flow()
 
-# --- UI更新・計算系 ---
-
 func _consume_gold():
-	var current_gold = Global.player_data.get("gold", 0)
-	Global.player_data["gold"] = current_gold - recruitment_cost
+	Global.player_data["gold"] = int(Global.player_data.get("gold", 0)) - recruitment_cost
 	update_ui()
 
 func update_ui():
-	var current_gold = Global.player_data.get("gold", 0)
-	current_gold_label.text = "%4d G" % current_gold
+	var gold = int(Global.player_data.get("gold", 0))
+	current_gold_label.text = "%4d G" % gold
 	cost_label.text = "%4d G" % recruitment_cost
-
-# BarScene.gd 内での処理イメージ
-
-func _show_status_window(data):
-	# 1. ステータス画面のシーンを読み込んでインスタンス化
-	var status_scene = preload("res://scenes/StatusWindow.tscn").instantiate()
-	
-	# 2. 酒場シーン（自分自身）の子として画面に追加
-	add_child(status_scene)
-	
-	# 3. データを渡す
-	status_scene.set_data(data)
-	
-	# 4. ステータス画面が閉じられるのを待つ（シグナルを利用）
-	await status_scene.closed 
-	
-	# 5. 閉じたらフローを再開
-	_proceed_flow()
