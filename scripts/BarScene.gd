@@ -101,7 +101,6 @@ func _start_async_save_process(npc_data: Dictionary):
 		await NetworkManager.load_finished
 	
 	message_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	NetworkManager.all_save_finished.emit()
 
 # --- ユーティリティ ---
 

@@ -117,6 +117,8 @@ func _finalize_process():
 	current_state = State.IDLE
 	is_processing_new_registration = false
 	load_finished.emit(true)
+	all_save_finished.emit()
+
 
 func _save_id_locally(id_val: int):
 	var file = FileAccess.open("user://save_data.json", FileAccess.WRITE)
