@@ -11,7 +11,7 @@ static func create_initial_data(player_name: String) -> Dictionary:
 	# プレイヤー固有の情報を上書き・追加
 	data["name"] = player_name
 	data["gold"] = 500
-	data["soldiers"] = []
+	data["inn_list"] = []
 	
 	_print_debug_log(data)
 	return data

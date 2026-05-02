@@ -63,13 +63,14 @@ func _proceed_flow():
 			message_panel.hide()
 			
 			# 1. まずキャラクターデータを生成
-			var character_data = PlayerFactory.create_character_data()
+			var npc_data = PlayerFactory.create_character_data()
+			npc_data["is_pc"] = false
 
 			# 2. シーンを読み込んで実体化（インスタンス化）する
 			var status_ui = preload("res://scenes/StatusWindow.tscn").instantiate()
 			
 			# 3. 【重要】実体化した status_ui に対してデータを渡す
-			status_ui.set_data(character_data)
+			status_ui.set_data(npc_data)
 
 			# 4. 画面（ツリー）に追加する
 			add_child(status_ui)
@@ -80,8 +81,8 @@ func _proceed_flow():
 			message_panel.show()
 			_consume_gold()
 
-			# サーバー上の所持金を更新する。
-			NetworkManager.save_player_data()
+			# 新キャラをサーバーに保存
+			NetworkManager.save_character_data(npc_data)
 			
 			await MessageManager.display_text("あたらしいなかまが くわわった！")
 			current_phase = Phase.POST_RESULT

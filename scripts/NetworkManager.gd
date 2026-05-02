@@ -3,6 +3,7 @@ extends Node
 
 const DB_URL = "https://jutegame-4ea50-default-rtdb.firebaseio.com/"
 var http_request: HTTPRequest
+var current_saving_data: Dictionary = {}
 signal load_finished(success: bool)
 
 # 通信状態を管理
@@ -15,7 +16,7 @@ enum State {
 	FETCHING_NEXT_ID_FOR_INCREMENT
 }
 var current_state = State.IDLE
-var pending_char_name = ""
+var is_processing_new_registration = false
 
 func _ready():
 	http_request = HTTPRequest.new()
@@ -23,15 +24,15 @@ func _ready():
 	http_request.request_completed.connect(_on_request_completed)
 	randomize()
 
-# NEW GAMEから呼ばれる入り口
-func request_new_game(user_name: String):
-	pending_char_name = user_name
+func _request_new_game(data: Dictionary):
+	current_saving_data = data
+	# 新規登録フロー開始のフラグを立てる
+	is_processing_new_registration = true
 	current_state = State.FETCHING_NEXT_ID
 	
-	# まずは次に使うべきIDを取得しにいく
 	var url = DB_URL + "metadata/next_id.json"
 	http_request.request(url, [], HTTPClient.METHOD_GET)
-
+	
 func _on_request_completed(_result, response_code, _headers, body):
 
 	var response_text = body.get_string_from_utf8()
@@ -48,24 +49,24 @@ func _on_request_completed(_result, response_code, _headers, body):
 			_register_new_player(next_id)
 			
 		State.REGISTERING_PLAYER:
-			# 登録中（REGISTERING_PLAYER）が終わった際の挙動
-			if pending_char_name != "":
-				# 名前がセットされている = 新規登録フローの途中
-				print("新規プレイヤー登録成功。IDを加算します。")
-				pending_char_name = "" # フラグをクリア
+			if is_processing_new_registration:
+				print("新規登録成功。サーバーのIDカウンターを更新します。")
 				_update_next_id_on_server()
 			else:
-				# 名前がない = 既存データの上書き保存完了
-				print("プレイヤーデータの上書き保存に成功しました。")
+				print("既存データの上書き完了。")
 				current_state = State.IDLE
-			# 必要に応じて load_finished シグナルを流用、
-			# または新しく save_finished(true) を定義して emit
 
 		State.UPDATING_NEXT_ID:
-			# ID更新も成功したら、最後にローカル保存して終了
-			var final_id = int(Global.player_data["my_id"])
-			_save_id_locally(final_id)
-			print("全ての登録プロセスが完了しました")
+			# ここで初めて is_pc を確認する
+			# 自分が操作するメインキャラ(PC)の時だけローカルにIDを刻む
+			if current_saving_data.get("is_pc", false):
+				var final_id = int(current_saving_data["my_id"])
+				_save_id_locally(final_id)
+				print("プレイヤーPCの登録とローカル保存が完了しました")
+			else:
+				print("NPCキャラの世界リスト登録が完了しました")
+			
+			is_processing_new_registration = false # フラグを戻す
 			current_state = State.IDLE
 			load_finished.emit(true)
 
@@ -95,23 +96,20 @@ func _update_next_id_on_server():
 	http_request.request(url, [], HTTPClient.METHOD_GET)
 
 # 実際にIDを割り当てて登録する内部関数
+
 func _register_new_player(new_id: int):
 	current_state = State.REGISTERING_PLAYER
-	
-	# 自分の変数にIDを反映し、最新の状態をセット
-	Global.player_data["my_id"] = new_id
-	# ※pending_char_name などは setup_local_player 時点で 
-	# Global.player_data["name"] に入っている前提です。
 
-	# 1. まずはプレイヤーデータを保存
+	current_saving_data["my_id"] = new_id
+
+	# もし「自分自身」の登録なら、Globalにも反映しておく
+	if current_saving_data.get("is_pc", false): # 判定用のフラグがあると便利です
+		Global.player_data["my_id"] = new_id
+
 	var player_url = DB_URL + "players/" + str(new_id) + ".json"
-	var json_data = JSON.stringify(Global.player_data)
+	var json_data = JSON.stringify(current_saving_data)
 	
-	# 既存の http_request を使い回す（完了後に次の通信へ飛ばす）
 	http_request.request(player_url, [], HTTPClient.METHOD_PUT, json_data)
-	
-	# ★ ここで ID更新リクエストを同時に送らず、
-	# _on_request_completed の REGISTERING_PLAYER 終了時に次を送るようにします。
 
 func _save_id_locally(id_val: int):
 	var data = {"my_id": id_val}
@@ -153,25 +151,19 @@ func load_existing_game():
 	if err != OK:
 		print("HTTPRequestを開始できませんでした。エラーコード:", err)
 
-# 王様の「セーブ」から呼ばれるメイン関数
-func save_player_data():
-	if Global.player_data.get("my_id", 0) == 0:
-		# IDが0（未登録）なら、これまでの新規登録フローを開始
-		print("新規登録を開始します...")
-		request_new_game(Global.player_data["name"])
+func save_character_data(data: Dictionary, path: String = "players"):
+	if data.get("my_id", 0) == 0:
+		# IDがない場合はデータごと渡す
+		_request_new_game(data) 
 	else:
-		# すでにIDがあるなら、そのIDの場所を最新データで上書きする
-		_overwrite_existing_player()
+		_overwrite_existing_data(data, path)
+
 
 # 上書き保存用の関数
-func _overwrite_existing_player():
-	current_state = State.REGISTERING_PLAYER # 状態は「登録中」を流用
+func _overwrite_existing_data(data: Dictionary, path: String):
+	current_state = State.REGISTERING_PLAYER
+	var char_id = data["my_id"]
+	var url = DB_URL + path + "/" + str(char_id) + ".json"
 	
-	var my_id = int(Global.player_data["my_id"])
-	var url = DB_URL + "players/" + str(my_id) + ".json"
-	
-	print("既存のデータを上書き中... ID:", my_id)
-	
-	# PUTメソッドで現在の Global.player_data をそのまま送信
-	var json_data = JSON.stringify(Global.player_data)
+	var json_data = JSON.stringify(data)
 	http_request.request(url, [], HTTPClient.METHOD_PUT, json_data)

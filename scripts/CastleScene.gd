@@ -58,7 +58,7 @@ func _on_save_button_pressed():
 	command_window.hide()
 	# セーブ実行（NetworkManagerなどは環境に合わせて呼び出し）
 	if has_node("/root/NetworkManager"):
-		get_node("/root/NetworkManager").save_player_data()
+		get_node("/root/NetworkManager").save_character_data(Global.player_data)
 	
 	current_phase = Phase.FINISHED
 	await MessageManager.display_text("たしかにセーブしたぞい。ではゆくがよい、ゆうしゃよ！")
