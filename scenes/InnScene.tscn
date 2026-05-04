@@ -11,7 +11,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yro66")
-recruitment_cost = null
 
 [node name="Background" type="TextureRect" parent="." unique_id=2139749929]
 layout_mode = 1
@@ -75,7 +74,7 @@ offset_top = 215.0
 offset_right = 400.0
 offset_bottom = 215.0
 
-[node name="PayButton" type="Button" parent="CanvasLayer/CommandWindow" unique_id=712118503]
+[node name="EditButton" type="Button" parent="CanvasLayer/CommandWindow" unique_id=712118503]
 layout_mode = 0
 offset_top = -60.0
 offset_right = 400.0
@@ -90,4 +89,5 @@ offset_bottom = 56.0
 theme_override_font_sizes/font_size = 32
 text = "たちさる"
 
+[connection signal="pressed" from="CanvasLayer/CommandWindow/EditButton" to="." method="_on_edit_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/CommandWindow/LeaveButton" to="." method="_on_leave_button_pressed"]

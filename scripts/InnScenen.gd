@@ -1,6 +1,6 @@
 extends Control
 
-enum Phase { INTRO, SHOW_PARTY, POST_RESULT, AGAIN_ASK, EXIT }
+enum Phase { INTRO, EDIT_PARTY, POST_RESULT, AGAIN_ASK, EXIT }
 var current_phase = Phase.INTRO
 
 @export var recruitment_cost: int = 50 
@@ -21,12 +21,10 @@ func _proceed_flow():
 	match current_phase:
 		Phase.INTRO:
 			await MessageManager.display_text("やどやです。\nメンバーのいれかえをしますか？")
-			current_phase = Phase.SHOW_PARTY
 			command_window.show()
 			
-		Phase.SHOW_PARTY:
-			await _execute_recruitment_sequence() # ガチャ工程を別関数に抽出
-			current_phase = Phase.POST_RESULT
+		Phase.EDIT_PARTY:
+			await _edit_party_member()
 			_proceed_flow()
 
 		Phase.POST_RESULT:
@@ -43,30 +41,13 @@ func _proceed_flow():
 
 # --- ガチャメインシーケンス ---
 
-func _execute_recruitment_sequence():
-	var npc_data = PlayerFactory.create_character_data()
-	npc_data["is_pc"] = false
-	
-	# 保存処理開始（マウス入力を一時無効化）
-	_start_async_save_process.call_deferred(npc_data)
-
-	# 演出
-	var tween = create_tween()
-	await tween.finished
-	
-	# 通信待ち
-	await NetworkManager.all_save_finished
-	message_panel.hide()
+func _edit_party_member():
 
 	# ステータス表示
-	var status_ui = preload("res://scenes/StatusWindow.tscn").instantiate()
-	status_ui.set_data(npc_data)
-	add_child(status_ui)
-	await status_ui.closed
-
-	# 完了報告
-	message_panel.show()
-	await MessageManager.display_text("あたらしいなかまが くわわった！")
+	var party_member_ui = preload("res://scenes/PartyMember.tscn").instantiate()
+	add_child(party_member_ui)
+	await party_member_ui.closed
+	current_phase = Phase.INTRO
 
 # --- 通信ヘルパー ---
 
@@ -110,12 +91,9 @@ func _on_panel_gui_input(event):
 		if MessageManager.current_state == MessageManager.MsgState.WAIT_TAP:
 			_proceed_flow()
 
-func _on_pay_button_pressed():
-	if int(Global.player_data.get("gold", 0)) < recruitment_cost:
-		MessageManager.display_text("あら、おかねが たりないみたいね…")
-		return
+func _on_edit_button_pressed():
 	command_window.hide()
-	current_phase = Phase.RESULT
+	current_phase = Phase.EDIT_PARTY
 	_proceed_flow()
 
 func _on_leave_button_pressed():
