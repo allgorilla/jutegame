@@ -19,8 +19,8 @@ func _ready():
 
 func setup_party_list():
 	# 一旦、VBoxContainerの中身を完全に空にする
-	for child in v_box.get_children():
-		child.queue_free()
+	# for child in v_box.get_children():
+	#	child.queue_free()
 	
 	for i in range(8):
 		var slot = load("res://scenes/CharacterSlot.tscn").instantiate()
