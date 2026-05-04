@@ -65,9 +65,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -200.0
-offset_top = 32.0
+offset_top = 20.0
 offset_right = 200.0
-offset_bottom = 96.0
+offset_bottom = 84.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
@@ -76,9 +76,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContent" unique_id=78141962]
-custom_minimum_size = Vector2(400, 344)
+custom_minimum_size = Vector2(400, 360)
 layout_mode = 0
-offset_top = 192.0
+offset_top = 176.0
 offset_right = 400.0
 offset_bottom = 536.0
 mouse_filter = 0
@@ -90,14 +90,20 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 2
+theme_override_constants/separation = 1
 
-[node name="CostArea" type="ColorRect" parent="MainContent" unique_id=1994400143]
+[node name="CostArea" type="PanelContainer" parent="MainContent" unique_id=885426183]
 layout_mode = 0
-offset_left = 200.0
-offset_top = 128.0
-offset_right = 400.0
-offset_bottom = 192.0
-color = Color(1, 1, 0.5019608, 1)
+offset_left = 271.0
+offset_top = 111.0
+offset_right = 399.0
+offset_bottom = 175.0
+
+[node name="CostLabel" type="Label" parent="MainContent/CostArea" unique_id=765448146]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "70/80"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="MainContent/DecideButton" to="." method="_on_decide_button_pressed"]
 [connection signal="pressed" from="MainContent/CancelButton" to="." method="_on_cancel_button_pressed"]
