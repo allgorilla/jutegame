@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dnusicofn1b8w"]
+
+[ext_resource type="Script" uid="uid://chatoo6uj02fs" path="res://scripts/CharacterSlot.gd" id="1_c0oo1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c0oo1"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=354129736]
+custom_minimum_size = Vector2(400, 64)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_c0oo1")
+script = ExtResource("1_c0oo1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=751963465]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+mouse_filter = 2

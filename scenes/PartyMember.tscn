@@ -18,6 +18,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(200, 300)
+mouse_filter = 1
 
 [node name="Background" type="ColorRect" parent="MainContent" unique_id=1404147515]
 layout_mode = 1
@@ -26,6 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.627451, 0.627451, 0.76862746, 1)
 
 [node name="DecideButton" type="Button" parent="MainContent" unique_id=356410281]
@@ -73,12 +75,20 @@ text = "パーティ編成"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScroolArea" type="ColorRect" parent="MainContent" unique_id=1268464766]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContent" unique_id=78141962]
+custom_minimum_size = Vector2(400, 344)
 layout_mode = 0
 offset_top = 192.0
 offset_right = 400.0
 offset_bottom = 536.0
-color = Color(0.76862746, 0.76862746, 1, 1)
+mouse_filter = 0
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContent/ScrollContainer" unique_id=1734395403]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
 
 [node name="CostArea" type="ColorRect" parent="MainContent" unique_id=1994400143]
 layout_mode = 0
