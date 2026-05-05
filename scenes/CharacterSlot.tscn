@@ -67,3 +67,5 @@ mouse_filter = 2
 [node name="Label" type="Label" parent="ColorRect/NamePanel" unique_id=350701161]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
+
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]
