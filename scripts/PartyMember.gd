@@ -81,7 +81,7 @@ func _update_slot_display(slot, index):
 
 func update_total_cost():
 	var total = 0
-	var party_cost = str(int(Global.player_data.get("leader_rank")))
+	var party_cost = str(int(Global.player_data.get("leader_rank", 0)))
 	for char_id in temp_party_list:
 		if char_id != null:
 			var data = Global.world_list.get(char_id)
