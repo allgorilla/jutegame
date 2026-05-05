@@ -50,7 +50,7 @@ func set_data(data: Dictionary):
 ## 実際にUIを更新する内部関数
 func _update_ui(data: Dictionary):
 	name_label.text = data.get("name", "Unknown")
-	cost_label.text = str(data.get("cost", 0))
+	cost_label.text = str(int(data.get("cost", 0)))
 
 	power_label.text = "%3d" % data.get("power", 0)
 	magic_label.text = "%3d" % data.get("magic", 0)
