@@ -32,6 +32,8 @@ func setup_party_list():
 		
 		# スロットにデータを流し込む処理をここに追加
 		var char_id = Global.party_list[i]
+		print(char_id)
+		print(Global.world_list.has(char_id))
 		if char_id != null and Global.world_list.has(char_id):
 			slot.display_character(Global.world_list[char_id])
 		else:
