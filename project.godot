@@ -32,6 +32,10 @@ window/stretch/mode="canvas_items"
 
 theme/custom_font="uid://drh1l1iix6ihw"
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

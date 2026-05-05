@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://dnusicofn1b8w"]
+
+[ext_resource type="Script" uid="uid://chatoo6uj02fs" path="res://scripts/CharacterSlot.gd" id="1_c0oo1"]
+[ext_resource type="Texture2D" uid="uid://n6lijamd1ev5" path="res://assets/image/human_01.png" id="2_6ykr7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c0oo1"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=354129736]
+custom_minimum_size = Vector2(350, 64)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -536.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_c0oo1")
+script = ExtResource("1_c0oo1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=751963465]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.5019608, 0.5019608, 1, 0)
+
+[node name="Button" type="Button" parent="ColorRect" unique_id=46424623]
+layout_mode = 0
+offset_left = 337.0
+offset_right = 399.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 24
+text = "削除"
+
+[node name="CostPanel" type="PanelContainer" parent="ColorRect" unique_id=502255016]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 63.0
+offset_bottom = 64.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="ColorRect/CostPanel" unique_id=1423580876]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="IconPanel" type="PanelContainer" parent="ColorRect" unique_id=67603348]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 128.0
+offset_bottom = 64.0
+mouse_filter = 2
+
+[node name="Texture" type="TextureRect" parent="ColorRect/IconPanel" unique_id=1941553466]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_6ykr7")
+expand_mode = 1
+
+[node name="NamePanel" type="PanelContainer" parent="ColorRect" unique_id=811264877]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 0
+offset_left = 129.0
+offset_right = 336.0
+offset_bottom = 64.0
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="ColorRect/NamePanel" unique_id=350701161]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]
+[connection signal="gui_input" from="ColorRect/NamePanel" to="." method="_on_name_panel_gui_input"]

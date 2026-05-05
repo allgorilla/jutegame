@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://rh4b66vcp67t"]
+
+[ext_resource type="Script" uid="uid://bbvyin1snes0w" path="res://scripts/PartyMember.gd" id="1_oqkpp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oqkpp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nlifi"]
+
+[node name="PartyMember" type="CanvasLayer" unique_id=1911568451]
+layer = 2
+script = ExtResource("1_oqkpp")
+
+[node name="MainContent" type="Control" parent="." unique_id=51945712]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 300)
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="MainContent" unique_id=1404147515]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.627451, 0.627451, 0.76862746, 1)
+
+[node name="DecideButton" type="Button" parent="MainContent" unique_id=356410281]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+offset_right = 200.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_oqkpp")
+text = "決定"
+
+[node name="CancelButton" type="Button" parent="MainContent" unique_id=1376769707]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nlifi")
+text = "キャンセル"
+
+[node name="TitleLabal" type="Label" parent="MainContent" unique_id=1273405822]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 84.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "パーティ編成"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContent" unique_id=78141962]
+custom_minimum_size = Vector2(400, 360)
+layout_mode = 0
+offset_top = 176.0
+offset_right = 400.0
+offset_bottom = 536.0
+mouse_filter = 0
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContent/ScrollContainer" unique_id=1734395403]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+theme_override_constants/separation = 1
+
+[node name="CostArea" type="PanelContainer" parent="MainContent" unique_id=885426183]
+layout_mode = 0
+offset_left = 271.0
+offset_top = 111.0
+offset_right = 399.0
+offset_bottom = 175.0
+
+[node name="CostLabel" type="Label" parent="MainContent/CostArea" unique_id=765448146]
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+horizontal_alignment = 1
+
+[connection signal="pressed" from="MainContent/DecideButton" to="." method="_on_decide_button_pressed"]
+[connection signal="pressed" from="MainContent/CancelButton" to="." method="_on_cancel_button_pressed"]

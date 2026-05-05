@@ -61,6 +61,7 @@ func _on_continue_button_pressed():
 # 合図が届いたらここで遷移する
 func _on_load_finished(success: bool):
 	if success:
+		Global.party_list[0] = str(int(Global.player_data.get("my_id")))
 		get_tree().change_scene_to_file("res://scenes/MainMap.tscn")
 	else:
 		# エラーメッセージを出すなどの処理
