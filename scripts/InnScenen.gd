@@ -1,6 +1,6 @@
 extends Control
 
-enum Phase { INTRO, EDIT_PARTY, POST_RESULT, AGAIN_ASK, EXIT }
+enum Phase { INTRO, EDIT_PARTY, EXIT }
 var current_phase = Phase.INTRO
 
 @export var recruitment_cost: int = 50 
@@ -27,14 +27,6 @@ func _proceed_flow():
 			await _edit_party_member()
 			_proceed_flow()
 
-		Phase.POST_RESULT:
-			await MessageManager.display_text("あたらしい なかまとは\nやどや でごうりゅうしてね！")
-			current_phase = Phase.AGAIN_ASK
-			
-		Phase.AGAIN_ASK:
-			await MessageManager.display_text("もうひとり しょうかい しちゃう？", false)
-			command_window.show()
-			
 		Phase.EXIT:
 			await MessageManager.display_text("やどやを たちさった。")
 			SceneManager.change_scene_with_fade("res://scenes/MainMap.tscn")
@@ -49,37 +41,7 @@ func _edit_party_member():
 	await party_member_ui.closed
 	current_phase = Phase.INTRO
 
-# --- 通信ヘルパー ---
-
-func _start_async_save_process(npc_data: Dictionary):
-	message_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE # 通信中の誤タップ防止
-	
-	_consume_gold()
-
-	# 1. NPC保存
-	NetworkManager.save_character_data(npc_data)
-	await NetworkManager.load_finished
-	await get_tree().process_frame
-
-	# 2. PCのリスト更新
-	_update_inn_list(int(NetworkManager.current_saving_data.get("my_id", 0)))
-
-	# 3. PCデータ上書き保存
-	var pc_id = int(Global.player_data.get("my_id", 0))
-	if pc_id > 0:
-		NetworkManager.save_character_data(Global.player_data)
-		await NetworkManager.load_finished
-	
-	message_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-
 # --- ユーティリティ ---
-
-func _update_inn_list(new_id: int):
-	if new_id <= 0: return
-	var list = Global.player_data.get("inn_list", [])
-	if not new_id in list:
-		list.append(new_id)
-		Global.player_data["inn_list"] = list
 
 func _setup_initial_ui():
 	command_window.hide()
@@ -100,11 +62,3 @@ func _on_leave_button_pressed():
 	command_window.hide()
 	current_phase = Phase.EXIT
 	_proceed_flow()
-
-func _consume_gold():
-	var gold = int(Global.player_data.get("gold", 0))
-	Global.player_data["gold"] = gold - recruitment_cost
-	update_ui()
-
-func update_ui():
-	var gold = int(Global.player_data.get("gold", 0))

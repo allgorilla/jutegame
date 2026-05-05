@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://rh4b66vcp67t"]
 
-[ext_resource type="Script" uid="uid://bbvyin1snes0w" path="res://scripts/PartyMenber.gd" id="1_oqkpp"]
+[ext_resource type="Script" uid="uid://bbvyin1snes0w" path="res://scripts/PartyMember.gd" id="1_oqkpp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oqkpp"]
 

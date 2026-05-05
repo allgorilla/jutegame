@@ -21,33 +21,7 @@ script = ExtResource("1_c0oo1")
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 mouse_filter = 2
-color = Color(0.5019608, 0.5019608, 1, 1)
-
-[node name="CostContainer" type="PanelContainer" parent="ColorRect" unique_id=502255016]
-layout_mode = 0
-offset_left = 1.0
-offset_right = 63.0
-offset_bottom = 64.0
-mouse_filter = 2
-
-[node name="CostLabel" type="Label" parent="ColorRect/CostContainer" unique_id=1423580876]
-layout_mode = 2
-theme_override_font_sizes/font_size = 38
-text = "25"
-horizontal_alignment = 1
-
-[node name="IconContainer" type="PanelContainer" parent="ColorRect" unique_id=67603348]
-layout_mode = 0
-offset_left = 64.0
-offset_right = 128.0
-offset_bottom = 64.0
-mouse_filter = 2
-
-[node name="IconRect" type="TextureRect" parent="ColorRect/IconContainer" unique_id=1941553466]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture = ExtResource("2_6ykr7")
-expand_mode = 1
+color = Color(0.5019608, 0.5019608, 1, 0)
 
 [node name="Button" type="Button" parent="ColorRect" unique_id=46424623]
 layout_mode = 0
@@ -57,7 +31,32 @@ offset_bottom = 64.0
 theme_override_font_sizes/font_size = 24
 text = "削除"
 
-[node name="NameContainer" type="PanelContainer" parent="ColorRect" unique_id=811264877]
+[node name="CostPanel" type="PanelContainer" parent="ColorRect" unique_id=502255016]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 63.0
+offset_bottom = 64.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="ColorRect/CostPanel" unique_id=1423580876]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="IconPanel" type="PanelContainer" parent="ColorRect" unique_id=67603348]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 128.0
+offset_bottom = 64.0
+mouse_filter = 2
+
+[node name="Texture" type="TextureRect" parent="ColorRect/IconPanel" unique_id=1941553466]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_6ykr7")
+expand_mode = 1
+
+[node name="NamePanel" type="PanelContainer" parent="ColorRect" unique_id=811264877]
 custom_minimum_size = Vector2(128, 64)
 layout_mode = 0
 offset_left = 129.0
@@ -65,7 +64,6 @@ offset_right = 336.0
 offset_bottom = 64.0
 mouse_filter = 2
 
-[node name="NameLabel" type="Label" parent="ColorRect/NameContainer" unique_id=350701161]
+[node name="Label" type="Label" parent="ColorRect/NamePanel" unique_id=350701161]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = " ジュテイム"
