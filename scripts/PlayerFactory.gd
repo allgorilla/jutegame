@@ -62,7 +62,8 @@ static func _generate_base_stats() -> Dictionary:
 		"rarity": rarity,
 		"power": base_power + extra_power,
 		"magic": magic_val,
-		"skill_id": skill_id
+		"skill_id": skill_id,
+		"leader_rank": 80
 	}
 
 static func _pick_rarity() -> int:

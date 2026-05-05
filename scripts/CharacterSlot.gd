@@ -11,6 +11,8 @@ extends Control
 @onready var name_panel = $ColorRect/NamePanel
 
 var slot_used = false
+signal action_triggered(index: int) # 追加：インデックスを渡すシグナル
+var slot_index: int = -1 # 自分が何番目か保持する変数
 
 func display_character(data):
 	# マウスイベントの貫通設定（以前のトラブル防止）
@@ -41,12 +43,5 @@ func display_character(data):
 		button_action.text = "追加"
 
 func _on_button_pressed():
-	if slot_used:
-		# 親シーン（PartyMember.gd）に再描画を依頼するか、自分自身を更新する
-		display_character(null)
-		print("キャラクターを削除した")
-	else:
-		# --- 追加処理 ---
-		slot_used = true;
-		# ここで「キャラクター選択画面」などを開く処理へ
-		print("キャラクターを追加した")
+	# 親（PartyMember）に「自分の番号」を添えて通知する
+	action_triggered.emit(slot_index)
