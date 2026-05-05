@@ -27,10 +27,20 @@ func display_character(data):
 
 	if data != null:
 		slot_used = true;
+		var char_id = str(data.get("my_id", ""))
 		name_label.text = str(data.get("name", "不明"))
 		cost_label.text = str(int(data.get("cost", 0)))
 		button_action.text = "削除"
 		
+		# --- リーダー（プレイヤーID）の保護処理 ---
+		# 例: Global.player_data["my_id"] と一致する場合はボタンを無効化する
+		if char_id == str(Global.player_data.get("my_id", "")):
+			button_action.disabled = true
+			button_action.modulate = Color(1, 1, 1, 0.5) # 半透明にして「押せない感」を出す
+		else:
+			button_action.disabled = false
+			button_action.modulate = Color.WHITE
+
 		# 表示状態にする
 		cost_label.visible = true
 		name_label.visible = true

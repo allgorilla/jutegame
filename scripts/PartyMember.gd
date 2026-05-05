@@ -62,7 +62,7 @@ func _on_slot_action_triggered(index: int):
 		_update_slot_display(v_box.get_child(index), index)
 		update_total_cost()
 	else:
-# --- 追加処理：選択画面を開く ---
+		# --- 追加処理：選択画面を開く ---
 		var selector = preload("res://scenes/CharacterSelector.tscn").instantiate()
 		add_child(selector)
 		
