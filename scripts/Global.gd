@@ -4,7 +4,7 @@ var last_player_pos = Vector2(0, 0) # 最後にいた座標を保存する
 # プレイヤーの全データを辞書で持つのが拡張しやすくて便利です
 var player_data = {} #
 var world_list = {} # IDをキーにした辞書
-var party_list = ["1148", null, "1149", null, "1150", null, "1151", null] #
+var party_list = [null, null, null, null, null, null, null, null] #
 
 # FirebaseのURL
 const FIREBASE_URL = "https://jutegame-4ea50-default-rtdb.firebaseio.com/players.json"

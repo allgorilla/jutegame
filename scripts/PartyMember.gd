@@ -58,18 +58,30 @@ func _on_cancel_button_pressed():
 # シグナルを受け取った時の処理
 func _on_slot_action_triggered(index: int):
 	if temp_party_list[index] != null:
-		# --- 削除の実行 ---
 		temp_party_list[index] = null
-		
-		# 該当するスロットだけ再描画する
-		var slot = v_box.get_child(index)
-		_update_slot_display(slot, index)
+		_update_slot_display(v_box.get_child(index), index)
+		update_total_cost()
 	else:
-		# --- 追加の実行（今後の実装用） ---
-		print("スロット ", index, " 番に追加画面を開きます")
-	
-	update_total_cost()
-
+# --- 追加処理：選択画面を開く ---
+		var selector = preload("res://scenes/CharacterSelector.tscn").instantiate()
+		add_child(selector)
+		
+		# 現在の状態を渡してセットアップ
+		var max_cost = int(Global.player_data.get("leader_rank", 0))
+		var current_cost = _calculate_current_total()
+		selector.setup(temp_party_list, max_cost, current_cost)
+		
+		# キャラが選ばれた時の反応
+		selector.character_selected.connect(func(char_id):
+			# 1. 一時リストを更新
+			temp_party_list[index] = str(int(char_id))
+			# 2. そのスロットの見た目を更新
+			var slot = v_box.get_child(index)
+			_update_slot_display(slot, index)
+			# 3. コスト表示を更新
+			update_total_cost()
+			print("キャラクターID: ", char_id, " をスロット ", index, " に追加しました")
+		)
 # 表示更新用の共通関数を作っておくと便利です
 func _update_slot_display(slot, index):
 	var char_id = temp_party_list[index]
@@ -78,6 +90,14 @@ func _update_slot_display(slot, index):
 	else:
 		slot.display_character(null)
 
+# コスト計算用の補助関数
+func _calculate_current_total() -> int:
+	var total = 0
+	for id in temp_party_list:
+		if id != null:
+			var data = Global.world_list.get(id)
+			if data: total += int(data.get("cost", 0))
+	return total
 
 func update_total_cost():
 	var total = 0
