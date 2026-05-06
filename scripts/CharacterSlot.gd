@@ -39,7 +39,7 @@ func display_character(data):
 		
 		# --- リーダー（プレイヤーID）の保護処理 ---
 		# 例: Global.player_data["my_id"] と一致する場合はボタンを無効化する
-		if character_id == str(Global.player_data.get("my_id", "")):
+		if character_id == str(int(Global.player_data.get("my_id", ""))):
 			button_action.disabled = true
 			button_action.modulate = Color(1, 1, 1, 0.5) # 半透明にして「押せない感」を出す
 		else:
