@@ -1,0 +1,714 @@
+[gd_scene format=3 uid="uid://vustj4fvmtfw"]
+
+[ext_resource type="Texture2D" uid="uid://c3semx6v8l31u" path="res://assets/image/grass.png" id="1_gkmpl"]
+[ext_resource type="Texture2D" uid="uid://n6lijamd1ev5" path="res://assets/image/human_01.png" id="2_3mvhd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28s16"]
+
+[node name="BattleScene" type="Node2D" unique_id=303367680]
+
+[node name="BackGround" type="TextureRect" parent="." unique_id=866276044]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 400.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_gkmpl")
+stretch_mode = 1
+
+[node name="Panel" type="Panel" parent="." unique_id=84952564]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 448.0
+offset_right = 400.0
+offset_bottom = 644.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MessageLabel" type="RichTextLabel" parent="Panel" unique_id=586482241]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -82.0
+offset_right = -32.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 24
+text = "メンバーの行動を入力してください。"
+
+[node name="NextGuide" type="Label" parent="Panel" unique_id=909065890]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 32
+text = "<NEXT>"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/NextGuide" unique_id=768409633]
+
+[node name="Info" type="Label" parent="." unique_id=726337092]
+offset_left = 320.0
+offset_top = 384.0
+offset_right = 400.0
+offset_bottom = 448.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_28s16")
+text = "Info"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoundPanel" type="Panel" parent="." unique_id=645283704]
+offset_left = 320.0
+offset_right = 400.0
+offset_bottom = 64.0
+
+[node name="Round" type="Label" parent="RoundPanel" unique_id=1703359720]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_28s16")
+text = "R3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mana1" type="ColorRect" parent="." unique_id=720114620]
+offset_left = 320.0
+offset_top = 64.0
+offset_right = 400.0
+offset_bottom = 192.0
+color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="Mana1" unique_id=244150303]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 38.0
+offset_bottom = 128.0
+
+[node name="Mana1" type="ColorRect" parent="Mana1/VBoxContainer1" unique_id=1061587804]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana2" type="ColorRect" parent="Mana1/VBoxContainer1" unique_id=910654269]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana3" type="ColorRect" parent="Mana1/VBoxContainer1" unique_id=665204373]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana4" type="ColorRect" parent="Mana1/VBoxContainer1" unique_id=1941584840]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="Mana5" type="ColorRect" parent="Mana1/VBoxContainer1" unique_id=862275228]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="Mana6" type="ColorRect" parent="Mana1/VBoxContainer1" unique_id=264296545]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Mana1" unique_id=1727727718]
+layout_mode = 0
+offset_left = 42.0
+offset_right = 78.0
+offset_bottom = 128.0
+
+[node name="Mana1" type="ColorRect" parent="Mana1/VBoxContainer2" unique_id=1128714408]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana2" type="ColorRect" parent="Mana1/VBoxContainer2" unique_id=1852499511]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana3" type="ColorRect" parent="Mana1/VBoxContainer2" unique_id=251304077]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana4" type="ColorRect" parent="Mana1/VBoxContainer2" unique_id=2004394326]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana5" type="ColorRect" parent="Mana1/VBoxContainer2" unique_id=1598708869]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana6" type="ColorRect" parent="Mana1/VBoxContainer2" unique_id=1962996282]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana2" type="ColorRect" parent="." unique_id=714385174]
+offset_left = 320.0
+offset_top = 256.0
+offset_right = 400.0
+offset_bottom = 384.0
+color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="Mana2" unique_id=215540319]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 38.0
+offset_bottom = 128.0
+
+[node name="Mana1" type="ColorRect" parent="Mana2/VBoxContainer1" unique_id=2057471913]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana2" type="ColorRect" parent="Mana2/VBoxContainer1" unique_id=217162573]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana3" type="ColorRect" parent="Mana2/VBoxContainer1" unique_id=555786660]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 1, 1)
+
+[node name="Mana4" type="ColorRect" parent="Mana2/VBoxContainer1" unique_id=751500647]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 1, 1)
+
+[node name="Mana5" type="ColorRect" parent="Mana2/VBoxContainer1" unique_id=2060576596]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 1, 1)
+
+[node name="Mana6" type="ColorRect" parent="Mana2/VBoxContainer1" unique_id=174052171]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 1, 1)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Mana2" unique_id=378651588]
+layout_mode = 0
+offset_left = 42.0
+offset_right = 78.0
+offset_bottom = 128.0
+
+[node name="Mana1" type="ColorRect" parent="Mana2/VBoxContainer2" unique_id=1974457307]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana2" type="ColorRect" parent="Mana2/VBoxContainer2" unique_id=842878560]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana3" type="ColorRect" parent="Mana2/VBoxContainer2" unique_id=1824891910]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana4" type="ColorRect" parent="Mana2/VBoxContainer2" unique_id=619284666]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana5" type="ColorRect" parent="Mana2/VBoxContainer2" unique_id=1133859665]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana6" type="ColorRect" parent="Mana2/VBoxContainer2" unique_id=387289358]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Go" type="Label" parent="." unique_id=1414920636]
+offset_left = 320.0
+offset_top = 192.0
+offset_right = 400.0
+offset_bottom = 256.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_28s16")
+text = "Go!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Line1" type="HBoxContainer" parent="." unique_id=307924703]
+offset_top = 256.0
+offset_right = 332.0
+offset_bottom = 320.0
+theme_override_constants/separation = 2
+
+[node name="Unit1" type="Panel" parent="Line1" unique_id=1718124225]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line1/Unit1" unique_id=1651891326]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeMax" type="ColorRect" parent="Line1/Unit1" unique_id=1713604638]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line1/Unit1/LifeMax" unique_id=109943509]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Unit2" type="Panel" parent="Line1" unique_id=1195308231]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line1/Unit2" unique_id=151823482]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeMax" type="ColorRect" parent="Line1/Unit2" unique_id=458625033]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line1/Unit2/LifeMax" unique_id=1931050187]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Unit3" type="Panel" parent="Line1" unique_id=4157456]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line1/Unit3" unique_id=359977096]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeMax" type="ColorRect" parent="Line1/Unit3" unique_id=1053733365]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line1/Unit3/LifeMax" unique_id=1951394499]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Unit4" type="Panel" parent="Line1" unique_id=483422867]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line1/Unit4" unique_id=1441335771]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeMax" type="ColorRect" parent="Line1/Unit4" unique_id=496819868]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line1/Unit4/LifeMax" unique_id=2036725569]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Line2" type="HBoxContainer" parent="." unique_id=1696945857]
+offset_top = 320.0
+offset_right = 318.0
+offset_bottom = 384.0
+theme_override_constants/separation = 2
+
+[node name="Unit1" type="Panel" parent="Line2" unique_id=1615731675]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line2/Unit1" unique_id=1073273436]
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeMax" type="ColorRect" parent="Line2/Unit1" unique_id=699074997]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line2/Unit1/LifeMax" unique_id=251067951]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Unit2" type="Panel" parent="Line2" unique_id=1567535997]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line2/Unit2" unique_id=690307886]
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeMax" type="ColorRect" parent="Line2/Unit2" unique_id=1030075780]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line2/Unit2/LifeMax" unique_id=1636496678]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Unit3" type="Panel" parent="Line2" unique_id=816114332]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line2/Unit3" unique_id=789071017]
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeMax" type="ColorRect" parent="Line2/Unit3" unique_id=1571937414]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line2/Unit3/LifeMax" unique_id=797056854]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Label" type="Label" parent="Line2/Unit3" unique_id=656944422]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 17.0
+offset_right = 72.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "★"
+
+[node name="Unit4" type="Panel" parent="Line2" unique_id=968957848]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line2/Unit4" unique_id=2052886779]
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeMax" type="ColorRect" parent="Line2/Unit4" unique_id=1340778514]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line2/Unit4/LifeMax" unique_id=1972266050]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Line3" type="HBoxContainer" parent="." unique_id=1978131260]
+offset_left = 40.0
+offset_top = 128.0
+offset_right = 358.0
+offset_bottom = 192.0
+theme_override_constants/separation = 2
+
+[node name="Unit1" type="Panel" parent="Line3" unique_id=1468503739]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line3/Unit1" unique_id=355180489]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+flip_h = true
+
+[node name="LifeMax" type="ColorRect" parent="Line3/Unit1" unique_id=1456672969]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line3/Unit1/LifeMax" unique_id=1852106316]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Unit2" type="Panel" parent="Line3" unique_id=1612708963]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line3/Unit2" unique_id=1837676692]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+flip_h = true
+
+[node name="LifeMax" type="ColorRect" parent="Line3/Unit2" unique_id=113611114]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line3/Unit2/LifeMax" unique_id=1873968796]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Unit3" type="Panel" parent="Line3" unique_id=1173885431]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line3/Unit3" unique_id=229079974]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+flip_h = true
+
+[node name="LifeMax" type="ColorRect" parent="Line3/Unit3" unique_id=1651423795]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line3/Unit3/LifeMax" unique_id=838249758]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Line4" type="HBoxContainer" parent="." unique_id=2017201449]
+offset_left = 40.0
+offset_top = 64.0
+offset_right = 358.0
+offset_bottom = 128.0
+theme_override_constants/separation = 2
+
+[node name="Unit1" type="Panel" parent="Line4" unique_id=2108291091]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line4/Unit1" unique_id=1652250349]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+flip_h = true
+
+[node name="LifeMax" type="ColorRect" parent="Line4/Unit1" unique_id=113828366]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line4/Unit1/LifeMax" unique_id=1774110048]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Unit2" type="Panel" parent="Line4" unique_id=700443221]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line4/Unit2" unique_id=2139852993]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+flip_h = true
+
+[node name="LifeMax" type="ColorRect" parent="Line4/Unit2" unique_id=1959237884]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line4/Unit2/LifeMax" unique_id=773885987]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Unit3" type="Panel" parent="Line4" unique_id=499738897]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+
+[node name="image" type="TextureRect" parent="Line4/Unit3" unique_id=2103352001]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+flip_h = true
+
+[node name="LifeMax" type="ColorRect" parent="Line4/Unit3" unique_id=1854513990]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line4/Unit3/LifeMax" unique_id=1541112998]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Line5" type="HBoxContainer" parent="." unique_id=1611116463]
+offset_left = 120.0
+offset_right = 198.0
+offset_bottom = 64.0
+theme_override_constants/separation = 2
+
+[node name="Unit1" type="Panel" parent="Line5" unique_id=428436116]
+custom_minimum_size = Vector2(78, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="image" type="TextureRect" parent="Line5/Unit1" unique_id=1654087680]
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+flip_h = true
+
+[node name="LifeMax" type="ColorRect" parent="Line5/Unit1" unique_id=1979991619]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 78.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="LifeRemain" type="ColorRect" parent="Line5/Unit1/LifeMax" unique_id=132391843]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 12.0
+offset_bottom = 62.0
+color = Color(0, 1, 0, 1)
+
+[node name="Label" type="Label" parent="Line5/Unit1" unique_id=700158781]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 149.0
+offset_right = 71.0
+offset_bottom = 197.0
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "★"
