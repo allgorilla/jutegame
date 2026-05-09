@@ -6,6 +6,12 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28s16"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3mvhd"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ftvu5"]
+bg_color = Color(0.19607843, 1, 0.19607843, 1)
+
 [node name="BattleScene" type="Node2D" unique_id=303367680]
 script = ExtResource("1_3mvhd")
 
@@ -259,458 +265,879 @@ text = "Go!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Line1" type="HBoxContainer" parent="." unique_id=307924703]
+[node name="PlayerContainer" type="VBoxContainer" parent="." unique_id=1656190738]
 offset_top = 256.0
-offset_right = 332.0
-offset_bottom = 320.0
-theme_override_constants/separation = 2
+offset_right = 320.0
+offset_bottom = 448.0
+theme_override_constants/separation = 0
 
-[node name="Unit1" type="Panel" parent="Line1" unique_id=1718124225]
-custom_minimum_size = Vector2(78, 64)
+[node name="Line1" type="CenterContainer" parent="PlayerContainer" unique_id=860156741]
+custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 
-[node name="image" type="TextureRect" parent="Line1/Unit1" unique_id=1651891326]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerContainer/Line1" unique_id=1434282297]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="PlayerContainer/Line1/HBoxContainer" unique_id=1707661960]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot1" unique_id=1982839868]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_3mvhd")
 
-[node name="LifeMax" type="ColorRect" parent="Line1/Unit1" unique_id=1713604638]
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot1" unique_id=2023684872]
+custom_minimum_size = Vector2(8, 60)
 layout_mode = 0
 offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line1/Unit1/LifeMax" unique_id=109943509]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
-offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
-
-[node name="Unit2" type="Panel" parent="Line1" unique_id=1195308231]
-custom_minimum_size = Vector2(78, 64)
-layout_mode = 2
-
-[node name="image" type="TextureRect" parent="Line1/Unit2" unique_id=151823482]
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 160.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
-
-[node name="LifeMax" type="ColorRect" parent="Line1/Unit2" unique_id=458625033]
-layout_mode = 0
-offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line1/Unit2/LifeMax" unique_id=1931050187]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
-offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
-
-[node name="Unit3" type="Panel" parent="Line1" unique_id=4157456]
-custom_minimum_size = Vector2(78, 64)
-layout_mode = 2
-
-[node name="image" type="TextureRect" parent="Line1/Unit3" unique_id=359977096]
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 160.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
-
-[node name="LifeMax" type="ColorRect" parent="Line1/Unit3" unique_id=1053733365]
-layout_mode = 0
-offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line1/Unit3/LifeMax" unique_id=1951394499]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
-offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
-
-[node name="Unit4" type="Panel" parent="Line1" unique_id=483422867]
-custom_minimum_size = Vector2(78, 64)
-layout_mode = 2
-
-[node name="image" type="TextureRect" parent="Line1/Unit4" unique_id=1441335771]
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 160.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
-
-[node name="LifeMax" type="ColorRect" parent="Line1/Unit4" unique_id=496819868]
-layout_mode = 0
-offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line1/Unit4/LifeMax" unique_id=2036725569]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
-offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
-
-[node name="Line2" type="HBoxContainer" parent="." unique_id=1696945857]
-offset_top = 320.0
-offset_right = 318.0
-offset_bottom = 384.0
-theme_override_constants/separation = 2
-
-[node name="Unit1" type="Panel" parent="Line2" unique_id=1615731675]
-custom_minimum_size = Vector2(78, 64)
-layout_mode = 2
-
-[node name="image" type="TextureRect" parent="Line2/Unit1" unique_id=1073273436]
-modulate = Color(1, 1, 1, 0.5019608)
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 160.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
-
-[node name="LifeMax" type="ColorRect" parent="Line2/Unit1" unique_id=699074997]
-layout_mode = 0
-offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line2/Unit1/LifeMax" unique_id=251067951]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
-offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
-
-[node name="Unit2" type="Panel" parent="Line2" unique_id=1567535997]
-custom_minimum_size = Vector2(78, 64)
-layout_mode = 2
-
-[node name="image" type="TextureRect" parent="Line2/Unit2" unique_id=690307886]
-modulate = Color(1, 1, 1, 0.5019608)
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 160.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
-
-[node name="LifeMax" type="ColorRect" parent="Line2/Unit2" unique_id=1030075780]
-layout_mode = 0
-offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line2/Unit2/LifeMax" unique_id=1636496678]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
-offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
-
-[node name="Unit3" type="Panel" parent="Line2" unique_id=816114332]
-custom_minimum_size = Vector2(78, 64)
-layout_mode = 2
-
-[node name="image" type="TextureRect" parent="Line2/Unit3" unique_id=789071017]
-modulate = Color(1, 1, 1, 0.5019608)
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 160.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
-
-[node name="LifeMax" type="ColorRect" parent="Line2/Unit3" unique_id=1571937414]
-layout_mode = 0
-offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line2/Unit3/LifeMax" unique_id=797056854]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
-offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
-
-[node name="Label" type="Label" parent="Line2/Unit3" unique_id=656944422]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 17.0
+offset_top = 2.0
 offset_right = 72.0
-offset_bottom = 65.0
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "★"
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
 
-[node name="Unit4" type="Panel" parent="Line2" unique_id=968957848]
-custom_minimum_size = Vector2(78, 64)
+[node name="UnitSlot2" type="Control" parent="PlayerContainer/Line1/HBoxContainer" unique_id=1905434816]
+custom_minimum_size = Vector2(80, 64)
 layout_mode = 2
 
-[node name="image" type="TextureRect" parent="Line2/Unit4" unique_id=2052886779]
-modulate = Color(1, 1, 1, 0.5019608)
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot2" unique_id=1458279168]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_3mvhd")
 
-[node name="LifeMax" type="ColorRect" parent="Line2/Unit4" unique_id=1340778514]
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot2" unique_id=1689969932]
+custom_minimum_size = Vector2(8, 60)
 layout_mode = 0
 offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line2/Unit4/LifeMax" unique_id=1972266050]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
+offset_top = 2.0
+offset_right = 72.0
 offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
 
-[node name="Line3" type="HBoxContainer" parent="." unique_id=1978131260]
-offset_left = 40.0
-offset_top = 128.0
-offset_right = 358.0
+[node name="UnitSlot3" type="Control" parent="PlayerContainer/Line1/HBoxContainer" unique_id=734512109]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot3" unique_id=1516118909]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot3" unique_id=43769921]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="PlayerContainer/Line1/HBoxContainer" unique_id=1702350570]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot4" unique_id=645297828]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot4" unique_id=224853187]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Line2" type="CenterContainer" parent="PlayerContainer" unique_id=1229105107]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerContainer/Line2" unique_id=1871613550]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="PlayerContainer/Line2/HBoxContainer" unique_id=961789317]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot1" unique_id=583108979]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot1" unique_id=630314321]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="PlayerContainer/Line2/HBoxContainer" unique_id=1499973664]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot2" unique_id=190931644]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot2" unique_id=1493493607]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="PlayerContainer/Line2/HBoxContainer" unique_id=855902805]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot3" unique_id=1295566075]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot3" unique_id=301612950]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="PlayerContainer/Line2/HBoxContainer" unique_id=804294674]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot4" unique_id=1742664079]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot4" unique_id=1643399317]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Line3" type="CenterContainer" parent="PlayerContainer" unique_id=1521870168]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerContainer/Line3" unique_id=777742726]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="PlayerContainer/Line3/HBoxContainer" unique_id=1678208885]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot1" unique_id=909691458]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot1" unique_id=4811862]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="PlayerContainer/Line3/HBoxContainer" unique_id=300737451]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot2" unique_id=1535780102]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot2" unique_id=69378982]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="PlayerContainer/Line3/HBoxContainer" unique_id=617155836]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot3" unique_id=355894101]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot3" unique_id=1609013720]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="PlayerContainer/Line3/HBoxContainer" unique_id=448392538]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot4" unique_id=1333580650]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot4" unique_id=286812038]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Line4" type="CenterContainer" parent="PlayerContainer" unique_id=73343720]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerContainer/Line4" unique_id=516875483]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="PlayerContainer/Line4/HBoxContainer" unique_id=1017456776]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot1" unique_id=956622393]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot1" unique_id=1201486709]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="PlayerContainer/Line4/HBoxContainer" unique_id=1135979477]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot2" unique_id=591326911]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot2" unique_id=1341965759]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="PlayerContainer/Line4/HBoxContainer" unique_id=1958203700]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot3" unique_id=1714931825]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot3" unique_id=603054445]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="PlayerContainer/Line4/HBoxContainer" unique_id=2132441625]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot4" unique_id=1575514980]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot4" unique_id=1333333040]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="EnemyContainer" type="VBoxContainer" parent="." unique_id=377926036]
+offset_top = -64.0
+offset_right = 320.0
 offset_bottom = 192.0
-theme_override_constants/separation = 2
+theme_override_constants/separation = 0
+alignment = 2
 
-[node name="Unit1" type="Panel" parent="Line3" unique_id=1468503739]
-custom_minimum_size = Vector2(78, 64)
+[node name="Line4" type="CenterContainer" parent="EnemyContainer" unique_id=1162521714]
+custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 
-[node name="image" type="TextureRect" parent="Line3/Unit1" unique_id=355180489]
+[node name="HBoxContainer" type="HBoxContainer" parent="EnemyContainer/Line4" unique_id=1075957660]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="EnemyContainer/Line4/HBoxContainer" unique_id=1060287383]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot1" unique_id=1644935477]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_3mvhd")
-flip_h = true
 
-[node name="LifeMax" type="ColorRect" parent="Line3/Unit1" unique_id=1456672969]
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot1" unique_id=1025858088]
+custom_minimum_size = Vector2(8, 60)
 layout_mode = 0
 offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line3/Unit1/LifeMax" unique_id=1852106316]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
+offset_top = 2.0
+offset_right = 72.0
 offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
 
-[node name="Unit2" type="Panel" parent="Line3" unique_id=1612708963]
-custom_minimum_size = Vector2(78, 64)
+[node name="UnitSlot2" type="Control" parent="EnemyContainer/Line4/HBoxContainer" unique_id=1354107961]
+custom_minimum_size = Vector2(80, 64)
 layout_mode = 2
 
-[node name="image" type="TextureRect" parent="Line3/Unit2" unique_id=1837676692]
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot2" unique_id=1924928153]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_3mvhd")
-flip_h = true
 
-[node name="LifeMax" type="ColorRect" parent="Line3/Unit2" unique_id=113611114]
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot2" unique_id=365299721]
+custom_minimum_size = Vector2(8, 60)
 layout_mode = 0
 offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line3/Unit2/LifeMax" unique_id=1873968796]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
+offset_top = 2.0
+offset_right = 72.0
 offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
 
-[node name="Unit3" type="Panel" parent="Line3" unique_id=1173885431]
-custom_minimum_size = Vector2(78, 64)
+[node name="UnitSlot3" type="Control" parent="EnemyContainer/Line4/HBoxContainer" unique_id=1887170765]
+custom_minimum_size = Vector2(80, 64)
 layout_mode = 2
 
-[node name="image" type="TextureRect" parent="Line3/Unit3" unique_id=229079974]
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot3" unique_id=404250636]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_3mvhd")
-flip_h = true
 
-[node name="LifeMax" type="ColorRect" parent="Line3/Unit3" unique_id=1651423795]
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot3" unique_id=1298087551]
+custom_minimum_size = Vector2(8, 60)
 layout_mode = 0
 offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line3/Unit3/LifeMax" unique_id=838249758]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
+offset_top = 2.0
+offset_right = 72.0
 offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
 
-[node name="Line4" type="HBoxContainer" parent="." unique_id=2017201449]
-offset_left = 40.0
-offset_top = 64.0
-offset_right = 358.0
-offset_bottom = 128.0
-theme_override_constants/separation = 2
-
-[node name="Unit1" type="Panel" parent="Line4" unique_id=2108291091]
-custom_minimum_size = Vector2(78, 64)
+[node name="UnitSlot4" type="Control" parent="EnemyContainer/Line4/HBoxContainer" unique_id=1655906384]
+custom_minimum_size = Vector2(80, 64)
 layout_mode = 2
 
-[node name="image" type="TextureRect" parent="Line4/Unit1" unique_id=1652250349]
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot4" unique_id=1822131882]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_3mvhd")
-flip_h = true
 
-[node name="LifeMax" type="ColorRect" parent="Line4/Unit1" unique_id=113828366]
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot4" unique_id=1474527206]
+custom_minimum_size = Vector2(8, 60)
 layout_mode = 0
 offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line4/Unit1/LifeMax" unique_id=1774110048]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
+offset_top = 2.0
+offset_right = 72.0
 offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
 
-[node name="Unit2" type="Panel" parent="Line4" unique_id=700443221]
-custom_minimum_size = Vector2(78, 64)
+[node name="Line3" type="CenterContainer" parent="EnemyContainer" unique_id=1722556087]
+custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 
-[node name="image" type="TextureRect" parent="Line4/Unit2" unique_id=2139852993]
+[node name="HBoxContainer" type="HBoxContainer" parent="EnemyContainer/Line3" unique_id=2041721759]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="EnemyContainer/Line3/HBoxContainer" unique_id=467184140]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot1" unique_id=1723478909]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_3mvhd")
-flip_h = true
 
-[node name="LifeMax" type="ColorRect" parent="Line4/Unit2" unique_id=1959237884]
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot1" unique_id=866980878]
+custom_minimum_size = Vector2(8, 60)
 layout_mode = 0
 offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line4/Unit2/LifeMax" unique_id=773885987]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
+offset_top = 2.0
+offset_right = 72.0
 offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
 
-[node name="Unit3" type="Panel" parent="Line4" unique_id=499738897]
-custom_minimum_size = Vector2(78, 64)
+[node name="UnitSlot2" type="Control" parent="EnemyContainer/Line3/HBoxContainer" unique_id=965597299]
+custom_minimum_size = Vector2(80, 64)
 layout_mode = 2
 
-[node name="image" type="TextureRect" parent="Line4/Unit3" unique_id=2103352001]
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot2" unique_id=1763142806]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_3mvhd")
-flip_h = true
 
-[node name="LifeMax" type="ColorRect" parent="Line4/Unit3" unique_id=1854513990]
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot2" unique_id=549001691]
+custom_minimum_size = Vector2(8, 60)
 layout_mode = 0
 offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line4/Unit3/LifeMax" unique_id=1541112998]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
+offset_top = 2.0
+offset_right = 72.0
 offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
 
-[node name="Line5" type="HBoxContainer" parent="." unique_id=1611116463]
-offset_left = 120.0
-offset_right = 198.0
-offset_bottom = 64.0
-theme_override_constants/separation = 2
-
-[node name="Unit1" type="Panel" parent="Line5" unique_id=428436116]
-custom_minimum_size = Vector2(78, 64)
+[node name="UnitSlot3" type="Control" parent="EnemyContainer/Line3/HBoxContainer" unique_id=1450600325]
+custom_minimum_size = Vector2(80, 64)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
-[node name="image" type="TextureRect" parent="Line5/Unit1" unique_id=1654087680]
-modulate = Color(1, 1, 1, 0.5019608)
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot3" unique_id=581754215]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_3mvhd")
-flip_h = true
 
-[node name="LifeMax" type="ColorRect" parent="Line5/Unit1" unique_id=1979991619]
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot3" unique_id=890416642]
+custom_minimum_size = Vector2(8, 60)
 layout_mode = 0
 offset_left = 64.0
-offset_right = 78.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 1)
-
-[node name="LifeRemain" type="ColorRect" parent="Line5/Unit1/LifeMax" unique_id=132391843]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 20.0
-offset_right = 12.0
+offset_top = 2.0
+offset_right = 72.0
 offset_bottom = 62.0
-color = Color(0, 1, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
 
-[node name="Label" type="Label" parent="Line5/Unit1" unique_id=700158781]
+[node name="UnitSlot4" type="Control" parent="EnemyContainer/Line3/HBoxContainer" unique_id=523306675]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot4" unique_id=792613067]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
-offset_left = 31.0
-offset_top = 149.0
-offset_right = 71.0
-offset_bottom = 197.0
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "★"
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot4" unique_id=1227707238]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Line2" type="CenterContainer" parent="EnemyContainer" unique_id=360155821]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EnemyContainer/Line2" unique_id=129301704]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="EnemyContainer/Line2/HBoxContainer" unique_id=415228579]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot1" unique_id=43387405]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot1" unique_id=1011517377]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="EnemyContainer/Line2/HBoxContainer" unique_id=59860368]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot2" unique_id=2016070151]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot2" unique_id=517429052]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="EnemyContainer/Line2/HBoxContainer" unique_id=1341820484]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot3" unique_id=347002165]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot3" unique_id=2101094582]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="EnemyContainer/Line2/HBoxContainer" unique_id=1242249656]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot4" unique_id=2097603417]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot4" unique_id=722377631]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Line1" type="CenterContainer" parent="EnemyContainer" unique_id=1327647338]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EnemyContainer/Line1" unique_id=464019058]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="EnemyContainer/Line1/HBoxContainer" unique_id=1231047290]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot1" unique_id=1765683274]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot1" unique_id=408200089]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="EnemyContainer/Line1/HBoxContainer" unique_id=1071834409]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot2" unique_id=1168405228]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot2" unique_id=1542037707]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="EnemyContainer/Line1/HBoxContainer" unique_id=1704003993]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot3" unique_id=1099881299]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot3" unique_id=1240256708]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="EnemyContainer/Line1/HBoxContainer" unique_id=3773436]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot4" unique_id=649424703]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_3mvhd")
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot4" unique_id=597039945]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
