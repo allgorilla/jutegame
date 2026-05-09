@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://vustj4fvmtfw"]
 
+[ext_resource type="Script" uid="uid://dhbgnvh6n1kqp" path="res://scripts/BattleScene.gd" id="1_3mvhd"]
 [ext_resource type="Texture2D" uid="uid://c3semx6v8l31u" path="res://assets/image/grass.png" id="1_gkmpl"]
 [ext_resource type="Texture2D" uid="uid://n6lijamd1ev5" path="res://assets/image/human_01.png" id="2_3mvhd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28s16"]
 
 [node name="BattleScene" type="Node2D" unique_id=303367680]
+script = ExtResource("1_3mvhd")
 
 [node name="BackGround" type="TextureRect" parent="." unique_id=866276044]
 anchors_preset = 15
