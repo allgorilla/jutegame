@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dhbgnvh6n1kqp" path="res://scripts/BattleScene.gd" id="1_3mvhd"]
 [ext_resource type="Texture2D" uid="uid://c3semx6v8l31u" path="res://assets/image/grass.png" id="1_gkmpl"]
-[ext_resource type="Texture2D" uid="uid://n6lijamd1ev5" path="res://assets/image/human_01.png" id="2_3mvhd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28s16"]
 
@@ -272,6 +271,7 @@ offset_bottom = 448.0
 theme_override_constants/separation = 0
 
 [node name="Line1" type="CenterContainer" parent="PlayerContainer" unique_id=860156741]
+visible = false
 custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 
@@ -289,7 +289,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot1" unique_id=2023684872]
 custom_minimum_size = Vector2(8, 60)
@@ -314,7 +313,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot2" unique_id=1689969932]
 custom_minimum_size = Vector2(8, 60)
@@ -339,7 +337,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot3" unique_id=43769921]
 custom_minimum_size = Vector2(8, 60)
@@ -364,7 +361,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot4" unique_id=224853187]
 custom_minimum_size = Vector2(8, 60)
@@ -380,6 +376,7 @@ fill_mode = 3
 show_percentage = false
 
 [node name="Line2" type="CenterContainer" parent="PlayerContainer" unique_id=1229105107]
+visible = false
 custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 
@@ -397,7 +394,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot1" unique_id=630314321]
 custom_minimum_size = Vector2(8, 60)
@@ -422,7 +418,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot2" unique_id=1493493607]
 custom_minimum_size = Vector2(8, 60)
@@ -447,7 +442,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot3" unique_id=301612950]
 custom_minimum_size = Vector2(8, 60)
@@ -472,7 +466,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot4" unique_id=1643399317]
 custom_minimum_size = Vector2(8, 60)
@@ -488,6 +481,7 @@ fill_mode = 3
 show_percentage = false
 
 [node name="Line3" type="CenterContainer" parent="PlayerContainer" unique_id=1521870168]
+visible = false
 custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 
@@ -505,7 +499,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot1" unique_id=4811862]
 custom_minimum_size = Vector2(8, 60)
@@ -530,7 +523,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot2" unique_id=69378982]
 custom_minimum_size = Vector2(8, 60)
@@ -555,7 +547,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot3" unique_id=1609013720]
 custom_minimum_size = Vector2(8, 60)
@@ -580,7 +571,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot4" unique_id=286812038]
 custom_minimum_size = Vector2(8, 60)
@@ -596,6 +586,7 @@ fill_mode = 3
 show_percentage = false
 
 [node name="Line4" type="CenterContainer" parent="PlayerContainer" unique_id=73343720]
+visible = false
 custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 
@@ -613,7 +604,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot1" unique_id=1201486709]
 custom_minimum_size = Vector2(8, 60)
@@ -638,7 +628,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot2" unique_id=1341965759]
 custom_minimum_size = Vector2(8, 60)
@@ -663,7 +652,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot3" unique_id=603054445]
 custom_minimum_size = Vector2(8, 60)
@@ -688,7 +676,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot4" unique_id=1333333040]
 custom_minimum_size = Vector2(8, 60)
@@ -711,6 +698,7 @@ theme_override_constants/separation = 0
 alignment = 2
 
 [node name="Line4" type="CenterContainer" parent="EnemyContainer" unique_id=1162521714]
+visible = false
 custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 
@@ -728,7 +716,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot1" unique_id=1025858088]
 custom_minimum_size = Vector2(8, 60)
@@ -753,7 +740,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot2" unique_id=365299721]
 custom_minimum_size = Vector2(8, 60)
@@ -778,7 +764,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot3" unique_id=1298087551]
 custom_minimum_size = Vector2(8, 60)
@@ -803,7 +788,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot4" unique_id=1474527206]
 custom_minimum_size = Vector2(8, 60)
@@ -819,6 +803,7 @@ fill_mode = 3
 show_percentage = false
 
 [node name="Line3" type="CenterContainer" parent="EnemyContainer" unique_id=1722556087]
+visible = false
 custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 
@@ -836,7 +821,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot1" unique_id=866980878]
 custom_minimum_size = Vector2(8, 60)
@@ -861,7 +845,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot2" unique_id=549001691]
 custom_minimum_size = Vector2(8, 60)
@@ -886,7 +869,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot3" unique_id=890416642]
 custom_minimum_size = Vector2(8, 60)
@@ -911,7 +893,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot4" unique_id=1227707238]
 custom_minimum_size = Vector2(8, 60)
@@ -927,6 +908,7 @@ fill_mode = 3
 show_percentage = false
 
 [node name="Line2" type="CenterContainer" parent="EnemyContainer" unique_id=360155821]
+visible = false
 custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 
@@ -944,7 +926,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot1" unique_id=1011517377]
 custom_minimum_size = Vector2(8, 60)
@@ -969,7 +950,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot2" unique_id=517429052]
 custom_minimum_size = Vector2(8, 60)
@@ -994,7 +974,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot3" unique_id=2101094582]
 custom_minimum_size = Vector2(8, 60)
@@ -1019,7 +998,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot4" unique_id=722377631]
 custom_minimum_size = Vector2(8, 60)
@@ -1035,6 +1013,7 @@ fill_mode = 3
 show_percentage = false
 
 [node name="Line1" type="CenterContainer" parent="EnemyContainer" unique_id=1327647338]
+visible = false
 custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 
@@ -1052,7 +1031,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot1" unique_id=408200089]
 custom_minimum_size = Vector2(8, 60)
@@ -1077,7 +1055,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot2" unique_id=1542037707]
 custom_minimum_size = Vector2(8, 60)
@@ -1102,7 +1079,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot3" unique_id=1240256708]
 custom_minimum_size = Vector2(8, 60)
@@ -1127,7 +1103,6 @@ layout_mode = 0
 offset_right = 160.0
 offset_bottom = 160.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_3mvhd")
 
 [node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot4" unique_id=597039945]
 custom_minimum_size = Vector2(8, 60)

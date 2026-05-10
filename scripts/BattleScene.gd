@@ -6,25 +6,30 @@ extends Node2D
 @onready var units_container
 
 func _ready():
-	await SceneManager.fade_in_scene()
-	
-	# BattleManager (Autoload) からデータを取得
+	# 1. まずデータを取得する
 	var battle_data = BattleManager.next_battle_data
 	
-	if battle_data.is_empty():
-		print("警告: 戦闘データが見つかりません。テスト用デフォルトで起動します。")
-		# デバッグ用に何かデフォルトを入れる場合はここに記述
+	# 2. 画面が暗いうちに初期化（ロード）を走らせる 
+	if not battle_data.is_empty():
+		_initialize_battle(battle_data)
+	else:
+		print("警告: 戦闘データが見つかりません。")
 		return
 
-	_initialize_battle(battle_data)
+	# 3. ロードが完了し、ノードが準備できてからフェードインを開始する
+	await SceneManager.fade_in_scene()
+
 
 # 受け取ったデータに基づいてシーンを構築
 func _initialize_battle(data: Dictionary):
-	# --- フロントユニット（Line1, 2）の処理 ---
-	_draw_array(BattleContext.front_units,"Line1","Line2")
-	_draw_array(BattleContext.back_units,"Line3","Line4")
+	# プレイヤー側
+	_draw_array(BattleContext.player_party.front_units,"PlayerContainer", "Line1", "Line2")
+	_draw_array(BattleContext.player_party.back_units,"PlayerContainer", "Line3", "Line4")
+	# エネミー側
+	_draw_array(BattleContext.enemy_party.front_units,"EnemyContainer", "Line1", "Line2")
+	_draw_array(BattleContext.enemy_party.back_units,"EnemyContainer", "Line3", "Line4")
 
-func _draw_array(units: Array, line_a:String, line_b:String):
+func _draw_array(units: Array, container:String, line_a:String, line_b:String):
 	var units_count = units.size()
 	for i in range(2):
 		var line_visible = false
@@ -34,21 +39,45 @@ func _draw_array(units: Array, line_a:String, line_b:String):
 			var current_index = (i * 4) + j
 			var is_visible = current_index < units_count
 			
-			var slot = get_node("EnemyContainer/" + line_string + "/HBoxContainer/UnitSlot" + str(j+1))
-			var image = slot.get_node("Image") # slotからの相対パスで書ける
+			var slot = get_node(container + "/" + line_string + "/HBoxContainer/UnitSlot" + str(j+1))
+			var image = slot.get_node("Image") # TextureRect または Sprite2D
+			
 			slot.visible = is_visible
 			if is_visible:
 				line_visible = true
 				image.texture = _setup_unit_visual(units[current_index])
+				
+				# 1. エネミー側なら画像を左右反転（Hフリップ）
+				if container == "EnemyContainer":
+					if "flip_h" in image: # Sprite2Dの場合
+						image.flip_h = true
+					elif image is TextureRect: # TextureRectの場合
+						# TextureRectはプロパティがないので、ScaleのXを-1にして反転させる
+						# 中央基準で反転させるため、PivotOffsetを中央にする必要がある
+						image.pivot_offset = image.size / 2
+						image.scale.x = -1
+				else:
+					# プレイヤー側は反転を戻す（念のため）
+					if "flip_h" in image: image.flip_h = false
+					elif image is TextureRect: image.scale.x = 1
 
-		get_node("EnemyContainer/" + line_string).visible = line_visible
+				# 2. 後列（Line3, Line4）なら透明度を50%に
+				# string.match を使って、行の名前に "Line3" か "Line4" が含まれるか判定
+				if line_string.match("Line3") or line_string.match("Line4"):
+					image.modulate = Color(0.5, 0.5, 0.75, 1) if container == "PlayerContainer" else Color(0.75, 0.5, 0.5, 1)
+				else:
+					image.modulate = Color(0.75, 0.75, 1, 1) if container == "PlayerContainer" else Color(1, 0.75, 0.75, 1)
+
+				# ----------------------
+
+		get_node(container + "/" + line_string).visible = line_visible
 
 func _setup_unit_visual(unit_data: Dictionary):
 	var unit_id = unit_data.get("my_id")
 	var data = UnitMaster.get_unit_data(unit_id)
 	if data.is_empty(): return null # テクスチャがない場合はnullを返す
 	
-	# パスを組み立ててロード [cite: 4]
+	# パスを組み立ててロード
 	var path = "res://assets/image/units/" + data["image_id"] + ".png"
 	var texture = load(path)
 	
