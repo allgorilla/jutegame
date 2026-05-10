@@ -21,22 +21,36 @@ const PARTY_TABLE = {
 	},
 	"regis_full_army": {
 		"party_name": "レギス一世と影の軍団",
-		"units": ["1194", "1189", "1189", "1190", "1190", "1195", "1195", "1206"],
+		"units": ["1189", "1190", "1191", "1192", "1193", "1194", "1195", "1197"],
 		"formation": {
-			# 前列 (4人)
 			"0": {"unit_id": "1189", "row": "front", "index": 0},
-			"1": {"unit_id": "1189", "row": "front", "index": 1},
-			"2": {"unit_id": "1190", "row": "front", "index": 2},
-			"3": {"unit_id": "1190", "row": "front", "index": 3},
-			# 後列 (4人)
-			"4": {"unit_id": "1194", "row": "front", "index": 1}, # レギス一世
-			"5": {"unit_id": "1195", "row": "back", "index": 0},
+			"1": {"unit_id": "1190", "row": "front", "index": 1},
+			"2": {"unit_id": "1191", "row": "front", "index": 2},
+			"3": {"unit_id": "1192", "row": "front", "index": 3},
+			"4": {"unit_id": "1193", "row": "front", "index": 1}, # レギス一世
+			"5": {"unit_id": "1194", "row": "back", "index": 0},
 			"6": {"unit_id": "1195", "row": "back", "index": 2},
-			"7": {"unit_id": "1206", "row": "back", "index": 3}
+			"7": {"unit_id": "1197", "row": "back", "index": 3}
 		},
 		"ai_id": "boss_legion_ai",
 		"loot_id": "royal_legend_loot"
 	},
+	"frost_legion": {
+		"party_name": "氷獄の騎士団",
+		"units": ["1198", "1199", "1200", "1203", "1204", "1205", "1206", "1206"],
+		"formation": {
+			"0": {"unit_id": "1198", "row": "front", "index": 0}, # 氷のウルス
+			"1": {"unit_id": "1199", "row": "front", "index": 1}, # テイル直し
+			"2": {"unit_id": "1200", "row": "back", "index": 2}, # クロス裂き
+			"3": {"unit_id": "1203", "row": "back", "index": 3}, # ヴォイド磨ぎ
+			"4": {"unit_id": "1204", "row": "back", "index": 0},  # カオス拭い
+			"5": {"unit_id": "1205", "row": "back", "index": 1},  # ダーク拭い
+			"6": {"unit_id": "1206", "row": "back", "index": 2},  # 忍者ルミナ
+			"7": {"unit_id": "1206", "row": "back", "index": 3}   # 怒れるシャドウ
+		},
+		"ai_id": "tactical_freeze_ai",
+		"loot_id": "glacier_rare_loot"
+	},	
 	"chaos_duo": {
 		"party_name": "混沌の二人組",
 		"units": ["1192", "1200"],
