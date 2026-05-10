@@ -1,0 +1,1118 @@
+[gd_scene format=3 uid="uid://vustj4fvmtfw"]
+
+[ext_resource type="Script" uid="uid://dhbgnvh6n1kqp" path="res://scripts/BattleScene.gd" id="1_3mvhd"]
+[ext_resource type="Texture2D" uid="uid://c3semx6v8l31u" path="res://assets/image/grass.png" id="1_gkmpl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28s16"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3mvhd"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ftvu5"]
+bg_color = Color(0.19607843, 1, 0.19607843, 1)
+
+[node name="BattleScene" type="Node2D" unique_id=303367680]
+script = ExtResource("1_3mvhd")
+
+[node name="BackGround" type="TextureRect" parent="." unique_id=866276044]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 400.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_gkmpl")
+stretch_mode = 1
+
+[node name="Panel" type="Panel" parent="." unique_id=84952564]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 448.0
+offset_right = 400.0
+offset_bottom = 644.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MessageLabel" type="RichTextLabel" parent="Panel" unique_id=586482241]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -82.0
+offset_right = -32.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 24
+text = "メンバーの行動を入力してください。"
+
+[node name="NextGuide" type="Label" parent="Panel" unique_id=909065890]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 32
+text = "<NEXT>"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/NextGuide" unique_id=768409633]
+
+[node name="Info" type="Label" parent="." unique_id=726337092]
+offset_left = 320.0
+offset_top = 384.0
+offset_right = 400.0
+offset_bottom = 448.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_28s16")
+text = "Info"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RoundPanel" type="Panel" parent="." unique_id=645283704]
+offset_left = 320.0
+offset_right = 400.0
+offset_bottom = 64.0
+
+[node name="Round" type="Label" parent="RoundPanel" unique_id=1703359720]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_28s16")
+text = "R3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mana1" type="ColorRect" parent="." unique_id=720114620]
+offset_left = 320.0
+offset_top = 64.0
+offset_right = 400.0
+offset_bottom = 192.0
+color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="Mana1" unique_id=244150303]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 38.0
+offset_bottom = 128.0
+
+[node name="Mana1" type="ColorRect" parent="Mana1/VBoxContainer1" unique_id=1061587804]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana2" type="ColorRect" parent="Mana1/VBoxContainer1" unique_id=910654269]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana3" type="ColorRect" parent="Mana1/VBoxContainer1" unique_id=665204373]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana4" type="ColorRect" parent="Mana1/VBoxContainer1" unique_id=1941584840]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="Mana5" type="ColorRect" parent="Mana1/VBoxContainer1" unique_id=862275228]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="Mana6" type="ColorRect" parent="Mana1/VBoxContainer1" unique_id=264296545]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(1, 0, 0, 1)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Mana1" unique_id=1727727718]
+layout_mode = 0
+offset_left = 42.0
+offset_right = 78.0
+offset_bottom = 128.0
+
+[node name="Mana1" type="ColorRect" parent="Mana1/VBoxContainer2" unique_id=1128714408]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana2" type="ColorRect" parent="Mana1/VBoxContainer2" unique_id=1852499511]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana3" type="ColorRect" parent="Mana1/VBoxContainer2" unique_id=251304077]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana4" type="ColorRect" parent="Mana1/VBoxContainer2" unique_id=2004394326]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana5" type="ColorRect" parent="Mana1/VBoxContainer2" unique_id=1598708869]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana6" type="ColorRect" parent="Mana1/VBoxContainer2" unique_id=1962996282]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana2" type="ColorRect" parent="." unique_id=714385174]
+offset_left = 320.0
+offset_top = 256.0
+offset_right = 400.0
+offset_bottom = 384.0
+color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="Mana2" unique_id=215540319]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 38.0
+offset_bottom = 128.0
+
+[node name="Mana1" type="ColorRect" parent="Mana2/VBoxContainer1" unique_id=2057471913]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana2" type="ColorRect" parent="Mana2/VBoxContainer1" unique_id=217162573]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana3" type="ColorRect" parent="Mana2/VBoxContainer1" unique_id=555786660]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 1, 1)
+
+[node name="Mana4" type="ColorRect" parent="Mana2/VBoxContainer1" unique_id=751500647]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 1, 1)
+
+[node name="Mana5" type="ColorRect" parent="Mana2/VBoxContainer1" unique_id=2060576596]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 1, 1)
+
+[node name="Mana6" type="ColorRect" parent="Mana2/VBoxContainer1" unique_id=174052171]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 1, 1)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Mana2" unique_id=378651588]
+layout_mode = 0
+offset_left = 42.0
+offset_right = 78.0
+offset_bottom = 128.0
+
+[node name="Mana1" type="ColorRect" parent="Mana2/VBoxContainer2" unique_id=1974457307]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana2" type="ColorRect" parent="Mana2/VBoxContainer2" unique_id=842878560]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana3" type="ColorRect" parent="Mana2/VBoxContainer2" unique_id=1824891910]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana4" type="ColorRect" parent="Mana2/VBoxContainer2" unique_id=619284666]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana5" type="ColorRect" parent="Mana2/VBoxContainer2" unique_id=1133859665]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Mana6" type="ColorRect" parent="Mana2/VBoxContainer2" unique_id=387289358]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Go" type="Label" parent="." unique_id=1414920636]
+offset_left = 320.0
+offset_top = 192.0
+offset_right = 400.0
+offset_bottom = 256.0
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_28s16")
+text = "Go!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerContainer" type="VBoxContainer" parent="." unique_id=1656190738]
+offset_top = 256.0
+offset_right = 320.0
+offset_bottom = 448.0
+theme_override_constants/separation = 0
+
+[node name="Line1" type="CenterContainer" parent="PlayerContainer" unique_id=860156741]
+visible = false
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerContainer/Line1" unique_id=1434282297]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="PlayerContainer/Line1/HBoxContainer" unique_id=1707661960]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot1" unique_id=1982839868]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot1" unique_id=2023684872]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="PlayerContainer/Line1/HBoxContainer" unique_id=1905434816]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot2" unique_id=1458279168]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot2" unique_id=1689969932]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="PlayerContainer/Line1/HBoxContainer" unique_id=734512109]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot3" unique_id=1516118909]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot3" unique_id=43769921]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="PlayerContainer/Line1/HBoxContainer" unique_id=1702350570]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot4" unique_id=645297828]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line1/HBoxContainer/UnitSlot4" unique_id=224853187]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Line2" type="CenterContainer" parent="PlayerContainer" unique_id=1229105107]
+visible = false
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerContainer/Line2" unique_id=1871613550]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="PlayerContainer/Line2/HBoxContainer" unique_id=961789317]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot1" unique_id=583108979]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot1" unique_id=630314321]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="PlayerContainer/Line2/HBoxContainer" unique_id=1499973664]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot2" unique_id=190931644]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot2" unique_id=1493493607]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="PlayerContainer/Line2/HBoxContainer" unique_id=855902805]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot3" unique_id=1295566075]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot3" unique_id=301612950]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="PlayerContainer/Line2/HBoxContainer" unique_id=804294674]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot4" unique_id=1742664079]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line2/HBoxContainer/UnitSlot4" unique_id=1643399317]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Line3" type="CenterContainer" parent="PlayerContainer" unique_id=1521870168]
+visible = false
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerContainer/Line3" unique_id=777742726]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="PlayerContainer/Line3/HBoxContainer" unique_id=1678208885]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot1" unique_id=909691458]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot1" unique_id=4811862]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="PlayerContainer/Line3/HBoxContainer" unique_id=300737451]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot2" unique_id=1535780102]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot2" unique_id=69378982]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="PlayerContainer/Line3/HBoxContainer" unique_id=617155836]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot3" unique_id=355894101]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot3" unique_id=1609013720]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="PlayerContainer/Line3/HBoxContainer" unique_id=448392538]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot4" unique_id=1333580650]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line3/HBoxContainer/UnitSlot4" unique_id=286812038]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Line4" type="CenterContainer" parent="PlayerContainer" unique_id=73343720]
+visible = false
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerContainer/Line4" unique_id=516875483]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="PlayerContainer/Line4/HBoxContainer" unique_id=1017456776]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot1" unique_id=956622393]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot1" unique_id=1201486709]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="PlayerContainer/Line4/HBoxContainer" unique_id=1135979477]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot2" unique_id=591326911]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot2" unique_id=1341965759]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="PlayerContainer/Line4/HBoxContainer" unique_id=1958203700]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot3" unique_id=1714931825]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot3" unique_id=603054445]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="PlayerContainer/Line4/HBoxContainer" unique_id=2132441625]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot4" unique_id=1575514980]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="PlayerContainer/Line4/HBoxContainer/UnitSlot4" unique_id=1333333040]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="EnemyContainer" type="VBoxContainer" parent="." unique_id=377926036]
+offset_top = -64.0
+offset_right = 320.0
+offset_bottom = 192.0
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="Line4" type="CenterContainer" parent="EnemyContainer" unique_id=1162521714]
+visible = false
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EnemyContainer/Line4" unique_id=1075957660]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="EnemyContainer/Line4/HBoxContainer" unique_id=1060287383]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot1" unique_id=1644935477]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot1" unique_id=1025858088]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="EnemyContainer/Line4/HBoxContainer" unique_id=1354107961]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot2" unique_id=1924928153]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot2" unique_id=365299721]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="EnemyContainer/Line4/HBoxContainer" unique_id=1887170765]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot3" unique_id=404250636]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot3" unique_id=1298087551]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="EnemyContainer/Line4/HBoxContainer" unique_id=1655906384]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot4" unique_id=1822131882]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line4/HBoxContainer/UnitSlot4" unique_id=1474527206]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Line3" type="CenterContainer" parent="EnemyContainer" unique_id=1722556087]
+visible = false
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EnemyContainer/Line3" unique_id=2041721759]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="EnemyContainer/Line3/HBoxContainer" unique_id=467184140]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot1" unique_id=1723478909]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot1" unique_id=866980878]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="EnemyContainer/Line3/HBoxContainer" unique_id=965597299]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot2" unique_id=1763142806]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot2" unique_id=549001691]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="EnemyContainer/Line3/HBoxContainer" unique_id=1450600325]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot3" unique_id=581754215]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot3" unique_id=890416642]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="EnemyContainer/Line3/HBoxContainer" unique_id=523306675]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot4" unique_id=792613067]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line3/HBoxContainer/UnitSlot4" unique_id=1227707238]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Line2" type="CenterContainer" parent="EnemyContainer" unique_id=360155821]
+visible = false
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EnemyContainer/Line2" unique_id=129301704]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="EnemyContainer/Line2/HBoxContainer" unique_id=415228579]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot1" unique_id=43387405]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot1" unique_id=1011517377]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="EnemyContainer/Line2/HBoxContainer" unique_id=59860368]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot2" unique_id=2016070151]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot2" unique_id=517429052]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="EnemyContainer/Line2/HBoxContainer" unique_id=1341820484]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot3" unique_id=347002165]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot3" unique_id=2101094582]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="EnemyContainer/Line2/HBoxContainer" unique_id=1242249656]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot4" unique_id=2097603417]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line2/HBoxContainer/UnitSlot4" unique_id=722377631]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Line1" type="CenterContainer" parent="EnemyContainer" unique_id=1327647338]
+visible = false
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EnemyContainer/Line1" unique_id=464019058]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="UnitSlot1" type="Control" parent="EnemyContainer/Line1/HBoxContainer" unique_id=1231047290]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot1" unique_id=1765683274]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot1" unique_id=408200089]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot2" type="Control" parent="EnemyContainer/Line1/HBoxContainer" unique_id=1071834409]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot2" unique_id=1168405228]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot2" unique_id=1542037707]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot3" type="Control" parent="EnemyContainer/Line1/HBoxContainer" unique_id=1704003993]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot3" unique_id=1099881299]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot3" unique_id=1240256708]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="UnitSlot4" type="Control" parent="EnemyContainer/Line1/HBoxContainer" unique_id=3773436]
+custom_minimum_size = Vector2(80, 64)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot4" unique_id=649424703]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 160.0
+scale = Vector2(0.4, 0.4)
+
+[node name="LifeBar" type="ProgressBar" parent="EnemyContainer/Line1/HBoxContainer/UnitSlot4" unique_id=597039945]
+custom_minimum_size = Vector2(8, 60)
+layout_mode = 0
+offset_left = 64.0
+offset_top = 2.0
+offset_right = 72.0
+offset_bottom = 62.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3mvhd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ftvu5")
+value = 50.0
+fill_mode = 3
+show_percentage = false
