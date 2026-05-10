@@ -107,6 +107,7 @@ func _check_tile_trigger(pos: Vector2):
 			var battle_data = EncounterMaster.get_battle_setup_data(info.target)
 			if not battle_data.is_empty():
 				BattleManager.next_battle_data = battle_data
+				BattleContext.setup_context(battle_data)
 				SceneManager.change_scene_with_fade("res://scenes/BattleScene.tscn")
 			else:
 				push_error("Battle data failed to load for: ", info.target)

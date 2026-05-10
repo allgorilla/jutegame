@@ -24,6 +24,7 @@ SceneManager="*uid://d3fggb4ln0k8s"
 UnitMaster="*uid://dc542qs3y7nf0"
 EncounterMaster="*uid://e7al6lqdqly4"
 BattleManager="*uid://d23ecju0e3yss"
+BattleContext="*uid://c745tf71xxp27"
 
 [display]
 

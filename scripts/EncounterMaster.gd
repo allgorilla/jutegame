@@ -29,7 +29,7 @@ const PARTY_TABLE = {
 			"2": {"unit_id": "1190", "row": "front", "index": 2},
 			"3": {"unit_id": "1190", "row": "front", "index": 3},
 			# 後列 (4人)
-			"4": {"unit_id": "1194", "row": "back", "index": 1}, # レギス一世
+			"4": {"unit_id": "1194", "row": "front", "index": 1}, # レギス一世
 			"5": {"unit_id": "1195", "row": "back", "index": 0},
 			"6": {"unit_id": "1195", "row": "back", "index": 2},
 			"7": {"unit_id": "1206", "row": "back", "index": 3}
