@@ -3,9 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://n6lijamd1ev5" path="res://assets/image/human_01.png" id="1_6mmf1"]
 [ext_resource type="Texture2D" uid="uid://tpus256a758r" path="res://assets/image/status_icon.png" id="1_iihyn"]
 [ext_resource type="Script" uid="uid://brucpu6cy7qvk" path="res://scripts/StatusWindow.gd" id="1_omt8b"]
-[ext_resource type="Texture2D" uid="uid://b7fj41yrgulqu" path="res://assets/image/Bonus_Weapon.png" id="4_2acd4"]
-[ext_resource type="Texture2D" uid="uid://bk605wk2jpud7" path="res://assets/image/Bonus_Armor.png" id="5_2jnv4"]
-[ext_resource type="Texture2D" uid="uid://dviua5vfwtahw" path="res://assets/image/Bonus_life.png" id="6_rypsu"]
+[ext_resource type="Texture2D" uid="uid://dc8v44mt6t0r2" path="res://assets/image/bonuses/a.png" id="4_6k7mt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fhuea"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="StatusWindow" type="CanvasLayer" unique_id=303682386]
 layer = 10
@@ -128,6 +129,81 @@ text = "5ターンのあいだ戦闘力が10増加する。使用時にＨＰを
 "
 autowrap_mode = 3
 
+[node name="BonusContainer" type="HBoxContainer" parent="MainContent" unique_id=1825721250]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 102.0
+offset_top = 511.0
+offset_right = 294.0
+offset_bottom = 575.0
+theme_override_constants/separation = 0
+
+[node name="Panel1" type="Panel" parent="MainContent/BonusContainer" unique_id=117136305]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fhuea")
+
+[node name="ColorRect" type="ColorRect" parent="MainContent/BonusContainer/Panel1" unique_id=2024018950]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 62.0
+offset_bottom = 62.0
+color = Color(0.78431374, 0.78431374, 0.5882353, 1)
+
+[node name="TextureRect" type="TextureRect" parent="MainContent/BonusContainer/Panel1/ColorRect" unique_id=748462440]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+texture = ExtResource("4_6k7mt")
+
+[node name="Panel2" type="Panel" parent="MainContent/BonusContainer" unique_id=397665047]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fhuea")
+
+[node name="ColorRect" type="ColorRect" parent="MainContent/BonusContainer/Panel2" unique_id=909032904]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 62.0
+offset_bottom = 62.0
+color = Color(0.78431374, 0.78431374, 0.5882353, 1)
+
+[node name="TextureRect" type="TextureRect" parent="MainContent/BonusContainer/Panel2/ColorRect" unique_id=1077846802]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+texture = ExtResource("4_6k7mt")
+
+[node name="Panel3" type="Panel" parent="MainContent/BonusContainer" unique_id=2054369990]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fhuea")
+
+[node name="ColorRect" type="ColorRect" parent="MainContent/BonusContainer/Panel3" unique_id=729104435]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 62.0
+offset_bottom = 62.0
+color = Color(0.78431374, 0.78431374, 0.5882353, 1)
+
+[node name="TextureRect" type="TextureRect" parent="MainContent/BonusContainer/Panel3/ColorRect" unique_id=1766244125]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+texture = ExtResource("4_6k7mt")
+
 [node name="BackgroundButton" type="Button" parent="." unique_id=2130032820]
 anchors_preset = 15
 anchor_right = 1.0
@@ -135,21 +211,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 flat = true
-
-[node name="BonusContainer" type="HBoxContainer" parent="." unique_id=1273401581]
-offset_left = 102.0
-offset_top = 511.0
-offset_right = 302.0
-offset_bottom = 575.0
-
-[node name="Bonus1" type="TextureRect" parent="BonusContainer" unique_id=1760122519]
-layout_mode = 2
-texture = ExtResource("4_2acd4")
-
-[node name="Bonus2" type="TextureRect" parent="BonusContainer" unique_id=831851964]
-layout_mode = 2
-texture = ExtResource("5_2jnv4")
-
-[node name="Bonus3" type="TextureRect" parent="BonusContainer" unique_id=1414648728]
-layout_mode = 2
-texture = ExtResource("6_rypsu")

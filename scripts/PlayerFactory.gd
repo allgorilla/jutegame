@@ -32,24 +32,30 @@ static func _generate_base_stats() -> Dictionary:
 	var costs = [10, 15, 20, 25, 30]
 	var cost = costs.pick_random()
 	var rarity = _pick_rarity()
-	var base_power
+	var base_power: int
 	
-	# POWERとMAGICの決定
+	# --- POWERの決定 ---
 	var extra_power = randi_range(1, 4)
-	var magic_val = 0
-	
 	match cost:
 		10: base_power = 0
 		15: base_power = 2
 		20: base_power = 4
 		25: base_power = 6
 		30: base_power = 8
+	var total_power = base_power + extra_power
 
-	match extra_power:
-		1: magic_val = randi_range(1, 10)
-		2: magic_val = randi_range(1, 8)
-		3: magic_val = randi_range(1, 6)
-		4: magic_val = randi_range(1, 4)
+	# --- MAGICの決定 ---
+	# 戦闘力(extra_power)に応じた魔力最大値を定義 
+	var magic_max_table = {1: 10, 2: 8, 3: 6, 4: 4}
+	var magic_max = magic_max_table[extra_power]
+	var magic_val = randi_range(1, magic_max)
+	
+	# --- 低スペック補正の判定 ---
+	# 魔力が最大値の半分以下であった場合は「低スペック補正」を与える 
+	var has_low_spec_bonus = magic_val <= (magic_max / 2)
+	
+	# --- ボーナスの抽選 ---
+	var bonuses = _generate_bonuses(rarity, has_low_spec_bonus)
 	
 	# スキルの抽選
 	var skill_id = "NONE"
@@ -60,9 +66,10 @@ static func _generate_base_stats() -> Dictionary:
 		"my_id": 0,
 		"cost": cost,
 		"rarity": rarity,
-		"power": base_power + extra_power,
+		"power": total_power,
 		"magic": magic_val,
 		"skill_id": skill_id,
+		"bonuses": bonuses, # 追加
 		"leader_rank": 80
 	}
 
@@ -80,6 +87,33 @@ static func _pick_cost() -> int:
 	elif roll < 0.40: return 20
 	elif roll < 0.70: return 15
 	else: return 10
+
+## ボーナス抽選用サブ関数
+static func _generate_bonuses(rarity: int, low_spec: bool) -> Array:
+	var result = []
+	var bonus_pool = [
+		"HPボーナス", "先制ボーナス", "反撃ボーナス", "加護ボーナス",
+		"格上ボーナス", "回復ボーナス", "マナボーナス", "復讐ボーナス"
+	]
+	
+	# 付与数の決定 
+	var count = 0
+	if rarity == Rarity.R: count = 1
+	elif rarity == Rarity.SR: count = 2
+	
+	if low_spec: count += 1 # 低スペック補正で+1 
+	
+	# 最大3つまで 
+	count = min(count, 3)
+	
+	# 重複ありで抽選
+	bonus_pool.shuffle()
+	for i in range(count):
+		result.append(bonus_pool.pick_random()) # pop_back ではなく pick_random を使う
+		
+	return result
+
+
 
 static func _print_debug_log(data: Dictionary) -> void:
 	print("--- キャラクター生成結果 ---")
