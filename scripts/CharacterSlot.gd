@@ -19,17 +19,25 @@ const STATUS_WINDOW_SCENE = preload("res://scenes/StatusWindow.tscn")
 
 signal action_triggered(index: int) # 追加：インデックスを渡すシグナル
 
+# タップ開始位置を保持する変数
+var _touch_start_pos = Vector2.ZERO
+# ドラッグ（スクロール）中かどうかを判定するフラグ
+var _is_dragging = false
+# 「動いた」とみなすピクセル距離（感度調整）
+const DRAG_THRESHOLD = 10
 
 func display_character(data):
 	# マウスイベントの貫通設定（以前のトラブル防止）
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	cost_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	cost_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	icon_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	icon_texture.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	name_panel.mouse_filter = Control.MOUSE_FILTER_PASS
 	name_label.mouse_filter = Control.MOUSE_FILTER_PASS
-	button_action.mouse_filter = MOUSE_FILTER_PASS
+
+	mouse_filter = Control.MOUSE_FILTER_PASS
+	button_action.mouse_filter = MOUSE_FILTER_STOP
+	button_action.action_mode = BaseButton.ACTION_MODE_BUTTON_RELEASE # 離したときに反応
 
 	if data != null:
 		slot_used = true;
@@ -67,11 +75,25 @@ func _on_button_pressed():
 	# 親（PartyMember）に「自分の番号」を添えて通知する
 	action_triggered.emit(slot_index)
 
-# 名前パネルの gui_input イベント
 func _on_name_panel_gui_input(event):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if slot_used and character_id:
-			_show_status_window()
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			# 1. 指を置いた瞬間に位置を記憶
+			_touch_start_pos = event.position
+			_is_dragging = false
+		else:
+			# 2. 指を離したとき、ドラッグ中でなければステータスを表示
+			if not _is_dragging:
+				if slot_used and character_id:
+					_show_status_window()
+			# リセット
+			_is_dragging = false
+
+	# 3. 指を置いたまま動かしているときの判定
+	if event is InputEventMouseMotion:
+		# 指を置いた場所から一定距離（DRAG_THRESHOLD）以上離れたら、ドラッグ中とみなす
+		if _touch_start_pos.distance_to(event.position) > DRAG_THRESHOLD:
+			_is_dragging = true
 
 func _show_status_window():
 	# 1. character_id を元に、Global.world_list から詳細データを取得する
