@@ -62,6 +62,7 @@ static func _generate_base_stats() -> Dictionary:
 	if rarity >= Rarity.UC:
 		skill_id = SkillFactory.get_random_skill_id(rarity)
 		
+	var image_id = _generate_random_image_id()
 	return {
 		"my_id": 0,
 		"cost": cost,
@@ -69,8 +70,9 @@ static func _generate_base_stats() -> Dictionary:
 		"power": total_power,
 		"magic": magic_val,
 		"skill_id": skill_id,
-		"bonuses": bonuses, # 追加
-		"leader_rank": 80
+		"bonuses": bonuses,
+		"leader_rank": 80,
+		"image_id": image_id
 	}
 
 static func _pick_rarity() -> int:
@@ -113,7 +115,11 @@ static func _generate_bonuses(rarity: int, low_spec: bool) -> Array:
 		
 	return result
 
-
+## image_id 生成用サブ関数
+static func _generate_random_image_id() -> String:
+	var num = randi_range(1, 12)
+	# %02d を使うことで、1桁の場合に "01" のようにゼロ埋めされます
+	return "%02d" % num
 
 static func _print_debug_log(data: Dictionary) -> void:
 	print("--- キャラクター生成結果 ---")

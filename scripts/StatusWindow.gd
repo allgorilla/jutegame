@@ -36,6 +36,7 @@ const BONUS_MAP = {
 @onready var rarity_icon = $MainContent/Rarity
 @onready var skill_name_label = $MainContent/SkillContainer/SkillName
 @onready var skill_text_label = $MainContent/SkillContainer/SkillText
+@onready var character_image = $MainContent/Image
 
 # ボーナスアイコン用（@onreadyのパスと変数の定義を修正） 
 @onready var bonus_icons = [
@@ -75,6 +76,17 @@ func _update_ui(data: Dictionary):
 	power_label.text = "%3d" % data.get("power", 0)
 	magic_label.text = "%3d" % data.get("magic", 0)
 
+	# --- キャラクター画像の表示処理 ---
+	# image_idを取得（デフォルトは"01"）し、パスを組み立てて読み込む
+	var img_id = data.get("image_id", "01")
+	var img_path = "res://assets/image/units/%s.png" % img_id 
+	
+	# ファイルが存在するかチェックしてからロード（安全のため）
+	if FileAccess.file_exists(img_path):
+		character_image.texture = load(img_path)
+	else:
+		push_warning("画像ファイルが見つかりません: " + img_path)
+	
 	# レアリティの設定 
 	var r_idx = data.get("rarity", 0)
 	rarity_icon.texture = load(RARITY_PATHS[r_idx])

@@ -9,6 +9,7 @@ extends Control
 @onready var icon_panel = $ColorRect/IconPanel
 @onready var name_label = $ColorRect/NamePanel/Label
 @onready var name_panel = $ColorRect/NamePanel
+@onready var character_image = $ColorRect/IconPanel/Texture
 
 var slot_used = false
 var slot_index: int = -1 # 自分が何番目か保持する変数
@@ -36,6 +37,15 @@ func display_character(data):
 		name_label.text = str(data.get("name", "不明"))
 		cost_label.text = str(int(data.get("cost", 0)))
 		button_action.text = "削除"
+		
+		# --- キャラクター画像の表示処理を追加 ---
+		var img_id = data.get("image_id", "01") # デフォルトは"01"
+		var img_path = "res://assets/image/units/%s.png" % img_id
+		
+		if FileAccess.file_exists(img_path):
+			character_image.texture = load(img_path)
+		else:
+			push_warning("CharacterSlot: 画像が見つかりません: " + img_path)
 		
 		# --- リーダー（プレイヤーID）の保護処理 ---
 		# 例: Global.player_data["my_id"] と一致する場合はボタンを無効化する
