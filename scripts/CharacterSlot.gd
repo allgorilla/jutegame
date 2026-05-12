@@ -40,12 +40,7 @@ func display_character(data):
 		
 		# --- キャラクター画像の表示処理を追加 ---
 		var img_id = data.get("image_id", "01") # デフォルトは"01"
-		var img_path = "res://assets/image/units/%s.png" % img_id
-		
-		if FileAccess.file_exists(img_path):
-			character_image.texture = load(img_path)
-		else:
-			push_warning("CharacterSlot: 画像が見つかりません: " + img_path)
+		UnitMaster.set_character_texture(img_id,character_image)
 		
 		# --- リーダー（プレイヤーID）の保護処理 ---
 		# 例: Global.player_data["my_id"] と一致する場合はボタンを無効化する

@@ -79,13 +79,7 @@ func _update_ui(data: Dictionary):
 	# --- キャラクター画像の表示処理 ---
 	# image_idを取得（デフォルトは"01"）し、パスを組み立てて読み込む
 	var img_id = data.get("image_id", "01")
-	var img_path = "res://assets/image/units/%s.png" % img_id 
-	
-	# ファイルが存在するかチェックしてからロード（安全のため）
-	if FileAccess.file_exists(img_path):
-		character_image.texture = load(img_path)
-	else:
-		push_warning("画像ファイルが見つかりません: " + img_path)
+	UnitMaster.set_character_texture(img_id,character_image)
 	
 	# レアリティの設定 
 	var r_idx = data.get("rarity", 0)

@@ -102,3 +102,19 @@ func get_units_batch(unit_ids: Array) -> Array:
 # IDの存在確認
 func has_unit(unit_id) -> bool:
 	return UNIT_TABLE.has(str(unit_id))
+	
+# Global.gd などに追記
+static func set_character_texture(image_id: String, texture_node: TextureRect) -> void:
+	if texture_node == null:
+		return
+		
+	# パスの組み立て
+	var img_path = "res://assets/image/units/%s.png" % image_id
+	
+	# ロード処理
+	if FileAccess.file_exists(img_path):
+		texture_node.texture = load(img_path)
+	else:
+		push_warning("共通処理: 画像が見つかりません -> " + img_path)
+		# 必要であれば、ここでデフォルト画像をセットする処理を入れても良い
+		# texture_node.texture = load("res://assets/image/units/01.png")
