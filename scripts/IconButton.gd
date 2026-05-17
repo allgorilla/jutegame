@@ -1,5 +1,5 @@
 # IconButton.gd
-extends TextureButton
+extends Button
 
 # エディタから個別に調整できるように変数化しておく
 @export var click_offset := Vector2(2, 2)
@@ -17,6 +17,9 @@ func _on_button_down():
 
 func _on_button_up():
 	position -= click_offset
+	var party_member_ui = preload("res://scenes/FormationEdit.tscn").instantiate()
+	add_child(party_member_ui)
+	await party_member_ui.closed
 
 func _on_mouse_entered():
 	self_modulate = hover_modulate

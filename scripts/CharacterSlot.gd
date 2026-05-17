@@ -47,7 +47,7 @@ func display_character(data):
 		button_action.text = "削除"
 		
 		# --- キャラクター画像の表示処理を追加 ---
-		var img_id = data.get("image_id", "01") # デフォルトは"01"
+		var img_id = data.get("image_id")
 		UnitMaster.set_character_texture(img_id,character_image)
 		
 		# --- リーダー（プレイヤーID）の保護処理 ---

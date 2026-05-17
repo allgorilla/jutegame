@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://civjshi6plgem" path="res://assets/image/map_event.png" id="6_x708w"]
 [ext_resource type="Texture2D" uid="uid://bh58x48dg7yph" path="res://assets/image/map_layout.png" id="7_yrulf"]
 [ext_resource type="Texture2D" uid="uid://ceqju8dc5suct" path="res://assets/image/map_object.png" id="8_mmkx4"]
-[ext_resource type="Texture2D" uid="uid://tpus256a758r" path="res://assets/image/status_icon.png" id="9_nmjbi"]
 [ext_resource type="Script" uid="uid://d2qgiy1txg1el" path="res://scripts/IconButton.gd" id="10_yd4n3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ehpa4"]
@@ -63,7 +62,7 @@ _data = {
 &"walk": SubResource("Animation_g0g1r")
 }
 
-[node name="Main" type="Node2D" unique_id=1149138988]
+[node name="Main" type="Node2D" unique_id=1765260998]
 
 [node name="Player" type="AnimatedSprite2D" parent="." unique_id=1036616371]
 z_index = 1
@@ -90,9 +89,11 @@ player = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1606306595]
 
-[node name="StatusButton" type="TextureButton" parent="CanvasLayer" unique_id=1140667457]
-offset_right = 40.0
-offset_bottom = 40.0
-texture_normal = ExtResource("9_nmjbi")
-texture_pressed = ExtResource("9_nmjbi")
+[node name="FormationEdit" type="Button" parent="CanvasLayer" unique_id=1668313768]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 63.0
+offset_bottom = 63.0
+theme_override_font_sizes/font_size = 24
+text = "配置"
 script = ExtResource("10_yd4n3")
